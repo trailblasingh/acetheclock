@@ -80,21 +80,8 @@ function buildTestRecord(pair, questionText, solutionText) {
     } else {
       let isNumeric = !isNaN(Number(finalAnswer));
       let explanationContainsNum = finalExplanation.includes(String(finalAnswer));
-      let hasValidEq = false;
-      const explLines = finalExplanation.split("\n");
-      for (const eline of explLines) {
-        if (eline.includes("=")) {
-          let cleanEq = eline.replace(/\\\(\s*/, "").replace(/\s*\\\)/, "");
-          let parts = cleanEq.split("=");
-          let rhs = parts[parts.length - 1].trim();
-          if (/^-?\d+(?:\.\d+)?$/.test(rhs)) {
-            hasValidEq = true;
-            break;
-          }
-        }
-      }
 
-      if (!isNumeric || !explanationContainsNum || !hasValidEq) {
+      if (!isNumeric || !explanationContainsNum || finalAnswer === "N/A") {
         console.error(`Invalid parsing: ${question.id}`);
       }
     }
@@ -197,33 +184,41 @@ function parseSolutions(solutionText, questions) {
       }
       
       if (answer === null) {
-        let extractedNum = null;
         let rawLines = rawBlock.split('\n');
-        let validEqLines = [];
-        for (let line of rawLines) {
-            if (line.includes('=')) {
-                let parts = line.split('=');
-                let rhs = parts[parts.length - 1].trim();
-                if (/^-?\d+(?:\.\d+)?$/.test(rhs)) {
-                    validEqLines.push(line);
+        for (let i = rawLines.length - 1; i >= 0; i--) {
+            let line = rawLines[i].trim();
+            if (!line) continue;
+
+            const numbersFound = line.match(/-?\d+(?:\.\d+)?/g) || [];
+            
+            // STRICT REJECTION
+            if (numbersFound.length > 1) continue;
+            
+            const lineWithoutAllowed = line.replace(/therefore|hence|so|answer/gi, '').trim();
+            if (/[a-zA-Z]/.test(lineWithoutAllowed)) continue;
+
+            // CASE 1: PURE NUMBER LINE
+            if (/^\s*-?\d+(?:\.\d+)?\s*$/.test(line)) {
+                let match = line.match(/-?\d+(?:\.\d+)?/);
+                if (match) {
+                    answer = match[0];
+                    break;
                 }
             }
-        }
-        if (validEqLines.length > 0) {
-            let lastEq = validEqLines[validEqLines.length - 1];
-            let match = lastEq.match(/=\s*(-?\d+(?:\.\d+)?)/);
-            if (match) extractedNum = match[1];
-        }
-        if (extractedNum === null) {
-            let finalLines = rawLines.filter(line => /(therefore|hence|final answer)/i.test(line));
-            if (finalLines.length > 0) {
-                let match = finalLines[finalLines.length - 1].match(/(-?\d+(?:\.\d+)?)/);
-                if (match) extractedNum = match[1];
+
+            // CASE 2: FINAL STATEMENT
+            if (/(therefore|hence|so|answer)/i.test(line) && numbersFound.length === 1) {
+                answer = numbersFound[0];
+                break;
             }
-        }
-        if (extractedNum !== null) {
-            if (!/[xyXY]/.test(extractedNum) && /^-?\d+(?:\.\d+)?$/.test(extractedNum)) {
-                answer = Number(extractedNum);
+
+            // CASE 3: EQUATION LINE (SAFE ONLY)
+            if (line.includes('=')) {
+                let rhsMatch = line.match(/=\s*(-?\d+(?:\.\d+)?)\s*$/);
+                if (rhsMatch) {
+                    answer = rhsMatch[1];
+                    break;
+                }
             }
         }
       }
@@ -239,82 +234,20 @@ function parseSolutions(solutionText, questions) {
       }
     }
 
-    if (answer !== null && answer !== "") {
-        let numAns = question && question.type === "MCQ" && question.options[Number(answer) - 1] ? Number(question.options[Number(answer) - 1]) : Number(answer);
-        if (isNaN(numAns)) numAns = Number(answer);
-
-        if (!isNaN(numAns)) {
-            let numStr = String(numAns);
-            let rawLines = rawBlock.split('\n');
-            let hasFinalEq = false;
-            for (let line of rawLines) {
-                if (line.includes('=') && line.includes(numStr)) {
-                    let parts = line.split('=');
-                    let rhs = parts[parts.length - 1].trim();
-                    if (/^-?\d+(?:\.\d+)?$/.test(rhs) && Number(rhs) === numAns) {
-                        hasFinalEq = true;
-                        break;
-                    }
-                }
-            }
-            if (!hasFinalEq) {
-                let matches = [...rawBlock.matchAll(/(-?\d+(?:\.\d+)?)[a-zA-Z]*/g)];
-                let reconstructed = false;
-                if (matches.length >= 2) {
-                    for (let i = matches.length - 1; i >= 1; i--) {
-                        for (let j = i - 1; j >= 0; j--) {
-                            let m1 = matches[j];
-                            let m2 = matches[i];
-                            let v1 = Number(m1[1]);
-                            let v2 = Number(m2[1]);
-                            if (v2 !== 0 && v1 / v2 === numAns) {
-                                rawBlock += `\n${m1[0]} / ${m2[0]} = ${numAns}`;
-                                reconstructed = true; break;
-                            } else if (v1 !== 0 && v2 / v1 === numAns) {
-                                rawBlock += `\n${m2[0]} / ${m1[0]} = ${numAns}`;
-                                reconstructed = true; break;
-                            } else if (v1 * v2 === numAns) {
-                                rawBlock += `\n${m1[0]} * ${m2[0]} = ${numAns}`;
-                                reconstructed = true; break;
-                            } else if (v1 + v2 === numAns) {
-                                rawBlock += `\n${m1[0]} + ${m2[0]} = ${numAns}`;
-                                reconstructed = true; break;
-                            } else if (v1 - v2 === numAns) {
-                                rawBlock += `\n${m1[0]} - ${m2[0]} = ${numAns}`;
-                                reconstructed = true; break;
-                            }
-                        }
-                        if (reconstructed) break;
-                    }
-                }
-            }
+    if (answer === null || answer === "") {
+        answer = "N/A";
+        console.warn(`N/A extracted for question: q${questionNumber}`);
+    } else {
+        if (question && question.type === "TITA" && !isNaN(Number(answer))) {
+            answer = Number(answer);
+        } else if (typeof answer !== "number") {
+            answer = String(answer);
         }
     }
 
-    answer = answer !== null ? answer : "";
-    if (typeof answer === "number" && isNaN(answer)) {
-      answer = "";
-    }
-
-    if (question && question.type === "TITA" && answer !== "") {
-      answer = Number(answer);
-    } else if (answer !== "") {
-      answer = String(answer);
-    }
-
-    let explanationLines = rawBlock.split('\n');
-    let formattedLines = [];
-    for (let line of explanationLines) {
-        let cleanLine = line.replace(/[^\x00-\x7F]+/g, "").trim();
-        if (!cleanLine) continue;
-        cleanLine = cleanLine.replace(/\*/g, " \\times ").replace(/\//g, " \\div ");
-        cleanLine = cleanLine.replace(/\s+/g, " ");
-        if (cleanLine.includes('=')) {
-            cleanLine = `\\( ${cleanLine} \\)`;
-        }
-        formattedLines.push(cleanLine);
-    }
-    let explanation = formattedLines.join('\n').trim();
+    let cleanExpl = rawBlock.replace(/[^\x00-\x7F]+/g, "");
+    cleanExpl = cleanExpl.replace(/[ \t]{2,}/g, " ");
+    let explanation = cleanExpl.trim();
 
     solutionMap.set(questionNumber, {
       correctAnswer: answer,

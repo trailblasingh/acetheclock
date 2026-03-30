@@ -323,7 +323,9 @@ function QuestionReviewSection({
               {showSolutions ? (
                 <div className="rounded-3xl border border-indigo-400/20 bg-indigo-500/5 p-5">
                   <p className="mb-3 text-sm uppercase tracking-[0.25em] text-indigo-200 not-dark:text-indigo-700">Explanation</p>
-                  <MathText text={question.explanation} className="text-slate-100 not-dark:text-slate-900" />
+                  <pre style={{ whiteSpace: "pre-wrap" }} className="font-sans text-base leading-relaxed text-slate-100 not-dark:text-slate-900">
+                    {question.explanation}
+                  </pre>
                 </div>
               ) : null}
             </div>
