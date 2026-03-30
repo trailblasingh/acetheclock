@@ -88,19 +88,23 @@ export function ResultSummary({ attemptId }: { attemptId: string }) {
       tone: attempt.accuracy < 60 ? "rose" : attempt.accuracy <= 80 ? "amber" : "emerald"
     };
 
-    const timeInsights = [...attempt.responses]
+    const topTimeResponses = [...attempt.responses]
       .sort((left, right) => right.timeSpentSeconds - left.timeSpentSeconds)
-      .slice(0, 3)
-      .map((response, index) => {
-        const question = review.questions.find((item) => item.id === response.questionId);
-        const questionLabel = question ? `Q${question.questionNumber}` : `Question ${index + 1}`;
+      .slice(0, 3);
 
-        return {
-          title: `Time Insight ${index + 1}`,
-          description: `You spent too much time on ${questionLabel} at ${Math.ceil(response.timeSpentSeconds / 60)} minute(s).`,
-          tone: "indigo" as const
-        };
-      });
+    const timeInsightDescription = topTimeResponses.length > 0
+      ? topTimeResponses.map((response) => {
+          const question = review.questions.find((item) => item.id === response.questionId);
+          const questionLabel = question ? `Q${question.questionNumber}` : `an unknown question`;
+          return `You spent ${Math.ceil(response.timeSpentSeconds / 60)} minutes on ${questionLabel}.`;
+        }).join(" ")
+      : "Great pacing, no significant time sinks detected.";
+
+    const timeInsight: InsightCard = {
+      title: "Time Sinks",
+      description: timeInsightDescription,
+      tone: "indigo" as const
+    };
 
     const mistakeInsight: InsightCard = {
       title: "Mistake Insight",
@@ -108,7 +112,7 @@ export function ResultSummary({ attemptId }: { attemptId: string }) {
       tone: attempt.incorrectCount > 5 ? "rose" : "slate"
     };
 
-    return [strategyInsight, accuracyInsight, ...timeInsights, mistakeInsight];
+    return [strategyInsight, accuracyInsight, timeInsight, mistakeInsight];
   }, [attempt, review]);
 
   if (!attempt) {

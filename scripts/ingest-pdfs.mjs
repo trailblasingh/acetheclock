@@ -167,19 +167,43 @@ function parseSolutions(solutionText, questions) {
       if (question && question.type === "MCQ") {
         const mcqMatch = rawBlock.match(/^([A-D]|\d+)\b/i);
         if (mcqMatch) {
-          let a = mcqMatch[1];
-          // Remove trailing period if caught
-          a = a.replace(/\.$/, "");
+          let a = mcqMatch[1].replace(/\.$/, "");
           if (/^[a-d]$/i.test(a)) {
             answer = String(a.toUpperCase().charCodeAt(0) - 64);
           } else {
             answer = a;
           }
         }
-      } else {
-        const numbersMatch = [...rawBlock.matchAll(/(-?\d+(\.\d+)?)/g)];
-        if (numbersMatch.length > 0) {
-          answer = Number(numbersMatch[numbersMatch.length - 1][1]);
+      }
+      
+      if (answer === null) {
+        let extractedNum = null;
+        const lines = rawBlock.split('\n');
+        const finalLines = lines.filter((line) => /(?:therefore|hence|final|=)/i.test(line));
+        
+        if (finalLines.length > 0) {
+            const numbers = [...finalLines[finalLines.length - 1].matchAll(/(-?\d+(\.\d+)?)/g)];
+            if (numbers.length > 0) {
+                extractedNum = Number(numbers[numbers.length - 1][1]);
+            }
+        }
+
+        if (extractedNum === null) {
+            const eqMatches = [...rawBlock.matchAll(/=\s*(-?\d+(\.\d+)?)/g)];
+            if (eqMatches.length > 0) {
+                extractedNum = Number(eqMatches[eqMatches.length - 1][1]);
+            }
+        }
+
+        if (extractedNum === null) {
+            const numbersMatch = [...rawBlock.matchAll(/(-?\d+(\.\d+)?)/g)];
+            if (numbersMatch.length > 0) {
+                extractedNum = Number(numbersMatch[numbersMatch.length - 1][1]);
+            }
+        }
+        
+        if (extractedNum !== null) {
+            answer = extractedNum;
         }
       }
     }
@@ -194,6 +218,30 @@ function parseSolutions(solutionText, questions) {
       }
     }
 
+    if (answer !== null && answer !== "") {
+        const numStr = String(answer);
+        if (!rawBlock.includes(numStr)) {
+            console.warn(`Suspicious answer mismatch: extracted ${numStr} but not in explanation. Question ID: q${questionNumber}`);
+            const equations = [...rawBlock.matchAll(/(-?\d+(?:\.\d+)?)\s*([-+*\/])\s*(-?\d+(?:\.\d+)?)/g)];
+            if (equations.length > 0) {
+                try {
+                   const match = equations[equations.length - 1];
+                   const left = Number(match[1]);
+                   const op = match[2];
+                   const right = Number(match[3]);
+                   let solverRes = null;
+                   if (op === '+') solverRes = left + right;
+                   if (op === '-') solverRes = left - right;
+                   if (op === '*') solverRes = left * right;
+                   if (op === '/') solverRes = right !== 0 ? left / right : null;
+                   if (solverRes !== null) {
+                       answer = solverRes;
+                   }
+                } catch(e) {}
+            }
+        }
+    }
+
     answer = answer !== null ? answer : "";
     if (typeof answer === "number" && isNaN(answer)) {
       answer = "";
@@ -206,8 +254,11 @@ function parseSolutions(solutionText, questions) {
     }
 
     let explanation = rawBlock.trim();
-    explanation = explanation.replace(/(\d+)\/(\d+)\s*=\s*([0-9.]+)/g, "$1 \\div $2 = $3");
-    explanation = explanation.replace(/([a-z]\^2\s*[-+]\s*\d*[a-z]?)/g, "\\( $1 \\)");
+    explanation = explanation.replace(/(\d+)\s*x\s*(\d+)/gi, "$1 \\times $2");
+    explanation = explanation.replace(/(\d+)\s*\/\s*(\d+)/g, "$1 \\div $2");
+    explanation = explanation.replace(/□/g, "");
+    explanation = explanation.replace(/(\b(?:\d+(?:\.\d+)?|[a-z])\s*(?:[-+*\/=]|\\times|\\div)\s*(?:\d+(?:\.\d+)?|[a-z])(?:\s*(?:[-+*\/=]|\\times|\\div)\s*(?:\d+(?:\.\d+)?|[a-z]))*\b)/gi, "\\( $1 \\)");
+    explanation = explanation.replace(/\\\(\s*\\\((.+?)\\\)\s*\\\)/g, "\\( $1 \\)");
 
     solutionMap.set(questionNumber, {
       correctAnswer: answer,
