@@ -31,8 +31,8 @@ export function scoreAttempt(
 
     const isCorrect =
       question.type === "MCQ"
-        ? answer === question.correctAnswer || answer === getOptionLabel(question.correctAnswer)
-        : normalize(answer) === normalize(question.correctAnswer);
+        ? answer === String(question.correctAnswer) || answer === getOptionLabel(String(question.correctAnswer))
+        : Math.abs(Number(answer) - Number(question.correctAnswer)) < 1e-6;
 
     if (isCorrect) {
       score += 3;

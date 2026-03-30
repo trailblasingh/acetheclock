@@ -248,8 +248,8 @@ function QuestionReviewSection({
         const isCorrect =
           !isUnattempted &&
           (question.type === "MCQ"
-            ? selectedAnswer === question.correctAnswer
-            : normalize(selectedAnswer) === normalize(question.correctAnswer));
+            ? selectedAnswer === String(question.correctAnswer)
+            : Math.abs(Number(selectedAnswer) - Number(question.correctAnswer)) < 1e-6);
         const statusLabel = isUnattempted ? "Unattempted" : isCorrect ? "Correct" : "Incorrect";
         const statusClass = isUnattempted
           ? "bg-slate-500/15 text-slate-300 not-dark:bg-slate-100 not-dark:text-slate-700"
@@ -282,7 +282,7 @@ function QuestionReviewSection({
                   {question.options.map((option, index) => {
                     const label = String(index + 1);
                     const isSelected = selectedAnswer === label;
-                    const isCorrectOption = question.correctAnswer === label;
+                    const isCorrectOption = String(question.correctAnswer) === label;
                     const optionClass = isCorrectOption
                       ? "border-emerald-400/40 bg-emerald-500/10"
                       : isSelected
@@ -306,13 +306,13 @@ function QuestionReviewSection({
               ) : (
                 <div className="grid gap-3 md:grid-cols-2">
                   <AnswerBox label="User Answer" value={selectedAnswer || "Not attempted"} />
-                  <AnswerBox label="Correct Answer" value={question.correctAnswer} />
+                  <AnswerBox label="Correct Answer" value={String(question.correctAnswer)} />
                 </div>
               )}
 
               <div className="grid gap-3 md:grid-cols-3">
                 <AnswerBox label="User Answer" value={question.type === "MCQ" ? formatMcqAnswer(question, selectedAnswer, true) : selectedAnswer || "Not attempted"} />
-                <AnswerBox label="Correct Answer" value={question.type === "MCQ" ? formatMcqAnswer(question, question.correctAnswer, false) : question.correctAnswer} />
+                <AnswerBox label="Correct Answer" value={question.type === "MCQ" ? formatMcqAnswer(question, String(question.correctAnswer), false) : String(question.correctAnswer)} />
                 <AnswerBox label="Status" value={statusLabel} />
               </div>
 

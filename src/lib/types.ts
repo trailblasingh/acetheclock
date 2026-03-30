@@ -6,7 +6,7 @@ export type QuestionRecord = {
   type: QuestionType;
   question: string;
   options: string[];
-  correctAnswer: string;
+  correctAnswer: string | number;
   explanation: string;
   sourceQuestionPdf?: string;
   sourceSolutionPdf?: string;

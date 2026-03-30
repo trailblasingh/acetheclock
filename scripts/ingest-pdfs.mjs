@@ -64,15 +64,25 @@ function buildTestRecord(pair, questionText, solutionText) {
   const topic = normalizeTopicName(topicLine);
   const topicSlug = slugify(topic);
   const questions = parseQuestions(questionText, pair);
-  const solutions = parseSolutions(solutionText);
+  const solutions = parseSolutions(solutionText, questions);
 
   const mergedQuestions = questions.map((question) => {
     const solution = solutions.get(question.questionNumber);
+    let finalAnswer = solution?.correctAnswer ?? question.correctAnswer ?? "";
+    let finalExplanation = (solution?.explanation ?? "").trim();
+    
+    if (!finalExplanation) {
+      finalExplanation = "Explanation not parsed.";
+    }
+
+    if (finalAnswer === "") {
+      console.warn(`Missing answer: ${pair.baseName} Q${question.questionNumber}`);
+    }
 
     return {
       ...question,
-      correctAnswer: solution?.correctAnswer ?? question.correctAnswer ?? "",
-      explanation: solution?.explanation ?? "Explanation not parsed.",
+      correctAnswer: finalAnswer,
+      explanation: finalExplanation,
       sourceQuestionPdf: path.basename(pair.questionFile),
       sourceSolutionPdf: path.basename(pair.solutionFile)
     };
@@ -132,21 +142,72 @@ function buildQuestionRecords(chunks, pair, mode) {
   return questions;
 }
 
-function parseSolutions(solutionText) {
+function parseSolutions(solutionText, questions) {
   const answerKey = extractAnswerKey(solutionText);
   const cleaned = solutionText.replace(/--\s*\d+\s+of\s+\d+\s*--/g, "").trim();
   const chunks = cleaned.split(/(?:^|\n)(\d+)\.\s+/g);
   const solutionMap = new Map();
 
+  const questionMap = new Map((questions || []).map((q) => [q.questionNumber, q]));
+
   for (let index = 1; index < chunks.length; index += 2) {
     const questionNumber = Number(chunks[index]);
     const rawBlock = cleanupBlock(chunks[index + 1] ?? "");
+    const question = questionMap.get(questionNumber);
+    
+    let answer = null;
+    const explicitMatch = rawBlock.match(/Answer\s*[:-]\s*([A-Za-z0-9.-]+)/i);
+
+    if (explicitMatch) {
+      answer = explicitMatch[1];
+      if (question && question.type === "MCQ" && /^[a-d]$/i.test(answer)) {
+        answer = String(answer.toUpperCase().charCodeAt(0) - 64);
+      }
+    } else {
+      if (question && question.type === "MCQ") {
+        const mcqMatch = rawBlock.match(/^([A-D]|\d+)\b/i);
+        if (mcqMatch) {
+          let a = mcqMatch[1];
+          // Remove trailing period if caught
+          a = a.replace(/\.$/, "");
+          if (/^[a-d]$/i.test(a)) {
+            answer = String(a.toUpperCase().charCodeAt(0) - 64);
+          } else {
+            answer = a;
+          }
+        }
+      } else {
+        const numbersMatch = [...rawBlock.matchAll(/(-?\d+(\.\d+)?)/g)];
+        if (numbersMatch.length > 0) {
+          answer = Number(numbersMatch[numbersMatch.length - 1][1]);
+        }
+      }
+    }
+
     const answerFromKey = answerKey.get(questionNumber) ?? "";
-    const answerFromBlock = rawBlock.match(/^([A-Za-z0-9.%/-]+)\s+/)?.[1] ?? "";
-    const answer =
-      answerFromKey ||
-      (/^(?:\d+|[A-D]|[1-4]|[\d.]+%?)$/.test(answerFromBlock) ? answerFromBlock : "");
-    const explanation = answer ? rawBlock.replace(new RegExp(`^${escapeRegex(answer)}\\s+`), "") : rawBlock;
+    if (answer === null && answerFromKey) {
+      answer = answerFromKey;
+      if (question && question.type === "MCQ" && /^[a-d]$/i.test(answer)) {
+        answer = String(answer.toUpperCase().charCodeAt(0) - 64);
+      } else if (!question || question.type === "TITA") {
+        answer = Number(answer);
+      }
+    }
+
+    answer = answer !== null ? answer : "";
+    if (typeof answer === "number" && isNaN(answer)) {
+      answer = "";
+    }
+
+    if (question && question.type === "TITA" && answer !== "") {
+      answer = Number(answer);
+    } else if (answer !== "") {
+      answer = String(answer);
+    }
+
+    let explanation = rawBlock.trim();
+    explanation = explanation.replace(/(\d+)\/(\d+)\s*=\s*([0-9.]+)/g, "$1 \\div $2 = $3");
+    explanation = explanation.replace(/([a-z]\^2\s*[-+]\s*\d*[a-z]?)/g, "\\( $1 \\)");
 
     solutionMap.set(questionNumber, {
       correctAnswer: answer,
