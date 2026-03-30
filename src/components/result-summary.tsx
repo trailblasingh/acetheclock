@@ -95,9 +95,9 @@ export function ResultSummary({ attemptId }: { attemptId: string }) {
     const timeInsightDescription = topTimeResponses.length > 0
       ? topTimeResponses.map((response) => {
           const question = review.questions.find((item) => item.id === response.questionId);
-          const questionLabel = question ? `Q${question.questionNumber}` : `an unknown question`;
-          return `You spent ${Math.ceil(response.timeSpentSeconds / 60)} minutes on ${questionLabel}.`;
-        }).join(" ")
+          const questionLabel = question ? `Q${question.questionNumber}` : `Q?`;
+          return `${questionLabel} \u2192 ${Math.ceil(response.timeSpentSeconds / 60)} min`;
+        }).join("\n")
       : "Great pacing, no significant time sinks detected.";
 
     const timeInsight: InsightCard = {
@@ -346,7 +346,7 @@ function InsightCardView({ insight }: { insight: InsightCard }) {
   return (
     <div className={`rounded-[28px] border p-5 ${toneClasses[insight.tone]}`}>
       <p className="text-sm uppercase tracking-[0.25em] opacity-80">{insight.title}</p>
-      <p className="mt-3 text-base font-medium leading-7">{insight.description}</p>
+      <p className="mt-3 whitespace-pre-line text-base font-medium leading-7">{insight.description}</p>
     </div>
   );
 }

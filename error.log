@@ -1,0 +1,10 @@
+file:///D:/acetheclock/scripts/ingest-pdfs.mjs:283
+                                rawBlock += `\n${m1[0]} - ${m2[0]} = ${numAns}`;
+                                         ^
+
+TypeError: Assignment to constant variable.
+    at parseSolutions (file:///D:/acetheclock/scripts/ingest-pdfs.mjs:283:42)
+    at buildTestRecord (file:///D:/acetheclock/scripts/ingest-pdfs.mjs:67:21)
+    at file:///D:/acetheclock/scripts/ingest-pdfs.mjs:16:14
+
+Node.js v24.14.0

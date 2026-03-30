@@ -77,6 +77,26 @@ function buildTestRecord(pair, questionText, solutionText) {
 
     if (finalAnswer === "") {
       console.warn(`Missing answer: ${pair.baseName} Q${question.questionNumber}`);
+    } else {
+      let isNumeric = !isNaN(Number(finalAnswer));
+      let explanationContainsNum = finalExplanation.includes(String(finalAnswer));
+      let hasValidEq = false;
+      const explLines = finalExplanation.split("\n");
+      for (const eline of explLines) {
+        if (eline.includes("=")) {
+          let cleanEq = eline.replace(/\\\(\s*/, "").replace(/\s*\\\)/, "");
+          let parts = cleanEq.split("=");
+          let rhs = parts[parts.length - 1].trim();
+          if (/^-?\d+(?:\.\d+)?$/.test(rhs)) {
+            hasValidEq = true;
+            break;
+          }
+        }
+      }
+
+      if (!isNumeric || !explanationContainsNum || !hasValidEq) {
+        console.error(`Invalid parsing: ${question.id}`);
+      }
     }
 
     return {
@@ -152,7 +172,7 @@ function parseSolutions(solutionText, questions) {
 
   for (let index = 1; index < chunks.length; index += 2) {
     const questionNumber = Number(chunks[index]);
-    const rawBlock = cleanupBlock(chunks[index + 1] ?? "");
+    let rawBlock = cleanupBlock(chunks[index + 1] ?? "");
     const question = questionMap.get(questionNumber);
     
     let answer = null;
@@ -178,32 +198,33 @@ function parseSolutions(solutionText, questions) {
       
       if (answer === null) {
         let extractedNum = null;
-        const lines = rawBlock.split('\n');
-        const finalLines = lines.filter((line) => /(?:therefore|hence|final|=)/i.test(line));
-        
-        if (finalLines.length > 0) {
-            const numbers = [...finalLines[finalLines.length - 1].matchAll(/(-?\d+(\.\d+)?)/g)];
-            if (numbers.length > 0) {
-                extractedNum = Number(numbers[numbers.length - 1][1]);
+        let rawLines = rawBlock.split('\n');
+        let validEqLines = [];
+        for (let line of rawLines) {
+            if (line.includes('=')) {
+                let parts = line.split('=');
+                let rhs = parts[parts.length - 1].trim();
+                if (/^-?\d+(?:\.\d+)?$/.test(rhs)) {
+                    validEqLines.push(line);
+                }
             }
         }
-
+        if (validEqLines.length > 0) {
+            let lastEq = validEqLines[validEqLines.length - 1];
+            let match = lastEq.match(/=\s*(-?\d+(?:\.\d+)?)/);
+            if (match) extractedNum = match[1];
+        }
         if (extractedNum === null) {
-            const eqMatches = [...rawBlock.matchAll(/=\s*(-?\d+(\.\d+)?)/g)];
-            if (eqMatches.length > 0) {
-                extractedNum = Number(eqMatches[eqMatches.length - 1][1]);
+            let finalLines = rawLines.filter(line => /(therefore|hence|final answer)/i.test(line));
+            if (finalLines.length > 0) {
+                let match = finalLines[finalLines.length - 1].match(/(-?\d+(?:\.\d+)?)/);
+                if (match) extractedNum = match[1];
             }
         }
-
-        if (extractedNum === null) {
-            const numbersMatch = [...rawBlock.matchAll(/(-?\d+(\.\d+)?)/g)];
-            if (numbersMatch.length > 0) {
-                extractedNum = Number(numbersMatch[numbersMatch.length - 1][1]);
-            }
-        }
-        
         if (extractedNum !== null) {
-            answer = extractedNum;
+            if (!/[xyXY]/.test(extractedNum) && /^-?\d+(?:\.\d+)?$/.test(extractedNum)) {
+                answer = Number(extractedNum);
+            }
         }
       }
     }
@@ -219,25 +240,53 @@ function parseSolutions(solutionText, questions) {
     }
 
     if (answer !== null && answer !== "") {
-        const numStr = String(answer);
-        if (!rawBlock.includes(numStr)) {
-            console.warn(`Suspicious answer mismatch: extracted ${numStr} but not in explanation. Question ID: q${questionNumber}`);
-            const equations = [...rawBlock.matchAll(/(-?\d+(?:\.\d+)?)\s*([-+*\/])\s*(-?\d+(?:\.\d+)?)/g)];
-            if (equations.length > 0) {
-                try {
-                   const match = equations[equations.length - 1];
-                   const left = Number(match[1]);
-                   const op = match[2];
-                   const right = Number(match[3]);
-                   let solverRes = null;
-                   if (op === '+') solverRes = left + right;
-                   if (op === '-') solverRes = left - right;
-                   if (op === '*') solverRes = left * right;
-                   if (op === '/') solverRes = right !== 0 ? left / right : null;
-                   if (solverRes !== null) {
-                       answer = solverRes;
-                   }
-                } catch(e) {}
+        let numAns = question && question.type === "MCQ" && question.options[Number(answer) - 1] ? Number(question.options[Number(answer) - 1]) : Number(answer);
+        if (isNaN(numAns)) numAns = Number(answer);
+
+        if (!isNaN(numAns)) {
+            let numStr = String(numAns);
+            let rawLines = rawBlock.split('\n');
+            let hasFinalEq = false;
+            for (let line of rawLines) {
+                if (line.includes('=') && line.includes(numStr)) {
+                    let parts = line.split('=');
+                    let rhs = parts[parts.length - 1].trim();
+                    if (/^-?\d+(?:\.\d+)?$/.test(rhs) && Number(rhs) === numAns) {
+                        hasFinalEq = true;
+                        break;
+                    }
+                }
+            }
+            if (!hasFinalEq) {
+                let matches = [...rawBlock.matchAll(/(-?\d+(?:\.\d+)?)[a-zA-Z]*/g)];
+                let reconstructed = false;
+                if (matches.length >= 2) {
+                    for (let i = matches.length - 1; i >= 1; i--) {
+                        for (let j = i - 1; j >= 0; j--) {
+                            let m1 = matches[j];
+                            let m2 = matches[i];
+                            let v1 = Number(m1[1]);
+                            let v2 = Number(m2[1]);
+                            if (v2 !== 0 && v1 / v2 === numAns) {
+                                rawBlock += `\n${m1[0]} / ${m2[0]} = ${numAns}`;
+                                reconstructed = true; break;
+                            } else if (v1 !== 0 && v2 / v1 === numAns) {
+                                rawBlock += `\n${m2[0]} / ${m1[0]} = ${numAns}`;
+                                reconstructed = true; break;
+                            } else if (v1 * v2 === numAns) {
+                                rawBlock += `\n${m1[0]} * ${m2[0]} = ${numAns}`;
+                                reconstructed = true; break;
+                            } else if (v1 + v2 === numAns) {
+                                rawBlock += `\n${m1[0]} + ${m2[0]} = ${numAns}`;
+                                reconstructed = true; break;
+                            } else if (v1 - v2 === numAns) {
+                                rawBlock += `\n${m1[0]} - ${m2[0]} = ${numAns}`;
+                                reconstructed = true; break;
+                            }
+                        }
+                        if (reconstructed) break;
+                    }
+                }
             }
         }
     }
@@ -253,12 +302,19 @@ function parseSolutions(solutionText, questions) {
       answer = String(answer);
     }
 
-    let explanation = rawBlock.trim();
-    explanation = explanation.replace(/(\d+)\s*x\s*(\d+)/gi, "$1 \\times $2");
-    explanation = explanation.replace(/(\d+)\s*\/\s*(\d+)/g, "$1 \\div $2");
-    explanation = explanation.replace(/□/g, "");
-    explanation = explanation.replace(/(\b(?:\d+(?:\.\d+)?|[a-z])\s*(?:[-+*\/=]|\\times|\\div)\s*(?:\d+(?:\.\d+)?|[a-z])(?:\s*(?:[-+*\/=]|\\times|\\div)\s*(?:\d+(?:\.\d+)?|[a-z]))*\b)/gi, "\\( $1 \\)");
-    explanation = explanation.replace(/\\\(\s*\\\((.+?)\\\)\s*\\\)/g, "\\( $1 \\)");
+    let explanationLines = rawBlock.split('\n');
+    let formattedLines = [];
+    for (let line of explanationLines) {
+        let cleanLine = line.replace(/[^\x00-\x7F]+/g, "").trim();
+        if (!cleanLine) continue;
+        cleanLine = cleanLine.replace(/\*/g, " \\times ").replace(/\//g, " \\div ");
+        cleanLine = cleanLine.replace(/\s+/g, " ");
+        if (cleanLine.includes('=')) {
+            cleanLine = `\\( ${cleanLine} \\)`;
+        }
+        formattedLines.push(cleanLine);
+    }
+    let explanation = formattedLines.join('\n').trim();
 
     solutionMap.set(questionNumber, {
       correctAnswer: answer,
