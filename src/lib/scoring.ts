@@ -29,10 +29,12 @@ export function scoreAttempt(
 
     attemptedCount += 1;
 
+    const evaluatedCorrectAnswer = question.correct_answer_override ?? question.correctAnswer;
+
     const isCorrect =
       question.type === "MCQ"
-        ? answer === String(question.correctAnswer) || answer === getOptionLabel(String(question.correctAnswer))
-        : Math.abs(Number(answer) - Number(question.correctAnswer)) < 1e-6;
+        ? answer === String(evaluatedCorrectAnswer) || answer === getOptionLabel(String(evaluatedCorrectAnswer))
+        : Math.abs(Number(answer) - Number(evaluatedCorrectAnswer)) < 1e-6;
 
     if (isCorrect) {
       score += 3;

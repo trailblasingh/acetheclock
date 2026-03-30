@@ -86,9 +86,23 @@ function buildTestRecord(pair, questionText, solutionText) {
       }
     }
 
+    let needsReview = false;
+    if (
+      /[xyXY]/.test(finalExplanation) ||
+      /≡|mod|\^|\//i.test(finalExplanation) ||
+      finalAnswer === "N/A" ||
+      finalAnswer === "" ||
+      isNaN(Number(finalAnswer))
+    ) {
+      needsReview = true;
+      console.warn(`Needs manual review: ${question.id}`);
+    }
+
     return {
       ...question,
       correctAnswer: finalAnswer,
+      correct_answer_override: null,
+      needs_review: needsReview,
       explanation: finalExplanation,
       sourceQuestionPdf: path.basename(pair.questionFile),
       sourceSolutionPdf: path.basename(pair.solutionFile)

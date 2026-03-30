@@ -7,6 +7,8 @@ export type QuestionRecord = {
   question: string;
   options: string[];
   correctAnswer: string | number;
+  correct_answer_override?: string | number | null;
+  needs_review?: boolean;
   explanation: string;
   sourceQuestionPdf?: string;
   sourceSolutionPdf?: string;
