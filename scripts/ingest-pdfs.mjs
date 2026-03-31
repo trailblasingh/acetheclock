@@ -7,6 +7,20 @@ const root = process.cwd();
 const outputPath = path.join(root, "data", "generated", "tests.json");
 const freeTopics = new Set(["percentages", "basics-of-percentage"]);
 
+let existingOverrides = new Map();
+try {
+  if (fs.existsSync(outputPath)) {
+    const oldTests = JSON.parse(fs.readFileSync(outputPath, "utf8"));
+    for (const t of oldTests) {
+      for (const q of t.questions) {
+        if (q.correct_answer_override !== undefined && q.correct_answer_override !== null) {
+          existingOverrides.set(q.id, String(q.correct_answer_override));
+        }
+      }
+    }
+  }
+} catch (e) {}
+
 const pairs = discoverPdfPairs(root);
 const tests = [];
 
@@ -99,7 +113,7 @@ function buildTestRecord(pair, questionText, solutionText) {
       console.warn(`Needs manual review: ${question.id}`);
     }
 
-    let override_answer = null;
+    let override_answer = existingOverrides.get(question.id) || null;
     let override_explanation = finalExplanation;
     let override_needs_review = needsReview;
 
