@@ -99,12 +99,22 @@ function buildTestRecord(pair, questionText, solutionText) {
       console.warn(`Needs manual review: ${question.id}`);
     }
 
+    let override_answer = null;
+    let override_explanation = finalExplanation;
+    let override_needs_review = needsReview;
+
+    if (question.question.includes("A college has raised 75% of the amount")) {
+      override_answer = "300";
+      override_explanation = `Let total number of people = x\n\nPeople already solicited = 60% of x = 0.6x\nRemaining people = 0.4x\n\nAverage donation from already solicited = 600\nSo, amount collected from them = 600 \u00d7 0.6x = 360x\n\nThis is 75% of total required amount\n\nTotal required amount = 360x / 0.75 = 480x\n\nRemaining amount = 25% of total = 120x\n\nNumber of remaining people = 0.4x\n\nAverage donation required = 120x / 0.4x = 300\n\nTherefore, required average donation = 300`;
+      override_needs_review = false;
+    }
+
     return {
       ...question,
       correctAnswer: finalAnswer,
-      correct_answer_override: null,
-      needs_review: needsReview,
-      explanation: finalExplanation,
+      correct_answer_override: override_answer,
+      needs_review: override_needs_review,
+      explanation: override_explanation,
       sourceQuestionPdf: path.basename(pair.questionFile),
       sourceSolutionPdf: path.basename(pair.solutionFile)
     };
