@@ -75,8 +75,9 @@ function buildTestRecord(pair, questionText, solutionText) {
       finalExplanation = "Explanation not parsed.";
     }
 
-    if (finalAnswer === "") {
-      console.warn(`Missing answer: ${pair.baseName} Q${question.questionNumber}`);
+    if (finalAnswer === "" || finalAnswer === null || Number.isNaN(finalAnswer)) {
+      console.warn(`Missing answer/solution completely: ${pair.baseName} Q${question.questionNumber}`);
+      finalAnswer = "N/A";
     } else {
       let isNumeric = !isNaN(Number(finalAnswer));
       let explanationContainsNum = finalExplanation.includes(String(finalAnswer));
@@ -248,9 +249,34 @@ function parseSolutions(solutionText, questions) {
       }
     }
 
-    if (answer === null || answer === "") {
+    if (answer === null || answer === "" || answer === "N/A" || Number.isNaN(answer)) {
+      const rawLines = rawBlock.split('\n').map(l => l.trim()).filter(Boolean);
+      const lastLines = rawLines.slice(-3);
+
+      let fallbackNumbers = [];
+      for (const line of lastLines) {
+        const matches = line.match(/-?\d+(?:\.\d+)?/g) || [];
+        for (const match of matches) {
+          fallbackNumbers.push(Number(match));
+        }
+      }
+
+      fallbackNumbers = fallbackNumbers.filter(n => n >= 1);
+      
+      const question_id = question ? question.id : `q${questionNumber}`;
+
+      if (fallbackNumbers.length > 0) {
+        const maxNumber = Math.max(...fallbackNumbers);
+        answer = maxNumber.toString();
+      } else {
         answer = "N/A";
-        console.warn(`N/A extracted for question: q${questionNumber}`);
+      }
+
+      console.log({
+        question_id,
+        fallback_numbers: fallbackNumbers,
+        selected_answer: answer
+      });
     } else {
         if (question && question.type === "TITA" && !isNaN(Number(answer))) {
             answer = Number(answer);
