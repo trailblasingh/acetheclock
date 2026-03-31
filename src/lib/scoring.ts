@@ -29,12 +29,18 @@ export function scoreAttempt(
 
     attemptedCount += 1;
 
-    const evaluatedCorrectAnswer = question.correct_answer_override ?? question.correctAnswer;
+    const finalCorrectAnswer = question.correct_answer_override ?? question.correctAnswer;
+
+    console.log({
+      override: question.correct_answer_override,
+      base: question.correctAnswer,
+      final: finalCorrectAnswer
+    });
 
     const isCorrect =
       question.type === "MCQ"
-        ? answer === String(evaluatedCorrectAnswer) || answer === getOptionLabel(String(evaluatedCorrectAnswer))
-        : Math.abs(Number(answer) - Number(evaluatedCorrectAnswer)) < 1e-6;
+        ? answer === String(finalCorrectAnswer) || answer === getOptionLabel(String(finalCorrectAnswer))
+        : Math.abs(Number(answer) - Number(finalCorrectAnswer)) < 1e-6;
 
     if (isCorrect) {
       score += 3;
