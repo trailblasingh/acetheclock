@@ -249,6 +249,8 @@ function QuestionReviewSection({
         const response = responseMap.get(question.id);
         const selectedAnswer = response?.selectedAnswer?.trim() ?? "";
         const isUnattempted = !selectedAnswer;
+
+        console.log("FRONTEND RECEIVED:", question);
         const finalAnswer = question.correctAnswerOverride ?? question.correctAnswer;
         
         console.log("RENDER CHECK:", {

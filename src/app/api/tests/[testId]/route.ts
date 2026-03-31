@@ -13,9 +13,17 @@ export async function GET(
     return NextResponse.json({ message: "Test not found." }, { status: 404 });
   }
 
+  if (test.questions.length > 0) {
+    console.log("API QUESTION:", test.questions[0]);
+  }
+
   return NextResponse.json({
     id: test.id,
     name: test.name,
-    questions: test.questions
+    questions: test.questions.map((q) => ({
+      ...q,
+      correctAnswer: q.correctAnswer,
+      correctAnswerOverride: q.correctAnswerOverride
+    }))
   });
 }
