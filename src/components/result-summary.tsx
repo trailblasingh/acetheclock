@@ -251,11 +251,10 @@ function QuestionReviewSection({
         const isUnattempted = !selectedAnswer;
         const finalAnswer = question.correctAnswerOverride ?? question.correctAnswer;
         
-        console.log("QUESTION DATA:", question);
-        console.log({
+        console.log("RENDER CHECK:", {
+          correctAnswer: question.correctAnswer,
           override: question.correctAnswerOverride,
-          base: question.correctAnswer,
-          final: finalAnswer
+          finalAnswer
         });
 
         const isCorrect =
@@ -325,7 +324,7 @@ function QuestionReviewSection({
 
               <div className="grid gap-3 md:grid-cols-3">
                 <AnswerBox label="User Answer" value={question.type === "MCQ" ? formatMcqAnswer(question, selectedAnswer, true) : selectedAnswer || "Not attempted"} />
-                <AnswerBox label="Correct Answer" value={question.type === "MCQ" ? formatMcqAnswer(question, String(finalAnswer), false) : String(finalAnswer)} />
+                <AnswerBox label="Correct Answer" value={String(finalAnswer)} />
                 <AnswerBox label="Status" value={statusLabel} />
               </div>
 
