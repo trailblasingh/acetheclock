@@ -250,7 +250,7 @@ function QuestionReviewSection({
         const selectedAnswer = response?.selectedAnswer?.trim() ?? "";
         const isUnattempted = !selectedAnswer;
 
-        console.log("FRONTEND RECEIVED:", question);
+        console.log("RESULT SOURCE:", question);
         const finalAnswer = question.correctAnswerOverride ?? question.correctAnswer;
         
         console.log("RENDER CHECK:", {
