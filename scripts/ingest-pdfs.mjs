@@ -249,34 +249,37 @@ function parseSolutions(solutionText, questions) {
       }
     }
 
-    if (answer === null || answer === "" || answer === "N/A" || Number.isNaN(answer)) {
-      const rawLines = rawBlock.split('\n').map(l => l.trim()).filter(Boolean);
-      const lastLines = rawLines.slice(-3);
+    let cleanExpl = rawBlock.replace(/[^\x00-\x7F]+/g, "");
+    cleanExpl = cleanExpl.replace(/[ \t]{2,}/g, " ");
+    let explanation = cleanExpl.trim();
 
-      let fallbackNumbers = [];
-      for (const line of lastLines) {
-        const matches = line.match(/-?\d+(?:\.\d+)?/g) || [];
-        for (const match of matches) {
-          fallbackNumbers.push(Number(match));
+    if (answer === null || answer === "" || answer === "N/A" || Number.isNaN(answer)) {
+      const lastLines = explanation.split("\n").slice(-3).join(" ");
+      const matches = lastLines.match(/-?\d+(\.\d+)?/g) || [];
+      const question_id = question ? question.id : `q${questionNumber}`;
+      
+      let correct_answer = null;
+
+      if (matches.length > 0) {
+        const numbers = matches.map(Number);
+        
+        // Remove small decimals like 0.4
+        const filtered = numbers.filter(n => n >= 1);
+        
+        if (filtered.length > 0) {
+          const maxVal = Math.max(...filtered);
+          correct_answer = String(maxVal);
+          
+          console.log("Fallback FIX applied:", {
+            question_id,
+            numbers,
+            selected: correct_answer
+          });
         }
       }
 
-      fallbackNumbers = fallbackNumbers.filter(n => n >= 1);
-      
-      const question_id = question ? question.id : `q${questionNumber}`;
+      answer = correct_answer ?? "N/A";
 
-      if (fallbackNumbers.length > 0) {
-        const maxNumber = Math.max(...fallbackNumbers);
-        answer = maxNumber.toString();
-      } else {
-        answer = "N/A";
-      }
-
-      console.log({
-        question_id,
-        fallback_numbers: fallbackNumbers,
-        selected_answer: answer
-      });
     } else {
         if (question && question.type === "TITA" && !isNaN(Number(answer))) {
             answer = Number(answer);
@@ -284,10 +287,6 @@ function parseSolutions(solutionText, questions) {
             answer = String(answer);
         }
     }
-
-    let cleanExpl = rawBlock.replace(/[^\x00-\x7F]+/g, "");
-    cleanExpl = cleanExpl.replace(/[ \t]{2,}/g, " ");
-    let explanation = cleanExpl.trim();
 
     solutionMap.set(questionNumber, {
       correctAnswer: answer,
