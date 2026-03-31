@@ -13,8 +13,9 @@ try {
     const oldTests = JSON.parse(fs.readFileSync(outputPath, "utf8"));
     for (const t of oldTests) {
       for (const q of t.questions) {
-        if (q.correct_answer_override !== undefined && q.correct_answer_override !== null) {
-          existingOverrides.set(q.id, String(q.correct_answer_override));
+        const overrideVal = q.correctAnswerOverride ?? q.correct_answer_override;
+        if (overrideVal !== undefined && overrideVal !== null) {
+          existingOverrides.set(q.id, String(overrideVal));
         }
       }
     }
@@ -126,7 +127,7 @@ function buildTestRecord(pair, questionText, solutionText) {
     return {
       ...question,
       correctAnswer: finalAnswer,
-      correct_answer_override: override_answer,
+      correctAnswerOverride: override_answer,
       needs_review: override_needs_review,
       explanation: override_explanation,
       sourceQuestionPdf: path.basename(pair.questionFile),

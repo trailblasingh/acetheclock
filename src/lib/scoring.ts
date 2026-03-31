@@ -29,10 +29,10 @@ export function scoreAttempt(
 
     attemptedCount += 1;
 
-    const finalAnswer = question.correct_answer_override ?? question.correctAnswer;
+    const finalAnswer = question.correctAnswerOverride ?? question.correctAnswer;
 
     console.log({
-      override: question.correct_answer_override,
+      override: question.correctAnswerOverride,
       base: question.correctAnswer,
       final: finalAnswer
     });

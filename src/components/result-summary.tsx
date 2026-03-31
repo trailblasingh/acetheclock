@@ -249,11 +249,11 @@ function QuestionReviewSection({
         const response = responseMap.get(question.id);
         const selectedAnswer = response?.selectedAnswer?.trim() ?? "";
         const isUnattempted = !selectedAnswer;
-        const finalAnswer = question.correct_answer_override || question.correctAnswer;
+        const finalAnswer = question.correctAnswerOverride ?? question.correctAnswer;
         
         console.log("QUESTION DATA:", question);
         console.log({
-          override: question.correct_answer_override,
+          override: question.correctAnswerOverride,
           base: question.correctAnswer,
           final: finalAnswer
         });
