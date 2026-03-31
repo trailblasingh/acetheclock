@@ -318,13 +318,33 @@ function QuestionReviewSection({
               ) : (
                 <div className="grid gap-3 md:grid-cols-2">
                   <AnswerBox label="User Answer" value={selectedAnswer || "Not attempted"} />
-                  <AnswerBox label="Correct Answer" value={String(finalAnswer)} />
+                  {(() => { console.log("FINAL RENDER VALUE:", question.correctAnswerOverride, question.correctAnswer); return null; })()}
+                  <div className="p-4 border rounded-xl bg-white">
+                    <div className="text-sm text-gray-500">Correct Answer</div>
+                    <div className="text-lg font-semibold text-black">
+                      {String(
+                        question.correctAnswerOverride ??
+                        question.correctAnswer ??
+                        "NA"
+                      )}
+                    </div>
+                  </div>
                 </div>
               )}
 
               <div className="grid gap-3 md:grid-cols-3">
                 <AnswerBox label="User Answer" value={question.type === "MCQ" ? formatMcqAnswer(question, selectedAnswer, true) : selectedAnswer || "Not attempted"} />
-                <AnswerBox label="Correct Answer" value={String(finalAnswer)} />
+                {(() => { console.log("FINAL RENDER VALUE:", question.correctAnswerOverride, question.correctAnswer); return null; })()}
+                <div className="p-4 border rounded-xl bg-white">
+                  <div className="text-sm text-gray-500">Correct Answer</div>
+                  <div className="text-lg font-semibold text-black">
+                    {String(
+                      question.correctAnswerOverride ??
+                      question.correctAnswer ??
+                      "NA"
+                    )}
+                  </div>
+                </div>
                 <AnswerBox label="Status" value={statusLabel} />
               </div>
 
