@@ -44,7 +44,7 @@ export function ResultSummary({ attemptId }: { attemptId: string }) {
     let active = true;
 
     void (async () => {
-      const response = await fetch(`/api/tests/${attempt.testId}`);
+      const response = await fetch(`/api/tests/${attempt.testId}?t=${Date.now()}`, { cache: "no-store" });
       if (!response.ok) {
         return;
       }
@@ -246,22 +246,26 @@ function QuestionReviewSection({
   return (
     <div className="mt-6 space-y-5">
       {review.questions.map((question) => {
+        const questionMap = new Map(review.questions.map((q) => [q.id, q]));
+        const fullQuestion = questionMap.get(question.id) || question;
+        
         const response = responseMap.get(question.id);
         const selectedAnswer = response?.selectedAnswer?.trim() ?? "";
         const isUnattempted = !selectedAnswer;
 
-        console.log("RESULT SOURCE:", question);
-        const finalAnswer = question.correctAnswerOverride ?? question.correctAnswer;
+        console.log("MERGED QUESTION:", fullQuestion);
+        console.log("RESULT SOURCE:", fullQuestion);
+        const finalAnswer = fullQuestion.correctAnswerOverride ?? fullQuestion.correctAnswer;
         
         console.log("RENDER CHECK:", {
-          correctAnswer: question.correctAnswer,
-          override: question.correctAnswerOverride,
+          correctAnswer: fullQuestion.correctAnswer,
+          override: fullQuestion.correctAnswerOverride,
           finalAnswer
         });
 
         const isCorrect =
           !isUnattempted &&
-          (question.type === "MCQ"
+          (fullQuestion.type === "MCQ"
             ? selectedAnswer === String(finalAnswer)
             : Math.abs(Number(selectedAnswer) - Number(finalAnswer)) < 1e-6);
         const statusLabel = isUnattempted ? "Unattempted" : isCorrect ? "Correct" : "Incorrect";
@@ -273,13 +277,13 @@ function QuestionReviewSection({
 
         return (
           <article
-            key={question.id}
+            key={fullQuestion.id}
             className="rounded-[28px] border border-white/10 bg-white/5 p-5 not-dark:border-slate-200 not-dark:bg-slate-50"
           >
             <div className="flex flex-col gap-3 border-b border-white/10 pb-4 not-dark:border-slate-200 md:flex-row md:items-center md:justify-between">
               <div>
-                <p className="text-sm uppercase tracking-[0.25em] text-slate-400">Question {question.questionNumber}</p>
-                <p className="text-sm text-slate-400">Type: {question.type}</p>
+                <p className="text-sm uppercase tracking-[0.25em] text-slate-400">Question {fullQuestion.questionNumber}</p>
+                <p className="text-sm text-slate-400">Type: {fullQuestion.type}</p>
               </div>
               <span className={`inline-flex rounded-full px-3 py-1 text-sm font-medium ${statusClass}`}>
                 {statusLabel}
@@ -288,12 +292,12 @@ function QuestionReviewSection({
 
             <div className="mt-5 space-y-5">
               <div>
-                <MathText text={question.question} className="text-slate-100 not-dark:text-slate-900" />
+                <MathText text={fullQuestion.question} className="text-slate-100 not-dark:text-slate-900" />
               </div>
 
-              {question.type === "MCQ" ? (
+              {fullQuestion.type === "MCQ" ? (
                 <div className="grid gap-3">
-                  {question.options.map((option, index) => {
+                  {fullQuestion.options.map((option, index) => {
                     const label = String(index + 1);
                     const isSelected = selectedAnswer === label;
                     const isCorrectOption = String(finalAnswer) === label;
@@ -304,7 +308,7 @@ function QuestionReviewSection({
                         : "border-white/10 bg-slate-950/40 not-dark:border-slate-200 not-dark:bg-white";
 
                     return (
-                      <div key={`${question.id}-${label}`} className={`rounded-2xl border p-4 ${optionClass}`}>
+                      <div key={`${fullQuestion.id}-${label}`} className={`rounded-2xl border p-4 ${optionClass}`}>
                         <div className="flex items-center justify-between gap-4">
                           <p className="text-sm font-semibold text-slate-300 not-dark:text-slate-700">Option {label}</p>
                           <div className="flex gap-2 text-xs">
@@ -320,13 +324,13 @@ function QuestionReviewSection({
               ) : (
                 <div className="grid gap-3 md:grid-cols-2">
                   <AnswerBox label="User Answer" value={selectedAnswer || "Not attempted"} />
-                  {(() => { console.log("FINAL RENDER VALUE:", question.correctAnswerOverride, question.correctAnswer); return null; })()}
+                  {(() => { console.log("FINAL RENDER VALUE:", fullQuestion.correctAnswerOverride, fullQuestion.correctAnswer); return null; })()}
                   <div className="p-4 border rounded-xl bg-white">
                     <div className="text-sm text-gray-500">Correct Answer</div>
                     <div className="text-lg font-semibold text-black">
                       {String(
-                        question.correctAnswerOverride ??
-                        question.correctAnswer ??
+                        fullQuestion.correctAnswerOverride ??
+                        fullQuestion.correctAnswer ??
                         "NA"
                       )}
                     </div>
@@ -335,14 +339,14 @@ function QuestionReviewSection({
               )}
 
               <div className="grid gap-3 md:grid-cols-3">
-                <AnswerBox label="User Answer" value={question.type === "MCQ" ? formatMcqAnswer(question, selectedAnswer, true) : selectedAnswer || "Not attempted"} />
-                {(() => { console.log("FINAL RENDER VALUE:", question.correctAnswerOverride, question.correctAnswer); return null; })()}
+                <AnswerBox label="User Answer" value={fullQuestion.type === "MCQ" ? formatMcqAnswer(fullQuestion, selectedAnswer, true) : selectedAnswer || "Not attempted"} />
+                {(() => { console.log("FINAL RENDER VALUE:", fullQuestion.correctAnswerOverride, fullQuestion.correctAnswer); return null; })()}
                 <div className="p-4 border rounded-xl bg-white">
                   <div className="text-sm text-gray-500">Correct Answer</div>
                   <div className="text-lg font-semibold text-black">
                     {String(
-                      question.correctAnswerOverride ??
-                      question.correctAnswer ??
+                      fullQuestion.correctAnswerOverride ??
+                      fullQuestion.correctAnswer ??
                       "NA"
                     )}
                   </div>
@@ -354,9 +358,9 @@ function QuestionReviewSection({
                 <div className="rounded-3xl border border-indigo-400/20 bg-indigo-500/5 p-5">
                   <p className="mb-5 text-sm uppercase tracking-[0.25em] text-indigo-200 not-dark:text-indigo-700">Explanation</p>
                   <FormattedExplanation
-                    text={question.explanation}
+                    text={fullQuestion.explanation}
                     expectedAnswer={String(finalAnswer)}
-                    expectedOptionText={question.type === "MCQ" ? question.options[Number(finalAnswer) - 1] : undefined}
+                    expectedOptionText={fullQuestion.type === "MCQ" ? fullQuestion.options[Number(finalAnswer) - 1] : undefined}
                   />
                 </div>
               ) : null}
