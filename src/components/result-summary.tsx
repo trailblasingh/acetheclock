@@ -323,10 +323,12 @@ function QuestionReviewSection({
 
               {showSolutions ? (
                 <div className="rounded-3xl border border-indigo-400/20 bg-indigo-500/5 p-5">
-                  <p className="mb-3 text-sm uppercase tracking-[0.25em] text-indigo-200 not-dark:text-indigo-700">Explanation</p>
-                  <pre style={{ whiteSpace: "pre-wrap" }} className="font-sans text-base leading-relaxed text-slate-100 not-dark:text-slate-900">
-                    {question.explanation}
-                  </pre>
+                  <p className="mb-5 text-sm uppercase tracking-[0.25em] text-indigo-200 not-dark:text-indigo-700">Explanation</p>
+                  <FormattedExplanation
+                    text={question.explanation}
+                    expectedAnswer={String(actualCorrectAnswer)}
+                    expectedOptionText={question.type === "MCQ" ? question.options[Number(actualCorrectAnswer) - 1] : undefined}
+                  />
                 </div>
               ) : null}
             </div>
@@ -392,4 +394,63 @@ function formatMcqAnswer(question: QuestionRecord, answer: string, allowEmpty: b
 
 function normalize(value: string) {
   return value.replace(/\s+/g, "").toLowerCase();
+}
+
+function FormattedExplanation({
+  text,
+  expectedAnswer,
+  expectedOptionText
+}: {
+  text: string;
+  expectedAnswer?: string;
+  expectedOptionText?: string;
+}) {
+  if (!text) return null;
+
+  const lines = text.split("\n");
+  const cleanedLines: string[] = [];
+
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (!trimmed) continue;
+    if (/^=+$/.test(trimmed)) continue;
+    if (/^[^a-zA-Z0-9]+$/.test(trimmed)) continue;
+
+    cleanedLines.push(trimmed);
+  }
+
+  const numericAnswer = expectedOptionText || expectedAnswer;
+
+  return (
+    <div className="font-sans text-base leading-relaxed text-slate-100 not-dark:text-slate-900">
+      {cleanedLines.map((line, index) => {
+        const isHighlight = /\b(Therefore|Hence)\b/i.test(line);
+        const hasNoOperators = !/[+\-*/=]/.test(line);
+        const hasMixedTokens = /(\d[a-zA-Z]|[a-zA-Z]\d)/.test(line) || /^[a-zA-Z0-9]+\s+[a-zA-Z0-9]+$/.test(line);
+        const isMessy = hasNoOperators && hasMixedTokens;
+
+        let isAnswerMatch = false;
+        if (numericAnswer && numericAnswer.length > 0) {
+          isAnswerMatch = numericAnswer.length > 1
+            ? line.includes(numericAnswer)
+            : new RegExp(`\\b${numericAnswer}\\b`).test(line);
+        }
+
+        let baseClass = "mb-4";
+        if (isHighlight) {
+          baseClass = "mb-8 font-semibold text-white drop-shadow-sm not-dark:text-slate-950 not-dark:drop-shadow-none";
+        } else if (isAnswerMatch) {
+          baseClass = "mb-4 font-medium text-emerald-400 not-dark:text-emerald-600";
+        } else if (isMessy) {
+          baseClass = "mb-4 text-slate-400 not-dark:text-slate-500";
+        }
+
+        return (
+          <div key={index} className={`last:mb-0 ${baseClass}`}>
+            {line}
+          </div>
+        );
+      })}
+    </div>
+  );
 }
