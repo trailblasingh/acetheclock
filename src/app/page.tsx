@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, BrainCircuit, ChartColumnIncreasing, ShieldCheck } from "lucide-react";
 
 import { getTopics } from "@/lib/catalog";
@@ -83,16 +84,95 @@ export default function HomePage() {
           </div>
         </div>
 
-        <aside className="rounded-[32px] border border-white/10 bg-slate-950/70 p-6 not-dark:border-slate-200 not-dark:bg-white/85">
-          <p className="text-sm uppercase tracking-[0.3em] text-slate-400">Founder Spotlight</p>
-          <div className="mt-5 rounded-[28px] border border-white/10 bg-[linear-gradient(135deg,rgba(79,70,229,0.28),rgba(34,197,94,0.22))] p-5 not-dark:border-slate-200">
-            <div className="h-28 rounded-[24px] bg-white/10" />
-            <h3 className="mt-5 text-xl font-semibold text-white not-dark:text-slate-950">Founder name placeholder</h3>
-            <p className="mt-3 text-sm text-slate-300 not-dark:text-slate-600">
-              Add the founder story, image, and pedagogy note here. This panel is ready for a real image and brand copy.
-            </p>
+        <div className="rounded-2xl bg-gradient-to-br from-indigo-100 via-white to-green-100 p-5 shadow-sm border border-gray-100">
+          {/* HEADER */}
+          <div className="text-xs tracking-widest text-gray-500 mb-3 text-center">
+            FOUNDER SPOTLIGHT
           </div>
-        </aside>
+
+          {/* IMAGE */}
+          <div className="flex justify-center">
+            <Image
+              src="/VikashProfile.jpeg"
+              alt="Vikash Singh"
+              width={80}
+              height={80}
+              className="rounded-full object-cover border-4 border-white shadow-md"
+            />
+          </div>
+
+          {/* NAME */}
+          <h3 className="text-base font-bold text-gray-900 text-center mt-2">
+            Vikash Singh
+          </h3>
+
+          {/* TAGLINE */}
+          <p className="text-[11px] text-indigo-600 font-semibold text-center">
+            CAT 99+ %iler (QA) | IIM Bangalore
+          </p>
+
+          {/* ROLES */}
+          <p className="text-[11px] text-gray-700 text-center mt-1">
+            Academic Head – Quant | Founder – Profitequations
+          </p>
+
+          {/* BADGE */}
+          <div className="flex justify-center mt-2">
+            <span className="text-[10px] bg-black text-white px-2 py-1 rounded-full">
+              10,000+ Students Mentored
+            </span>
+          </div>
+
+          {/* DESCRIPTION */}
+          <p className="text-[11px] text-gray-600 leading-relaxed text-center mt-2">
+            14+ years of teaching experience. Mentored thousands of CAT aspirants with multiple IIM converts.
+          </p>
+
+          {/* CTA */}
+          <button className="mt-3 w-full text-[11px] font-semibold bg-black text-white py-2 rounded-lg hover:bg-gray-800 transition">
+            Learn from Vikash →
+          </button>
+        </div>
+      </section>
+
+      <section>
+        <h1 className="text-center text-4xl font-bold mb-12 mt-20 text-white not-dark:text-gray-900">
+          Meet the Founder
+        </h1>
+
+        <div className="max-w-5xl mx-auto px-6 pb-20">
+          <div className="grid md:grid-cols-2 gap-10 items-center">
+            {/* IMAGE */}
+            <div className="flex justify-center">
+              <Image
+                src="/VikashProfile.jpeg"
+                alt="Vikash Singh"
+                width={260}
+                height={260}
+                className="rounded-2xl shadow-lg object-cover"
+              />
+            </div>
+
+            {/* CONTENT */}
+            <div>
+              <h2 className="text-3xl font-bold text-white not-dark:text-gray-900 mb-3">
+                Vikash Singh
+              </h2>
+
+              <p className="text-sm text-indigo-400 not-dark:text-indigo-600 font-semibold mb-4">
+                CAT Serial 99%iler (QA) | IIM Bangalore Alumnus
+              </p>
+
+              <p className="text-sm text-slate-300 not-dark:text-gray-700 mb-4 font-medium">
+                Academic Head – Quantitative Aptitude | Founder – Profitequations | School of Decision Making and Logical Thinking
+              </p>
+
+              <p className="text-slate-400 not-dark:text-gray-600 leading-relaxed">
+                Vikash Singh is a serial CAT 99+ percentiler (QA), educator and IIM Bangalore alumnus with 14+ years of experience in quantitative aptitude, logical reasoning, and applied finance education. He has mentored 10,000+ CAT aspirants, many of whom have secured calls and conversions at IIMs and top B-schools.
+              </p>
+            </div>
+          </div>
+        </div>
       </section>
     </div>
   );
