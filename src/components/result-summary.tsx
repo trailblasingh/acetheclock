@@ -5,7 +5,7 @@ import Link from "next/link";
 import { AlertTriangle, BarChart3, CheckCircle2, ChevronDown, Clock3, Target, XCircle } from "lucide-react";
 
 import { MathText } from "@/components/math-text";
-import type { AttemptReviewRecord, QuestionRecord } from "@/lib/types";
+import type { AttemptReviewRecord, QuestionRecord, AttemptResponse } from "@/lib/types";
 
 const metricClass =
   "rounded-[28px] border border-white/10 bg-white/5 p-5 not-dark:border-slate-200 not-dark:bg-white";
@@ -93,8 +93,8 @@ export function ResultSummary({ attemptId }: { attemptId: string }) {
       .slice(0, 3);
 
     const timeInsightDescription = topTimeResponses.length > 0
-      ? topTimeResponses.map((response) => {
-          const question = review.questions.find((item) => item.id === response.questionId);
+      ? topTimeResponses.map((response: AttemptResponse) => {
+          const question = review.questions.find((item: QuestionRecord) => item.id === response.questionId);
           const questionLabel = question ? `Q${question.questionNumber}` : `Q?`;
           return `${questionLabel} \u2192 ${Math.ceil(response.timeTaken / 60)} min`;
         }).join("\n")
@@ -193,7 +193,7 @@ export function ResultSummary({ attemptId }: { attemptId: string }) {
           </div>
         </div>
         <div className="mt-6 grid gap-4 lg:grid-cols-2 xl:grid-cols-3">
-          {insights.map((insight) => (
+          {insights.map((insight: InsightCard) => (
             <InsightCardView key={`${insight.title}-${insight.description}`} insight={insight} />
           ))}
         </div>
@@ -232,7 +232,7 @@ function QuestionReviewSection({
 }) {
   const questionMap = useMemo(() => {
     if (!review) return new Map();
-    return new Map(review.questions.map((q) => [q.id, q]));
+    return new Map(review.questions.map((q: QuestionRecord) => [q.id, q]));
   }, [review]);
 
   if (!review) {
@@ -245,7 +245,7 @@ function QuestionReviewSection({
 
   return (
     <div className="mt-6 space-y-5">
-      {attempt.responses.map((response) => {
+      {attempt.responses.map((response: AttemptResponse) => {
         const fullQuestion = questionMap.get(response.questionId);
         if (!fullQuestion) return null;
         
@@ -291,7 +291,7 @@ function QuestionReviewSection({
 
               {fullQuestion.type === "MCQ" ? (
                 <div className="grid gap-3">
-                  {fullQuestion.options.map((option, index) => {
+                  {fullQuestion.options.map((option: string, index: number) => {
                     const label = String(index + 1);
                     const isSelected = userAnswer === label;
                     const isCorrectOption = String(finalAnswer) === label;
@@ -434,7 +434,7 @@ function FormattedExplanation({
 
   return (
     <div className="font-sans text-base leading-relaxed text-slate-100 not-dark:text-slate-900">
-      {cleanedLines.map((line, index) => {
+      {cleanedLines.map((line: string, index: number) => {
         const isHighlight = /\b(Therefore|Hence)\b/i.test(line);
         const hasNoOperators = !/[+\-*/=]/.test(line);
         const hasMixedTokens = /(\d[a-zA-Z]|[a-zA-Z]\d)/.test(line) || /^[a-zA-Z0-9]+\s+[a-zA-Z0-9]+$/.test(line);
