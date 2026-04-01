@@ -27,8 +27,8 @@ export type TestRecord = {
 
 export type AttemptResponse = {
   questionId: string;
-  selectedAnswer: string;
-  timeSpentSeconds: number;
+  userAnswer: string;
+  timeTaken: number;
 };
 
 export type AttemptSummary = {

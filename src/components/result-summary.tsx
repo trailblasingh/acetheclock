@@ -89,14 +89,14 @@ export function ResultSummary({ attemptId }: { attemptId: string }) {
     };
 
     const topTimeResponses = [...attempt.responses]
-      .sort((left, right) => right.timeSpentSeconds - left.timeSpentSeconds)
+      .sort((left, right) => right.timeTaken - left.timeTaken)
       .slice(0, 3);
 
     const timeInsightDescription = topTimeResponses.length > 0
       ? topTimeResponses.map((response) => {
           const question = review.questions.find((item) => item.id === response.questionId);
           const questionLabel = question ? `Q${question.questionNumber}` : `Q?`;
-          return `${questionLabel} \u2192 ${Math.ceil(response.timeSpentSeconds / 60)} min`;
+          return `${questionLabel} \u2192 ${Math.ceil(response.timeTaken / 60)} min`;
         }).join("\n")
       : "Great pacing, no significant time sinks detected.";
 
@@ -230,10 +230,10 @@ function QuestionReviewSection({
   review: ReviewPayload | null;
   showSolutions: boolean;
 }) {
-  const responseMap = useMemo(
-    () => new Map(attempt.responses.map((response) => [response.questionId, response])),
-    [attempt.responses]
-  );
+  const questionMap = useMemo(() => {
+    if (!review) return new Map();
+    return new Map(review.questions.map((q) => [q.id, q]));
+  }, [review]);
 
   if (!review) {
     return (
@@ -245,29 +245,23 @@ function QuestionReviewSection({
 
   return (
     <div className="mt-6 space-y-5">
-      {review.questions.map((question) => {
-        const questionMap = new Map(review.questions.map((q) => [q.id, q]));
-        const fullQuestion = questionMap.get(question.id) || question;
+      {attempt.responses.map((response) => {
+        const fullQuestion = questionMap.get(response.questionId);
+        if (!fullQuestion) return null;
         
-        const response = responseMap.get(question.id);
-        const selectedAnswer = response?.selectedAnswer?.trim() ?? "";
-        const isUnattempted = !selectedAnswer;
+        const userAnswer = response.userAnswer?.trim() ?? "";
+        const isUnattempted = !userAnswer;
 
-        console.log("MERGED QUESTION:", fullQuestion);
-        console.log("RESULT SOURCE:", fullQuestion);
+        console.log("DEBUG: response", { response, fullQuestion });
+
         const finalAnswer = fullQuestion.correctAnswerOverride ?? fullQuestion.correctAnswer;
-        
-        console.log("RENDER CHECK:", {
-          correctAnswer: fullQuestion.correctAnswer,
-          override: fullQuestion.correctAnswerOverride,
-          finalAnswer
-        });
 
         const isCorrect =
           !isUnattempted &&
           (fullQuestion.type === "MCQ"
-            ? selectedAnswer === String(finalAnswer)
-            : Math.abs(Number(selectedAnswer) - Number(finalAnswer)) < 1e-6);
+            ? userAnswer === String(finalAnswer)
+            : Math.abs(Number(userAnswer) - Number(finalAnswer)) < 1e-6);
+        
         const statusLabel = isUnattempted ? "Unattempted" : isCorrect ? "Correct" : "Incorrect";
         const statusClass = isUnattempted
           ? "bg-slate-500/15 text-slate-300 not-dark:bg-slate-100 not-dark:text-slate-700"
@@ -299,7 +293,7 @@ function QuestionReviewSection({
                 <div className="grid gap-3">
                   {fullQuestion.options.map((option, index) => {
                     const label = String(index + 1);
-                    const isSelected = selectedAnswer === label;
+                    const isSelected = userAnswer === label;
                     const isCorrectOption = String(finalAnswer) === label;
                     const optionClass = isCorrectOption
                       ? "border-emerald-400/40 bg-emerald-500/10"
@@ -321,26 +315,10 @@ function QuestionReviewSection({
                     );
                   })}
                 </div>
-              ) : (
-                <div className="grid gap-3 md:grid-cols-2">
-                  <AnswerBox label="User Answer" value={selectedAnswer || "Not attempted"} />
-                  {(() => { console.log("FINAL RENDER VALUE:", fullQuestion.correctAnswerOverride, fullQuestion.correctAnswer); return null; })()}
-                  <div className="p-4 border rounded-xl bg-white">
-                    <div className="text-sm text-gray-500">Correct Answer</div>
-                    <div className="text-lg font-semibold text-black">
-                      {String(
-                        fullQuestion.correctAnswerOverride ??
-                        fullQuestion.correctAnswer ??
-                        "NA"
-                      )}
-                    </div>
-                  </div>
-                </div>
-              )}
+              ) : null}
 
               <div className="grid gap-3 md:grid-cols-3">
-                <AnswerBox label="User Answer" value={fullQuestion.type === "MCQ" ? formatMcqAnswer(fullQuestion, selectedAnswer, true) : selectedAnswer || "Not attempted"} />
-                {(() => { console.log("FINAL RENDER VALUE:", fullQuestion.correctAnswerOverride, fullQuestion.correctAnswer); return null; })()}
+                <AnswerBox label="User Answer" value={fullQuestion.type === "MCQ" ? formatMcqAnswer(fullQuestion, userAnswer, true) : userAnswer || "Not attempted"} />
                 <div className="p-4 border rounded-xl bg-white">
                   <div className="text-sm text-gray-500">Correct Answer</div>
                   <div className="text-lg font-semibold text-black">

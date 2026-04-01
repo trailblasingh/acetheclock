@@ -21,7 +21,7 @@ export function scoreAttempt(
 
   for (const question of test.questions) {
     const response = responseMap.get(question.id);
-    const answer = response?.selectedAnswer?.trim();
+    const answer = response?.userAnswer?.trim();
 
     if (!answer) {
       continue;

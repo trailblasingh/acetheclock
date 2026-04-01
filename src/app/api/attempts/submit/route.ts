@@ -5,8 +5,8 @@ import { scoreAttempt } from "@/lib/scoring";
 
 const responseSchema = z.object({
   questionId: z.string(),
-  selectedAnswer: z.string(),
-  timeSpentSeconds: z.number()
+  userAnswer: z.string(),
+  timeTaken: z.number()
 });
 
 const payloadSchema = z.object({

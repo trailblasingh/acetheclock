@@ -60,8 +60,8 @@ export function ExamRunner({ test }: { test: TestRecord }) {
   function buildResponses(): AttemptResponse[] {
     return test.questions.map((question) => ({
       questionId: question.id,
-      selectedAnswer: answers[question.id] ?? "",
-      timeSpentSeconds: timeSpent[question.id] ?? 0
+      userAnswer: answers[question.id] ?? "",
+      timeTaken: timeSpent[question.id] ?? 0
     }));
   }
 
