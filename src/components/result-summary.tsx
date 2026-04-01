@@ -291,7 +291,7 @@ function QuestionReviewSection({
 
               {fullQuestion.type === "MCQ" ? (
                 <div className="grid gap-3">
-                  {fullQuestion.options.map((option: string, index: number) => {
+                  {fullQuestion.options.map((option: any, index: number) => {
                     const label = String(index + 1);
                     const isSelected = userAnswer === label;
                     const isCorrectOption = String(finalAnswer) === label;
