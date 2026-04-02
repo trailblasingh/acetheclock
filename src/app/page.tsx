@@ -85,13 +85,14 @@ export default function HomePage() {
         </div>
 
         <div className="rounded-2xl bg-gradient-to-br from-indigo-100 via-white to-green-100 p-5 shadow-sm border border-gray-100">
-          {/* HEADER */}
+
           <div className="text-xs tracking-widest text-gray-500 mb-3 text-center">
             FOUNDER SPOTLIGHT
           </div>
 
-          {/* IMAGE */}
-          <div className="flex justify-center">
+        {/* IMAGE */}
+
+          <div className="flex justify-center mb-3">
             <Image
               src="/VikashProfile.jpeg"
               alt="Vikash Singh"
@@ -101,37 +102,38 @@ export default function HomePage() {
             />
           </div>
 
-          {/* NAME */}
-          <h3 className="text-base font-bold text-gray-900 text-center mt-2">
+        {/* NAME */}
+
+          <h3 className="text-base font-bold text-gray-900 text-center">
             Vikash Singh
           </h3>
 
-          {/* TAGLINE */}
+        {/* TAGLINE */}
+
           <p className="text-[11px] text-indigo-600 font-semibold text-center">
             CAT 99+ %iler (QA) | IIM Bangalore
           </p>
 
-          {/* ROLES */}
+        {/* ROLES */}
+
           <p className="text-[11px] text-gray-700 text-center mt-1">
             Academic Head – Quant | Founder – Profitequations
           </p>
 
-          {/* BADGE */}
+        {/* BADGE */}
+
           <div className="flex justify-center mt-2">
             <span className="text-[10px] bg-black text-white px-2 py-1 rounded-full">
               10,000+ Students Mentored
             </span>
           </div>
 
-          {/* DESCRIPTION */}
+        {/* DESCRIPTION */}
+
           <p className="text-[11px] text-gray-600 leading-relaxed text-center mt-2">
-            14+ years of teaching experience. Mentored thousands of CAT aspirants with multiple IIM converts.
+            14+ years of teaching experience. Mentored 10,000+ CAT aspirants with multiple IIM converts.
           </p>
 
-          {/* CTA */}
-          <button className="mt-3 w-full text-[11px] font-semibold bg-black text-white py-2 rounded-lg hover:bg-gray-800 transition">
-            Learn from Vikash →
-          </button>
         </div>
       </section>
 
