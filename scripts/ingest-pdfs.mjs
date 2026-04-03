@@ -16,6 +16,8 @@ for (const pair of pairs) {
   tests.push(test);
 }
 
+console.log(JSON.stringify(tests[0], null, 2));
+
 fs.mkdirSync(path.dirname(outputPath), { recursive: true });
 fs.writeFileSync(outputPath, JSON.stringify(tests, null, 2));
 console.log(`Generated ${tests.length} tests into ${outputPath}`);
@@ -63,8 +65,13 @@ function buildTestRecord(pair, questionText, solutionText) {
   const topic = normalizeTopicName(topicLine);
   const topicSlug = slugify(topic);
 
-  const meta = inferMeta(pair.baseName, topic, questionText);
-  const questions = parseQuestions(questionText, pair, meta);
+  const sectionBlocks = detectSectionBlocks(questionText);
+  const meta = inferMeta(pair.baseName, topic, questionText, sectionBlocks);
+
+  const questions = sectionBlocks.length
+    ? sectionBlocks.flatMap(({ text, name }) => parseQuestions(text, pair, { ...meta, section: name }))
+    : parseQuestions(questionText, pair, meta);
+
   const solutions = parseSolutions(solutionText, questions);
 
   const mergedQuestions = questions.map((question) => {
@@ -91,20 +98,19 @@ function buildTestRecord(pair, questionText, solutionText) {
     };
   });
 
-  const hasVarc = /varc/i.test(questionText);
-  const hasDilr = /(dilr|lrdi)/i.test(questionText);
-  const hasQa = /\bqa\b/i.test(questionText) || /quant/i.test(questionText);
-  const hasAllSections = hasVarc && hasDilr && hasQa;
+  const hasAllSections = hasAllThreeSections(sectionBlocks);
 
   const type = hasAllSections ? "FULL_MOCK" : "TOPIC_TEST";
 
-  const sections = type === "FULL_MOCK"
-    ? [
-        { name: "VARC", time: 40 },
-        { name: "DILR", time: 40 },
-        { name: "QA", time: 40 }
-      ]
-    : [{ name: "QA", time: 60 }];
+  const sectionNames = hasAllSections
+    ? ["VARC", "DILR", "QA"]
+    : [sectionBlocks[0]?.name || "QA"];
+
+  const sections = sectionNames.map((name) => ({
+    name,
+    time: name === "QA" ? 60 : 40,
+    questions: mergedQuestions.filter((q) => q.section === name)
+  }));
 
   const title = type === "FULL_MOCK" ? buildFullMockTitle(pair.baseName, meta) : buildTopicTitle(pair.baseName, topic);
 
@@ -129,6 +135,48 @@ function buildTestRecord(pair, questionText, solutionText) {
     sections,
     questions: mergedQuestions
   };
+}
+
+function detectSectionBlocks(questionText) {
+  const lines = questionText.split(/\n+/);
+  const blocks = [];
+  let currentName = null;
+  let buffer = [];
+
+  const pushBlock = () => {
+    if (currentName && buffer.length) {
+      blocks.push({ name: normalizeSectionName(currentName), text: buffer.join("\n") });
+    }
+    buffer = [];
+  };
+
+  for (const raw of lines) {
+    const line = raw.trim();
+    const match = line.match(/^(VARC|VERBAL ABILITY|DILR|LRDI|LOGICAL|DATA INTERPRETATION|QA|QUANT)/i);
+    if (match) {
+      pushBlock();
+      currentName = normalizeSectionName(match[1]);
+      continue;
+    }
+    buffer.push(line);
+  }
+  if (buffer.length) {
+    pushBlock();
+  }
+
+  return blocks;
+}
+
+function normalizeSectionName(name) {
+  const lower = name.toLowerCase();
+  if (lower.startsWith("varc") || lower.includes("verbal")) return "VARC";
+  if (lower.includes("dilr") || lower.includes("lrdi") || lower.includes("logical") || lower.includes("data")) return "DILR";
+  return "QA";
+}
+
+function hasAllThreeSections(blocks) {
+  const names = new Set(blocks.map((b) => b.name));
+  return names.has("VARC") && names.has("DILR") && names.has("QA");
 }
 
 function parseQuestions(questionText, pair, meta) {
@@ -253,6 +301,10 @@ function findExplicitAnswer(text) {
   return null;
 }
 
+function isValidAnswer(val) {
+  return /^[0-9]+(\.[0-9]+)?$/.test(val);
+}
+
 function extractAnswer(text) {
   const numbers = [];
   const regex = /(?<![A-Za-z%])(-?\d+(?:\.\d+)?)(?![A-Za-z%])/g;
@@ -261,19 +313,16 @@ function extractAnswer(text) {
     numbers.push(match[1]);
   }
 
-  return numbers.length ? numbers[numbers.length - 1] : null;
+  const valid = numbers.filter(isValidAnswer);
+  return valid.length ? valid[valid.length - 1] : null;
 }
 
-function inferMeta(baseName, topic, questionText) {
+function inferMeta(baseName, topic, questionText, sectionBlocks) {
   const yearMatch = baseName.match(/(20\d{2}|19\d{2})/);
   const slotMatch = baseName.match(/slot[-_\s]*([123])/i);
   const year = yearMatch ? Number(yearMatch[1]) : null;
   const slot = slotMatch ? Number(slotMatch[1]) : null;
-  const section = /varc/i.test(questionText)
-    ? "VARC"
-    : /(dilr|lrdi)/i.test(questionText)
-      ? "DILR"
-      : "QA";
+  const section = sectionBlocks[0]?.name || "QA";
 
   const testId = year ? `cat_${year}_slot_${slot ?? 1}` : slugify(baseName).replace(/-/g, "_");
   const title = year ? `CAT ${year} Slot ${slot ?? 1}` : baseName;
