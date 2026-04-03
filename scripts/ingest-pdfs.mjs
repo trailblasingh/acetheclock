@@ -12,7 +12,12 @@ const tests = [];
 for (const pair of pairs) {
   const questionText = await extractText(pair.questionFile);
   const solutionText = await extractText(pair.solutionFile);
-  tests.push(buildTestRecord(pair, questionText, solutionText));
+  const test = buildTestRecord(pair, questionText, solutionText);
+  if (isValidTest(test)) {
+    tests.push(test);
+  } else {
+    console.warn(`Dropping invalid test: ${test.title ?? pair.baseName}`);
+  }
 }
 
 fs.mkdirSync(path.dirname(outputPath), { recursive: true });
@@ -58,7 +63,6 @@ async function extractText(filePath) {
 
 function buildTestRecord(pair, questionText, solutionText) {
   const lines = questionText.split("\n").map((line) => line.trim()).filter(Boolean);
-  const titleLine = lines[0] ?? pair.baseName;
   const topicLine = lines.find((line, index) => index > 0 && !line.startsWith("--")) ?? pair.baseName;
   const topic = normalizeTopicName(topicLine);
   const topicSlug = slugify(topic);
@@ -71,14 +75,14 @@ function buildTestRecord(pair, questionText, solutionText) {
     const solution = solutions.get(question.questionNumber) ?? { correctAnswer: "", explanation: "" };
     const explanation = solution.explanation.trim() || "Explanation not parsed.";
     const rawAnswer = solution.correctAnswer;
+    const cleanedAnswer = rawAnswer === "-" ? "" : rawAnswer;
     const finalAnswer =
-      normalizeAnswer(question, rawAnswer) ||
+      normalizeAnswer(question, cleanedAnswer) ||
       (question.type === "TITA" ? extractLastNumber(explanation) : "") ||
-      "Answer not available";
+      "";
 
-    console.log(`Q${question.questionNumber} -> ${finalAnswer}`);
-    if (finalAnswer === "Answer not available") {
-      console.warn(`Missing answer for Q${question.questionNumber}`);
+    if (!finalAnswer) {
+      console.error(`MISSING ANSWER: ${question.id}`);
     }
 
     return {
@@ -96,27 +100,14 @@ function buildTestRecord(pair, questionText, solutionText) {
     };
   });
 
-  const durationByCount = mergedQuestions.length >= 60 ? 120 : mergedQuestions.length >= 20 ? 60 : 30;
+  const hasVarc = /varc/i.test(questionText);
+  const hasDilr = /(dilr|lrdi)/i.test(questionText);
+  const hasQa = /\bqa\b/i.test(questionText) || /quant/i.test(questionText);
+  const hasAllSections = hasVarc && hasDilr && hasQa;
 
-  const isFullMock = determineFullMock({
-    baseName: pair.baseName,
-    questionText,
-    questionCount: mergedQuestions.length,
-    durationMinutes: durationByCount,
-    hasSectionMarkers: meta.hasSectionMarkers
-  });
+  const type = hasAllSections ? "FULL_MOCK" : "TOPIC_TEST";
 
-  const type = isFullMock ? "FULL_MOCK" : "TOPIC_TEST";
-
-  const title = isFullMock ? buildFullMockTitle(pair.baseName, meta) : buildTopicTitle(pair.baseName, topic);
-
-  const isFree =
-    (type === "FULL_MOCK" && title.toLowerCase() === "cat 2025 slot 1") ||
-    title.toLowerCase().includes("basics of percentage");
-
-  console.log("TEST TYPE:", title, type, isFree);
-
-  const sections = isFullMock
+  const sections = type === "FULL_MOCK"
     ? [
         { name: "VARC", time: 40 },
         { name: "DILR", time: 40 },
@@ -124,7 +115,15 @@ function buildTestRecord(pair, questionText, solutionText) {
       ]
     : [{ name: "QA", time: 60 }];
 
-  const durationMinutes = isFullMock ? 120 : durationByCount;
+  const title = type === "FULL_MOCK" ? buildFullMockTitle(pair.baseName, meta) : buildTopicTitle(pair.baseName, topic);
+
+  const isFree =
+    (type === "FULL_MOCK" && title === "CAT 2025 Slot 1") ||
+    (type === "TOPIC_TEST" && title.toLowerCase().includes("percentage"));
+
+  console.log("TEST TYPE:", title, type, isFree);
+
+  const durationMinutes = type === "FULL_MOCK" ? 120 : mergedQuestions.length >= 20 ? 60 : 30;
 
   const testSlug = meta.testId ?? slugify(pair.baseName).replace(/-/g, "_");
 
@@ -202,7 +201,7 @@ function parseSolutions(solutionText, questions) {
     const rawBlock = cleanupBlock(chunks[index + 1] ?? "");
 
     const explicitAnswer = rawBlock.match(/Answer\s*[:\-]\s*([A-Za-z0-9.%/-]+)/i)?.[1] ?? "";
-    let answer = explicitAnswer;
+    let answer = explicitAnswer === "-" ? "" : explicitAnswer;
 
     if (!answer && question && question.type === "MCQ") {
       const mcqLead = rawBlock.match(/^([A-D]|\d+)\b/i);
@@ -215,7 +214,7 @@ function parseSolutions(solutionText, questions) {
     if (!answer) {
       const keyAnswer = answerKey.get(questionNumber);
       if (keyAnswer) {
-        answer = keyAnswer;
+        answer = keyAnswer === "-" ? "" : keyAnswer;
       }
     }
 
@@ -277,20 +276,9 @@ function inferMeta(baseName, topic, questionText) {
 
   const testId = year ? `cat_${year}_slot_${slot ?? 1}` : slugify(baseName).replace(/-/g, "_");
   const title = year ? `CAT ${year} Slot ${slot ?? 1}` : baseName;
-  const hasSectionMarkers = /varc|dilr|lrdi/.test(questionText.toLowerCase());
+  const hasSectionMarkers = /varc/.test(questionText.toLowerCase()) && /(dilr|lrdi)/.test(questionText.toLowerCase()) && /qa/.test(questionText.toLowerCase());
 
   return { year, slot, section, testId, title, topic, hasSectionMarkers };
-}
-
-function determineFullMock({ baseName, questionText, questionCount, durationMinutes, hasSectionMarkers }) {
-  const lowerName = baseName.toLowerCase();
-  const hasCatSlot = lowerName.includes("cat") && lowerName.includes("slot");
-  const hasExplicitSections = /varc/.test(questionText.toLowerCase()) && /(dilr|lrdi)/.test(questionText.toLowerCase()) && /qa/.test(questionText.toLowerCase());
-  const manyQuestions = questionCount >= 60;
-  const longDuration = durationMinutes >= 120;
-  const sectionFlag = hasSectionMarkers;
-
-  return manyQuestions || hasExplicitSections || hasCatSlot || sectionFlag || longDuration;
 }
 
 function buildFullMockTitle(baseName, meta) {
@@ -308,6 +296,7 @@ function buildTopicTitle(baseName, topic) {
   const cleaned = baseName
     .replace(/^\d+\s*/g, "")
     .replace(/qa\s*[:-]?\s*/i, "")
+    .replace(/review test\s*[:-]?\s*/i, "")
     .replace(/[-_]+/g, " ")
     .trim();
 
@@ -316,7 +305,7 @@ function buildTopicTitle(baseName, topic) {
     return `${topic} Practice ${numberMatch[1]}`;
   }
 
-  return cleaned || `${topic} Practice`;
+  return `${topic} Practice`;
 }
 
 function normalizeRawText(text) {
@@ -379,9 +368,22 @@ function extractLastNumber(text) {
 
 function normalizeAnswer(question, rawAnswer) {
   if (!rawAnswer) return "";
+  if (rawAnswer === "-") return "";
   if (question.type === "MCQ") {
     return String(rawAnswer).trim();
   }
   const num = extractLastNumber(String(rawAnswer));
   return num || String(rawAnswer).trim();
+}
+
+function isValidTest(test) {
+  if (!test || !Array.isArray(test.questions) || test.questions.length === 0) {
+    return false;
+  }
+
+  const hasBadQuestion = test.questions.some(
+    (q) => !q.correctAnswer || q.correctAnswer === "-" || !q.explanation || q.explanation.trim().length === 0
+  );
+
+  return !hasBadQuestion;
 }

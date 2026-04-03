@@ -1,4 +1,4 @@
-export type QuestionType = "MCQ" | "TITA";
+﻿export type QuestionType = "MCQ" | "TITA";
 
 export type QuestionRecord = {
   id: string;
@@ -6,7 +6,7 @@ export type QuestionRecord = {
   type: QuestionType;
   question: string;
   options: string[];
-  correctAnswer: string | number;
+  correctAnswer: string | number | null;
   correctAnswerOverride?: string | number | null;
   needs_review?: boolean;
   explanation: string;
@@ -25,6 +25,7 @@ export type TestRecord = {
   title?: string;
   topic: string;
   topicSlug: string;
+  type?: "FULL_MOCK" | "TOPIC_TEST";
   isFree: boolean;
   name: string;
   slug: string;

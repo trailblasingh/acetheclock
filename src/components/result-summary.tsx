@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
@@ -250,10 +250,17 @@ function QuestionReviewSection({
         if (!fullQuestion) return null;
         
         const userAnswer = response.userAnswer?.trim() ?? "";
-        const isUnattempted = !userAnswer;
+                const isUnattempted = !userAnswer;
 
+        const finalAnswer =
+          fullQuestion.correctAnswerOverride ??
+          fullQuestion.correctAnswer ??
+          (fullQuestion as any).answer ??
+          null;
 
-        const finalAnswer = fullQuestion.correctAnswerOverride ?? fullQuestion.correctAnswer ?? "NA";
+        if (finalAnswer === null) {
+          console.error("MISSING ANSWER:", fullQuestion);
+        }
 
         const isCorrect =
           !isUnattempted &&
@@ -464,6 +471,13 @@ function FormattedExplanation({
     </div>
   );
 }
+
+
+
+
+
+
+
 
 
 

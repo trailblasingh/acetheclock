@@ -1,4 +1,4 @@
-import fs from "node:fs";
+﻿import fs from "node:fs";
 import path from "node:path";
 
 import type { TestRecord } from "@/lib/types";
@@ -13,9 +13,11 @@ const defaultSections = [
 
 function enrichTest(record: TestRecord): TestRecord {
   const title = record.title ?? record.name ?? record.id;
-  const isFree = record.id === "cat_2025_slot_1" || record.isFree;
+  const isFree = record.isFree ?? record.id === "cat_2025_slot_1";
+  const type = record.type;
   return {
     ...record,
+    type,
     title,
     name: record.name ?? title,
     isFree,
@@ -37,6 +39,7 @@ function getFallbackCatalog(): TestRecord[] {
       title: "CAT 2025 Slot 1",
       topic: "Percentages",
       topicSlug: "percentages",
+      type: "FULL_MOCK",
       isFree: true,
       name: "CAT 2025 Slot 1",
       slug: "cat-2025-slot-1",
@@ -94,6 +97,9 @@ export function getTopics() {
   >();
 
   for (const test of tests) {
+    const isTopic = !test.type || test.type === "TOPIC_TEST";
+    if (!isTopic) continue;
+
     const current =
       map.get(test.topicSlug) ??
       {
