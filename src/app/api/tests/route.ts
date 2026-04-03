@@ -10,12 +10,7 @@ export async function GET() {
     return NextResponse.json({ tests: [] });
   }
 
-  const list: any[] = Array.isArray(tests) ? (tests as any[]) : [];
+  const list = Array.isArray(tests) ? (tests as any[]) : [];
 
-  return NextResponse.json({
-    tests: list.map((t: any) => ({
-      ...t,
-      questions: t.questions
-    }))
-  });
+  return NextResponse.json({ tests: list });
 }
