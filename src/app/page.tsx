@@ -1,9 +1,9 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, BrainCircuit, ChartColumnIncreasing, ShieldCheck } from "lucide-react";
 
 import { getTopics } from "@/lib/catalog";
-import MockSection from "@/components/mock-section";
+import MockSection from "@/components/MockSection";
 
 export default function HomePage() {
   const topics = getTopics();
@@ -70,7 +70,7 @@ export default function HomePage() {
             </Link>
           </div>
           <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {topics.map((topic) => (
+            {topics.map((topic: any) => (
               <div
                 key={topic.slug}
                 className="rounded-[28px] border border-white/10 bg-slate-950/60 p-5 not-dark:border-slate-200 not-dark:bg-slate-50"
@@ -88,93 +88,32 @@ export default function HomePage() {
         </div>
 
         <div className="rounded-2xl bg-gradient-to-br from-indigo-100 via-white to-green-100 p-5 shadow-sm border border-gray-100">
-
-          <div className="text-xs tracking-widest text-gray-500 mb-3 text-center">
-            FOUNDER SPOTLIGHT
-          </div>
-
-        {/* IMAGE */}
-
+          <div className="text-xs tracking-widest text-gray-500 mb-3 text-center">FOUNDER SPOTLIGHT</div>
           <div className="flex justify-center mb-3">
-            <Image
-              src="/VikashProfile.jpeg"
-              alt="Vikash Singh"
-              width={80}
-              height={80}
-              className="rounded-full object-cover border-4 border-white shadow-md"
-            />
+            <Image src="/VikashProfile.jpeg" alt="Vikash Singh" width={80} height={80} className="rounded-full object-cover border-4 border-white shadow-md" />
           </div>
-
-        {/* NAME */}
-
-          <h3 className="text-base font-bold text-gray-900 text-center">
-            Vikash Singh
-          </h3>
-
-        {/* TAGLINE */}
-
-          <p className="text-[11px] text-indigo-600 font-semibold text-center">
-            CAT 99+ %iler (QA) | IIM Bangalore
-          </p>
-
-        {/* ROLES */}
-
-          <p className="text-[11px] text-gray-700 text-center mt-1">
-            Academic Head – Quant | Founder – Profitequations
-          </p>
-
-        {/* BADGE */}
-
+          <h3 className="text-base font-bold text-gray-900 text-center">Vikash Singh</h3>
+          <p className="text-[11px] text-indigo-600 font-semibold text-center">CAT 99+ %iler (QA) | IIM Bangalore</p>
+          <p className="text-[11px] text-gray-700 text-center mt-1">Academic Head - Quant | Founder - Profitequations</p>
           <div className="flex justify-center mt-2">
-            <span className="text-[10px] bg-black text-white px-2 py-1 rounded-full">
-              10,000+ Students Mentored
-            </span>
+            <span className="text-[10px] bg-black text-white px-2 py-1 rounded-full">10,000+ Students Mentored</span>
           </div>
-
-        {/* DESCRIPTION */}
-
-          <p className="text-[11px] text-gray-600 leading-relaxed text-center mt-2">
-            14+ years of teaching experience. Mentored 10,000+ CAT aspirants with multiple IIM converts.
-          </p>
-
+          <p className="text-[11px] text-gray-600 leading-relaxed text-center mt-2">14+ years of teaching experience. Mentored 10,000+ CAT aspirants with multiple IIM converts.</p>
         </div>
       </section>
 
       <section>
-        <h1 className="text-center text-4xl font-bold mb-12 mt-20 text-white not-dark:text-gray-900">
-          Meet the Founder
-        </h1>
-
+        <h1 className="text-center text-4xl font-bold mb-12 mt-20 text-white not-dark:text-gray-900">Meet the Founder</h1>
         <div className="max-w-5xl mx-auto px-6 pb-20">
           <div className="grid md:grid-cols-2 gap-10 items-center">
-            {/* IMAGE */}
             <div className="flex justify-center">
-              <Image
-                src="/VikashProfile.jpeg"
-                alt="Vikash Singh"
-                width={260}
-                height={260}
-                className="rounded-2xl shadow-lg object-cover"
-              />
+              <Image src="/VikashProfile.jpeg" alt="Vikash Singh" width={260} height={260} className="rounded-2xl shadow-lg object-cover" />
             </div>
-
-            {/* CONTENT */}
             <div>
-              <h2 className="text-3xl font-bold text-white not-dark:text-gray-900 mb-3">
-                Vikash Singh
-              </h2>
-
-              <p className="text-sm text-indigo-400 not-dark:text-indigo-600 font-semibold mb-4">
-                CAT Serial 99%iler (QA) | IIM Bangalore Alumnus
-              </p>
-
-              <p className="text-sm text-slate-300 not-dark:text-gray-700 mb-4 font-medium">
-                Academic Head – Quantitative Aptitude | Founder – Profitequations | School of Decision Making and Logical Thinking
-              </p>
-
-              <p className="text-slate-400 not-dark:text-gray-600 leading-relaxed">
-                Vikash Singh is a serial CAT 99+ percentiler (QA), educator and IIM Bangalore alumnus with 14+ years of experience in quantitative aptitude, logical reasoning, and applied finance education. He has mentored 10,000+ CAT aspirants, many of whom have secured calls and conversions at IIMs and top B-schools.
-              </p>
+              <h2 className="text-3xl font-bold text-white not-dark:text-gray-900 mb-3">Vikash Singh</h2>
+              <p className="text-sm text-indigo-400 not-dark:text-indigo-600 font-semibold mb-4">CAT Serial 99%iler (QA) | IIM Bangalore Alumnus</p>
+              <p className="text-sm text-slate-300 not-dark:text-gray-700 mb-4 font-medium">Academic Head - Quantitative Aptitude | Founder - Profitequations | School of Decision Making and Logical Thinking</p>
+              <p className="text-slate-400 not-dark:text-gray-600 leading-relaxed">Vikash Singh is a serial CAT 99+ percentiler (QA), educator and IIM Bangalore alumnus with 14+ years of experience in quantitative aptitude, logical reasoning, and applied finance education. He has mentored 10,000+ CAT aspirants, many of whom have secured calls and conversions at IIMs and top B-schools.</p>
             </div>
           </div>
         </div>
@@ -183,15 +122,7 @@ export default function HomePage() {
   );
 }
 
-function FeatureCard({
-  icon,
-  title,
-  description
-}: {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-}) {
+function FeatureCard({ icon, title, description }: { icon: React.ReactNode; title: string; description: string }) {
   return (
     <div className="rounded-[28px] border border-white/10 bg-white/5 p-6 not-dark:border-slate-200 not-dark:bg-white/80">
       <div className="inline-flex rounded-2xl bg-indigo-500/15 p-3 text-indigo-200 not-dark:text-indigo-700">{icon}</div>
@@ -200,3 +131,4 @@ function FeatureCard({
     </div>
   );
 }
+

@@ -36,7 +36,7 @@ export function TopicsClient({ topics, tests }: { topics: TopicCard[]; tests: Te
       </section>
 
       <div className="grid gap-5 xl:grid-cols-2">
-        {topics.map((topic) => {
+        {topics.map((topic: any) => {
           const topicTests = tests.filter((test) => test.topicSlug === topic.slug);
           const isLocked = !topic.isFree && !isPremium;
 
@@ -67,7 +67,7 @@ export function TopicsClient({ topics, tests }: { topics: TopicCard[]; tests: Te
               </div>
 
               <div className="mt-6 space-y-3">
-                {topicTests.map((test) => (
+                {topicTests.map((test: any) => (
                   <div
                     key={test.id}
                     className="flex flex-col gap-4 rounded-[28px] border border-white/10 bg-slate-950/50 p-4 not-dark:border-slate-200 not-dark:bg-slate-50 md:flex-row md:items-center md:justify-between"

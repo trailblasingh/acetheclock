@@ -8,12 +8,12 @@ type MathTextProps = {
 export function MathText({ text, className }: MathTextProps) {
   const lines = text
     .split("\n")
-    .map((line) => line.trim())
+    .map((line: string) => line.trim())
     .filter(Boolean);
 
   return (
     <div className={className}>
-      {lines.map((line, index) => (
+      {lines.map((line: string, index: number) => (
         <p key={`${line}-${index}`} className="mb-3 leading-7 text-pretty">
           {line}
         </p>

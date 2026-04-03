@@ -1,4 +1,3 @@
-import { headers } from "next/headers";
 import { notFound } from "next/navigation";
 
 import { ExamRunner } from "@/components/exam-runner";
@@ -9,12 +8,20 @@ export const dynamic = "force-dynamic";
 export default async function TestPage({ params }: { params: Promise<{ testId: string }> }) {
   const { testId } = await params;
 
-  const host = headers().get("host");
-  const baseUrl = host?.startsWith("http") ? host : http://;
-  const res = await fetch(${baseUrl}/api/tests/, { cache: "no-store" });
-  const apiTest = res.ok ? await res.json() : null;
-  const fallback = getTestById(testId);
-  const test = apiTest ?? fallback;
+  const base = process.env.NEXT_PUBLIC_SITE_URL ?? "";
+  let test: any = null;
+  try {
+    const res = await fetch(`${base}/api/tests/${testId}`, { cache: "no-store" });
+    if (res.ok) {
+      test = await res.json();
+    }
+  } catch (error) {
+    // ignore
+  }
+
+  if (!test || !test.questions) {
+    test = getTestById(testId);
+  }
 
   if (!test || !test.questions) {
     notFound();

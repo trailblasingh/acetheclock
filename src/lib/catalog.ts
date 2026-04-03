@@ -20,7 +20,7 @@ function enrichTest(record: TestRecord): TestRecord {
     name: record.name ?? title,
     isFree,
     sections: record.sections?.length ? record.sections : defaultSections,
-    questions: record.questions.map((q) => ({
+    questions: record.questions.map((q: any) => ({
       section: q.section ?? "QA",
       difficulty: q.difficulty ?? "Medium",
       topic: q.topic ?? record.topic,

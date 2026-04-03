@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
@@ -193,7 +193,7 @@ export function ResultSummary({ attemptId }: { attemptId: string }) {
           </div>
         </div>
         <div className="mt-6 grid gap-4 lg:grid-cols-2 xl:grid-cols-3">
-          {insights.map((insight: InsightCard) => (
+          {insights.map((insight: any) => (
             <InsightCardView key={`${insight.title}-${insight.description}`} insight={insight} />
           ))}
         </div>
@@ -464,4 +464,5 @@ function FormattedExplanation({
     </div>
   );
 }
+
 

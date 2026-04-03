@@ -51,10 +51,10 @@ export function ExamRunner({ test }: { test: TestRecord }) {
   const [currentIndex, setCurrentIndex] = useState(() => getStoredState(test).currentIndex);
   const [answers, setAnswers] = useState<Record<string, string>>(() => getStoredState(test).answers);
   const [marked, setMarked] = useState<Record<string, boolean>>(() =>
-    Object.fromEntries(getStoredState(test).marked.map((id) => [id, true]))
+    Object.fromEntries(getStoredState(test).marked.map((id: any) => [id, true]))
   );
   const [visited, setVisited] = useState<Record<string, boolean>>(() =>
-    Object.fromEntries(getStoredState(test).visited.map((id) => [id, true]))
+    Object.fromEntries(getStoredState(test).visited.map((id: any) => [id, true]))
   );
   const [timeSpent, setTimeSpent] = useState<Record<string, number>>(() => getStoredState(test).timeSpent);
   const [remainingSeconds, setRemainingSeconds] = useState(() => getStoredState(test).remainingSeconds);
@@ -73,7 +73,7 @@ export function ExamRunner({ test }: { test: TestRecord }) {
 
 
   function buildResponses(): AttemptResponse[] {
-    return test.questions.map((question) => ({
+    return test.questions.map((question: any) => ({
       questionId: question.id,
       userAnswer: answers[question.id] ?? "",
       timeTaken: timeSpent[question.id] ?? 0
@@ -165,7 +165,7 @@ export function ExamRunner({ test }: { test: TestRecord }) {
 
   const statuses = useMemo(() => {
     return Object.fromEntries(
-      test.questions.map((question) => {
+      test.questions.map((question: any) => {
         const wasVisited = visited[question.id];
         const hasAnswer = Boolean(answers[question.id]?.trim());
         const isMarked = Boolean(marked[question.id]);
@@ -277,7 +277,7 @@ export function ExamRunner({ test }: { test: TestRecord }) {
 
           {currentQuestion.type === "MCQ" ? (
             <div className="mt-6 grid gap-3">
-              {currentQuestion.options.map((option, index) => {
+              {currentQuestion.options.map((option: any, index: number) => {
                 const label = String(index + 1);
                 const selected = answers[currentQuestion.id] === label || answers[currentQuestion.id] === option;
 
@@ -362,7 +362,7 @@ export function ExamRunner({ test }: { test: TestRecord }) {
         <div>
           <p className="text-sm uppercase tracking-[0.3em] text-slate-400">Question Palette</p>
           <div className="mt-4 grid grid-cols-5 gap-3">
-            {test.questions.map((question, index) => (
+            {test.questions.map((question: any, index: number) => (
               <button
                 key={question.id}
                 type="button"

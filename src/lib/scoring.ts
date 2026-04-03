@@ -12,7 +12,7 @@ export function scoreAttempt(
     throw new Error(`Test "${testId}" not found.`);
   }
 
-  const responseMap = new Map(responses.map((response) => [response.questionId, response]));
+  const responseMap = new Map(responses.map((response: any) => [response.questionId, response]));
 
   let score = 0;
   let correctCount = 0;

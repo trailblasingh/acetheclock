@@ -18,7 +18,7 @@ export function DashboardClient() {
   const [attempts] = useState(getStoredAttempts);
 
   const totalAttempts = attempts.length;
-  const bestScore = attempts.length > 0 ? Math.max(...attempts.map((attempt) => attempt.score)) : 0;
+  const bestScore = attempts.length > 0 ? Math.max(...attempts.map((attempt: any) => attempt.score)) : 0;
   const averageAccuracy =
     attempts.length > 0
       ? (attempts.reduce((sum, attempt) => sum + attempt.accuracy, 0) / attempts.length).toFixed(2)
@@ -52,7 +52,7 @@ export function DashboardClient() {
               No saved attempts yet. Submit a test to start building your analytics dashboard.
             </p>
           ) : (
-            attempts.map((attempt) => (
+            attempts.map((attempt: any) => (
               <div
                 key={attempt.attemptId}
                 className="grid gap-3 rounded-3xl border border-white/10 bg-white/5 p-4 md:grid-cols-[2fr_repeat(4,1fr)] not-dark:border-slate-200 not-dark:bg-slate-50"
