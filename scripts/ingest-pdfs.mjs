@@ -13,11 +13,7 @@ for (const pair of pairs) {
   const questionText = await extractText(pair.questionFile);
   const solutionText = await extractText(pair.solutionFile);
   const test = buildTestRecord(pair, questionText, solutionText);
-  if (isValidTest(test)) {
-    tests.push(test);
-  } else {
-    console.warn(`Dropping invalid test: ${test.title ?? pair.baseName}`);
-  }
+  tests.push(test);
 }
 
 fs.mkdirSync(path.dirname(outputPath), { recursive: true });
@@ -72,17 +68,12 @@ function buildTestRecord(pair, questionText, solutionText) {
   const solutions = parseSolutions(solutionText, questions);
 
   const mergedQuestions = questions.map((question) => {
-    const solution = solutions.get(question.questionNumber) ?? { correctAnswer: "", explanation: "" };
-    const explanation = solution.explanation.trim() || "Explanation not parsed.";
-    const rawAnswer = solution.correctAnswer;
-    const cleanedAnswer = rawAnswer === "-" ? "" : rawAnswer;
-    const finalAnswer =
-      normalizeAnswer(question, cleanedAnswer) ||
-      (question.type === "TITA" ? extractLastNumber(explanation) : "") ||
-      "";
+    const solution = solutions.get(question.questionNumber) ?? { correctAnswer: null, explanation: "" };
+    const explanation = solution.explanation?.trim() || "Explanation not parsed.";
+    const finalAnswer = solution.correctAnswer;
 
-    if (!finalAnswer) {
-      console.error(`MISSING ANSWER: ${question.id}`);
+    if (finalAnswer === null) {
+      console.error("❌ Missing answer:", question);
     }
 
     return {
@@ -117,9 +108,7 @@ function buildTestRecord(pair, questionText, solutionText) {
 
   const title = type === "FULL_MOCK" ? buildFullMockTitle(pair.baseName, meta) : buildTopicTitle(pair.baseName, topic);
 
-  const isFree =
-    (type === "FULL_MOCK" && title === "CAT 2025 Slot 1") ||
-    (type === "TOPIC_TEST" && title.toLowerCase().includes("percentage"));
+  const isFree = title === "CAT 2025 Slot 1" || title.toLowerCase().includes("percentage");
 
   console.log("TEST TYPE:", title, type, isFree);
 
@@ -174,7 +163,7 @@ function buildQuestionRecords(chunks, pair, mode, meta) {
       type: options.length > 0 ? "MCQ" : "TITA",
       question,
       options,
-      correctAnswer: "",
+      correctAnswer: null,
       explanation: "",
       difficulty: "Medium",
       year: meta.year,
@@ -200,8 +189,7 @@ function parseSolutions(solutionText, questions) {
     const question = questionMap.get(questionNumber);
     const rawBlock = cleanupBlock(chunks[index + 1] ?? "");
 
-    const explicitAnswer = rawBlock.match(/Answer\s*[:\-]\s*([A-Za-z0-9.%/-]+)/i)?.[1] ?? "";
-    let answer = explicitAnswer === "-" ? "" : explicitAnswer;
+    let answer = findExplicitAnswer(rawBlock);
 
     if (!answer && question && question.type === "MCQ") {
       const mcqLead = rawBlock.match(/^([A-D]|\d+)\b/i);
@@ -214,21 +202,18 @@ function parseSolutions(solutionText, questions) {
     if (!answer) {
       const keyAnswer = answerKey.get(questionNumber);
       if (keyAnswer) {
-        answer = keyAnswer === "-" ? "" : keyAnswer;
+        answer = keyAnswer;
       }
+    }
+
+    if (!answer) {
+      answer = extractAnswer(rawBlock);
     }
 
     const explanation = rawBlock.trim() || "Explanation not parsed.";
 
-    if (!answer) {
-      const lastNum = extractLastNumber(explanation);
-      if (lastNum) {
-        answer = lastNum;
-      }
-    }
-
     solutionMap.set(questionNumber, {
-      correctAnswer: answer,
+      correctAnswer: answer ?? null,
       explanation
     });
   }
@@ -262,23 +247,38 @@ function extractAnswerKey(solutionText) {
   return map;
 }
 
+function findExplicitAnswer(text) {
+  const explicit = text.match(/(?:Correct\s*Answer|Answer)\s*[:\-]\s*([A-Za-z0-9.]+)/i)?.[1];
+  if (explicit) return explicit;
+  return null;
+}
+
+function extractAnswer(text) {
+  const numbers = [];
+  const regex = /(?<![A-Za-z%])(-?\d+(?:\.\d+)?)(?![A-Za-z%])/g;
+  let match;
+  while ((match = regex.exec(text)) !== null) {
+    numbers.push(match[1]);
+  }
+
+  return numbers.length ? numbers[numbers.length - 1] : null;
+}
+
 function inferMeta(baseName, topic, questionText) {
-  const lower = baseName.toLowerCase();
   const yearMatch = baseName.match(/(20\d{2}|19\d{2})/);
   const slotMatch = baseName.match(/slot[-_\s]*([123])/i);
   const year = yearMatch ? Number(yearMatch[1]) : null;
   const slot = slotMatch ? Number(slotMatch[1]) : null;
-  const section = /varc|verbal/.test(lower)
+  const section = /varc/i.test(questionText)
     ? "VARC"
-    : /dilr|lrdi|logical|data/.test(lower)
+    : /(dilr|lrdi)/i.test(questionText)
       ? "DILR"
       : "QA";
 
   const testId = year ? `cat_${year}_slot_${slot ?? 1}` : slugify(baseName).replace(/-/g, "_");
   const title = year ? `CAT ${year} Slot ${slot ?? 1}` : baseName;
-  const hasSectionMarkers = /varc/.test(questionText.toLowerCase()) && /(dilr|lrdi)/.test(questionText.toLowerCase()) && /qa/.test(questionText.toLowerCase());
 
-  return { year, slot, section, testId, title, topic, hasSectionMarkers };
+  return { year, slot, section, testId, title, topic };
 }
 
 function buildFullMockTitle(baseName, meta) {
@@ -297,6 +297,7 @@ function buildTopicTitle(baseName, topic) {
     .replace(/^\d+\s*/g, "")
     .replace(/qa\s*[:-]?\s*/i, "")
     .replace(/review test\s*[:-]?\s*/i, "")
+    .replace(/practice\s*/i, "")
     .replace(/[-_]+/g, " ")
     .trim();
 
@@ -359,32 +360,3 @@ function slugify(value) {
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
 }
-
-function extractLastNumber(text) {
-  const matches = [...text.matchAll(/-?\d+(?:\.\d+)?/g)];
-  if (!matches.length) return "";
-  return matches[matches.length - 1][0];
-}
-
-function normalizeAnswer(question, rawAnswer) {
-  if (!rawAnswer) return "";
-  if (rawAnswer === "-") return "";
-  if (question.type === "MCQ") {
-    return String(rawAnswer).trim();
-  }
-  const num = extractLastNumber(String(rawAnswer));
-  return num || String(rawAnswer).trim();
-}
-
-function isValidTest(test) {
-  if (!test || !Array.isArray(test.questions) || test.questions.length === 0) {
-    return false;
-  }
-
-  const hasBadQuestion = test.questions.some(
-    (q) => !q.correctAnswer || q.correctAnswer === "-" || !q.explanation || q.explanation.trim().length === 0
-  );
-
-  return !hasBadQuestion;
-}
-
