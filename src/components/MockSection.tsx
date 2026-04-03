@@ -15,7 +15,10 @@ export default function MockSection() {
   useEffect(() => {
     fetch("/api/tests", { cache: "no-store" })
       .then((res) => res.json())
-      .then((data) => setTests((data?.tests as Test[]) || []))
+      .then((data) => {
+        console.log("FRONTEND TESTS:", data);
+        setTests((data?.tests as Test[]) || []);
+      })
       .catch((error) => console.error(error));
   }, []);
 
@@ -24,18 +27,20 @@ export default function MockSection() {
   }
 
   return (
-    <div className="mb-10">
-      <h2 className="text-2xl font-bold mb-4">Full-Length CAT Mocks</h2>
+    <div className="mt-10">
+      <h2 className="text-2xl font-bold mb-6">Full Length CAT Mocks</h2>
 
-      <div className="grid md:grid-cols-3 gap-4">
-        {(tests || []).map((t: Test) => (
+      <div className="grid md:grid-cols-3 gap-6">
+        {(tests || []).map((t) => (
           <div
             key={t.id}
             className="p-5 rounded-xl border bg-white shadow-sm hover:shadow-md transition"
           >
             <div className="font-semibold">{t.title || t.name || t.id}</div>
 
-            <div className="text-xs text-gray-500 mt-1">120 mins � 3 sections</div>
+            <div className="text-xs text-gray-500 mt-1">
+              120 mins • VARC + DILR + QA
+            </div>
 
             <div className="mt-3">
               {t.isFree ? (
