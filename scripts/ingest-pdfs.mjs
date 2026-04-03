@@ -1,4 +1,4 @@
-import fs from "node:fs";
+﻿import fs from "node:fs";
 import path from "node:path";
 
 import { PDFParse } from "pdf-parse";
@@ -63,7 +63,7 @@ function buildTestRecord(pair, questionText, solutionText) {
   const topic = normalizeTopicName(topicLine);
   const topicSlug = slugify(topic);
 
-  const meta = inferMeta(pair.baseName, topic);
+  const meta = inferMeta(pair.baseName, topic, questionText);
   const questions = parseQuestions(questionText, pair, meta);
   const solutions = parseSolutions(solutionText, questions);
 
@@ -92,27 +92,53 @@ function buildTestRecord(pair, questionText, solutionText) {
       difficulty: question.difficulty ?? "Medium",
       year: meta.year,
       slot: meta.slot,
-      section: meta.section
+      section: question.section || meta.section
     };
   });
 
-  const testSlug = meta.testId ?? slugify(pair.baseName);
-  const title = meta.title ?? titleLine.replace("QA", "CAT").trim();
+  const durationByCount = mergedQuestions.length >= 60 ? 120 : mergedQuestions.length >= 20 ? 60 : 30;
+
+  const isFullMock = determineFullMock({
+    baseName: pair.baseName,
+    questionText,
+    questionCount: mergedQuestions.length,
+    durationMinutes: durationByCount,
+    hasSectionMarkers: meta.hasSectionMarkers
+  });
+
+  const type = isFullMock ? "FULL_MOCK" : "TOPIC_TEST";
+
+  const title = isFullMock ? buildFullMockTitle(pair.baseName, meta) : buildTopicTitle(pair.baseName, topic);
+
+  const isFree =
+    (type === "FULL_MOCK" && title.toLowerCase() === "cat 2025 slot 1") ||
+    title.toLowerCase().includes("basics of percentage");
+
+  console.log("TEST TYPE:", title, type, isFree);
+
+  const sections = isFullMock
+    ? [
+        { name: "VARC", time: 40 },
+        { name: "DILR", time: 40 },
+        { name: "QA", time: 40 }
+      ]
+    : [{ name: "QA", time: 60 }];
+
+  const durationMinutes = isFullMock ? 120 : durationByCount;
+
+  const testSlug = meta.testId ?? slugify(pair.baseName).replace(/-/g, "_");
 
   return {
     id: testSlug,
     title,
     topic,
     topicSlug,
-    isFree: testSlug === "cat_2025_slot_1",
+    type,
+    isFree,
     name: title,
     slug: testSlug,
-    durationMinutes: mergedQuestions.length >= 60 ? 120 : mergedQuestions.length >= 20 ? 60 : 30,
-    sections: [
-      { name: "VARC", time: 40 },
-      { name: "DILR", time: 40 },
-      { name: "QA", time: 40 }
-    ],
+    durationMinutes,
+    sections,
     questions: mergedQuestions
   };
 }
@@ -237,7 +263,7 @@ function extractAnswerKey(solutionText) {
   return map;
 }
 
-function inferMeta(baseName, topic) {
+function inferMeta(baseName, topic, questionText) {
   const lower = baseName.toLowerCase();
   const yearMatch = baseName.match(/(20\d{2}|19\d{2})/);
   const slotMatch = baseName.match(/slot[-_\s]*([123])/i);
@@ -250,9 +276,47 @@ function inferMeta(baseName, topic) {
       : "QA";
 
   const testId = year ? `cat_${year}_slot_${slot ?? 1}` : slugify(baseName).replace(/-/g, "_");
-  const title = year ? `CAT ${year} Slot ${slot ?? 1} Mock` : baseName;
+  const title = year ? `CAT ${year} Slot ${slot ?? 1}` : baseName;
+  const hasSectionMarkers = /varc|dilr|lrdi/.test(questionText.toLowerCase());
 
-  return { year, slot, section, testId, title, topic };
+  return { year, slot, section, testId, title, topic, hasSectionMarkers };
+}
+
+function determineFullMock({ baseName, questionText, questionCount, durationMinutes, hasSectionMarkers }) {
+  const lowerName = baseName.toLowerCase();
+  const hasCatSlot = lowerName.includes("cat") && lowerName.includes("slot");
+  const hasExplicitSections = /varc/.test(questionText.toLowerCase()) && /(dilr|lrdi)/.test(questionText.toLowerCase()) && /qa/.test(questionText.toLowerCase());
+  const manyQuestions = questionCount >= 60;
+  const longDuration = durationMinutes >= 120;
+  const sectionFlag = hasSectionMarkers;
+
+  return manyQuestions || hasExplicitSections || hasCatSlot || sectionFlag || longDuration;
+}
+
+function buildFullMockTitle(baseName, meta) {
+  const match = baseName.match(/cat[^0-9]*(20\d{2})[^0-9]*slot[^0-9]*([123])/i);
+  if (match) {
+    return `CAT ${match[1]} Slot ${match[2]}`;
+  }
+  if (meta.year) {
+    return `CAT ${meta.year} Slot ${meta.slot ?? 1}`;
+  }
+  return "CAT Full Mock";
+}
+
+function buildTopicTitle(baseName, topic) {
+  const cleaned = baseName
+    .replace(/^\d+\s*/g, "")
+    .replace(/qa\s*[:-]?\s*/i, "")
+    .replace(/[-_]+/g, " ")
+    .trim();
+
+  const numberMatch = cleaned.match(/(\d+)$/);
+  if (numberMatch) {
+    return `${topic} Practice ${numberMatch[1]}`;
+  }
+
+  return cleaned || `${topic} Practice`;
 }
 
 function normalizeRawText(text) {

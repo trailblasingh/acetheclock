@@ -7,6 +7,7 @@ type Test = {
   title?: string;
   name?: string;
   isFree?: boolean;
+  type?: string;
 };
 
 export default function MockSection() {
@@ -36,10 +37,12 @@ export default function MockSection() {
             key={t.id}
             className="p-5 rounded-xl border bg-white shadow-sm hover:shadow-md transition"
           >
-            <div className="font-semibold">{t.title || t.name || t.id}</div>
+            <div className="font-semibold">
+              {t.type === "FULL_MOCK" ? t.title || t.name || t.id : `QA: ${t.title || t.name || t.id}`}
+            </div>
 
             <div className="text-xs text-gray-500 mt-1">
-              120 mins • VARC + DILR + QA
+              {t.type === "FULL_MOCK" ? "120 mins • VARC + DILR + QA" : "QA Practice Test"}
             </div>
 
             <div className="mt-3">

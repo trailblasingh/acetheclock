@@ -1,25 +1,18 @@
 [
   {
     "id": "05_qa_arithmetic_1",
-    "title": "05 QA Arithmetic-1",
+    "title": "Basics of percentage Practice 1",
     "topic": "Basics of percentage",
     "topicSlug": "basics-of-percentage",
-    "isFree": false,
-    "name": "05 QA Arithmetic-1",
+    "type": "TOPIC_TEST",
+    "isFree": true,
+    "name": "Basics of percentage Practice 1",
     "slug": "05_qa_arithmetic_1",
     "durationMinutes": 60,
     "sections": [
       {
-        "name": "VARC",
-        "time": 40
-      },
-      {
-        "name": "DILR",
-        "time": 40
-      },
-      {
         "name": "QA",
-        "time": 40
+        "time": 60
       }
     ],
     "questions": [
@@ -452,25 +445,18 @@
   },
   {
     "id": "06_qa_arithmetic_2",
-    "title": "06 QA Arithmetic-2",
+    "title": "Profit, Loss and Discount; Faulty Weights Practice 2",
     "topic": "Profit, Loss and Discount; Faulty Weights",
     "topicSlug": "profit-loss-and-discount-faulty-weights",
+    "type": "TOPIC_TEST",
     "isFree": false,
-    "name": "06 QA Arithmetic-2",
+    "name": "Profit, Loss and Discount; Faulty Weights Practice 2",
     "slug": "06_qa_arithmetic_2",
     "durationMinutes": 60,
     "sections": [
       {
-        "name": "VARC",
-        "time": 40
-      },
-      {
-        "name": "DILR",
-        "time": 40
-      },
-      {
         "name": "QA",
-        "time": 40
+        "time": 60
       }
     ],
     "questions": [
@@ -903,25 +889,18 @@
   },
   {
     "id": "07_qa_arithmetic_3",
-    "title": "07 QA Arithmetic-3",
+    "title": "SI and CI; Instalments Practice 3",
     "topic": "SI and CI; Instalments",
     "topicSlug": "si-and-ci-instalments",
+    "type": "TOPIC_TEST",
     "isFree": false,
-    "name": "07 QA Arithmetic-3",
+    "name": "SI and CI; Instalments Practice 3",
     "slug": "07_qa_arithmetic_3",
     "durationMinutes": 60,
     "sections": [
       {
-        "name": "VARC",
-        "time": 40
-      },
-      {
-        "name": "DILR",
-        "time": 40
-      },
-      {
         "name": "QA",
-        "time": 40
+        "time": 60
       }
     ],
     "questions": [
@@ -1329,25 +1308,18 @@
   },
   {
     "id": "09_qa_arithmetic_5",
-    "title": "09 QA Arithmetic-5",
+    "title": "Average and Alligation - 01 Practice 5",
     "topic": "Average and Alligation - 01",
     "topicSlug": "average-and-alligation-01",
+    "type": "TOPIC_TEST",
     "isFree": false,
-    "name": "09 QA Arithmetic-5",
+    "name": "Average and Alligation - 01 Practice 5",
     "slug": "09_qa_arithmetic_5",
     "durationMinutes": 60,
     "sections": [
       {
-        "name": "VARC",
-        "time": 40
-      },
-      {
-        "name": "DILR",
-        "time": 40
-      },
-      {
         "name": "QA",
-        "time": 40
+        "time": 60
       }
     ],
     "questions": [
@@ -1766,25 +1738,18 @@
   },
   {
     "id": "10_qa_arithmetic_6",
-    "title": "10 QA Arithmetic-6",
+    "title": "Averages and Alligation - 02; Median, Mode Practice 6",
     "topic": "Averages and Alligation - 02; Median, Mode",
     "topicSlug": "averages-and-alligation-02-median-mode",
+    "type": "TOPIC_TEST",
     "isFree": false,
-    "name": "10 QA Arithmetic-6",
+    "name": "Averages and Alligation - 02; Median, Mode Practice 6",
     "slug": "10_qa_arithmetic_6",
     "durationMinutes": 60,
     "sections": [
       {
-        "name": "VARC",
-        "time": 40
-      },
-      {
-        "name": "DILR",
-        "time": 40
-      },
-      {
         "name": "QA",
-        "time": 40
+        "time": 60
       }
     ],
     "questions": [
@@ -2222,25 +2187,18 @@
   },
   {
     "id": "11_qa_arithmetic_7",
-    "title": "11 QA Arithmetic-7",
+    "title": "Mixtures and Solutions; Replacement Practice 7",
     "topic": "Mixtures and Solutions; Replacement",
     "topicSlug": "mixtures-and-solutions-replacement",
+    "type": "TOPIC_TEST",
     "isFree": false,
-    "name": "11 QA Arithmetic-7",
+    "name": "Mixtures and Solutions; Replacement Practice 7",
     "slug": "11_qa_arithmetic_7",
     "durationMinutes": 60,
     "sections": [
       {
-        "name": "VARC",
-        "time": 40
-      },
-      {
-        "name": "DILR",
-        "time": 40
-      },
-      {
         "name": "QA",
-        "time": 40
+        "time": 60
       }
     ],
     "questions": [
@@ -2763,25 +2721,18 @@
   },
   {
     "id": "13_qa_arithmetic_9",
-    "title": "13 QA Arithmetic-9",
+    "title": "Proportionality; Average Speed Practice 9",
     "topic": "Proportionality; Average Speed",
     "topicSlug": "proportionality-average-speed",
+    "type": "TOPIC_TEST",
     "isFree": false,
-    "name": "13 QA Arithmetic-9",
+    "name": "Proportionality; Average Speed Practice 9",
     "slug": "13_qa_arithmetic_9",
     "durationMinutes": 60,
     "sections": [
       {
-        "name": "VARC",
-        "time": 40
-      },
-      {
-        "name": "DILR",
-        "time": 40
-      },
-      {
         "name": "QA",
-        "time": 40
+        "time": 60
       }
     ],
     "questions": [
@@ -3225,25 +3176,18 @@
   },
   {
     "id": "15_qa_arithmetic_11",
-    "title": "15 QA Arithmetic-11",
+    "title": "Circular Races; To and Fro Practice 11",
     "topic": "Circular Races; To and Fro",
     "topicSlug": "circular-races-to-and-fro",
+    "type": "TOPIC_TEST",
     "isFree": false,
-    "name": "15 QA Arithmetic-11",
+    "name": "Circular Races; To and Fro Practice 11",
     "slug": "15_qa_arithmetic_11",
     "durationMinutes": 30,
     "sections": [
       {
-        "name": "VARC",
-        "time": 40
-      },
-      {
-        "name": "DILR",
-        "time": 40
-      },
-      {
         "name": "QA",
-        "time": 40
+        "time": 60
       }
     ],
     "questions": [
@@ -3586,25 +3530,18 @@
   },
   {
     "id": "16_qa_arithmetic_12",
-    "title": "16 QA Arithmetic-12",
+    "title": "Clocks; Boats and Streams; Escalators Practice 12",
     "topic": "Clocks; Boats and Streams; Escalators",
     "topicSlug": "clocks-boats-and-streams-escalators",
+    "type": "TOPIC_TEST",
     "isFree": false,
-    "name": "16 QA Arithmetic-12",
+    "name": "Clocks; Boats and Streams; Escalators Practice 12",
     "slug": "16_qa_arithmetic_12",
     "durationMinutes": 30,
     "sections": [
       {
-        "name": "VARC",
-        "time": 40
-      },
-      {
-        "name": "DILR",
-        "time": 40
-      },
-      {
         "name": "QA",
-        "time": 40
+        "time": 60
       }
     ],
     "questions": [
@@ -3995,25 +3932,18 @@
   },
   {
     "id": "17_qa_arithmetic_rt_1",
-    "title": "17 QA Arithmetic RT-1",
+    "title": "Review Test - 01 Practice 1",
     "topic": "Review Test - 01",
     "topicSlug": "review-test-01",
+    "type": "TOPIC_TEST",
     "isFree": false,
-    "name": "17 QA Arithmetic RT-1",
+    "name": "Review Test - 01 Practice 1",
     "slug": "17_qa_arithmetic_rt_1",
     "durationMinutes": 60,
     "sections": [
       {
-        "name": "VARC",
-        "time": 40
-      },
-      {
-        "name": "DILR",
-        "time": 40
-      },
-      {
         "name": "QA",
-        "time": 40
+        "time": 60
       }
     ],
     "questions": [
@@ -4507,25 +4437,18 @@
   },
   {
     "id": "18_qa_arithmetic_rt_2",
-    "title": "18 QA Arithmetic RT-2",
+    "title": "Review Test - 02 Practice 2",
     "topic": "Review Test - 02",
     "topicSlug": "review-test-02",
+    "type": "TOPIC_TEST",
     "isFree": false,
-    "name": "18 QA Arithmetic RT-2",
+    "name": "Review Test - 02 Practice 2",
     "slug": "18_qa_arithmetic_rt_2",
     "durationMinutes": 60,
     "sections": [
       {
-        "name": "VARC",
-        "time": 40
-      },
-      {
-        "name": "DILR",
-        "time": 40
-      },
-      {
         "name": "QA",
-        "time": 40
+        "time": 60
       }
     ],
     "questions": [
@@ -5014,25 +4937,18 @@
   },
   {
     "id": "20_qa_numbers_2",
-    "title": "20 QA Numbers-2",
+    "title": "Factors Practice 2",
     "topic": "Factors",
     "topicSlug": "factors",
+    "type": "TOPIC_TEST",
     "isFree": false,
-    "name": "20 QA Numbers-2",
+    "name": "Factors Practice 2",
     "slug": "20_qa_numbers_2",
     "durationMinutes": 60,
     "sections": [
       {
-        "name": "VARC",
-        "time": 40
-      },
-      {
-        "name": "DILR",
-        "time": 40
-      },
-      {
         "name": "QA",
-        "time": 40
+        "time": 60
       }
     ],
     "questions": [
@@ -5430,25 +5346,18 @@
   },
   {
     "id": "21_qa_numbers_3",
-    "title": "21 QA Numbers-3",
+    "title": "Trailing Digits; Factorials Practice 3",
     "topic": "Trailing Digits; Factorials",
     "topicSlug": "trailing-digits-factorials",
+    "type": "TOPIC_TEST",
     "isFree": false,
-    "name": "21 QA Numbers-3",
+    "name": "Trailing Digits; Factorials Practice 3",
     "slug": "21_qa_numbers_3",
     "durationMinutes": 60,
     "sections": [
       {
-        "name": "VARC",
-        "time": 40
-      },
-      {
-        "name": "DILR",
-        "time": 40
-      },
-      {
         "name": "QA",
-        "time": 40
+        "time": 60
       }
     ],
     "questions": [
@@ -5896,25 +5805,18 @@
   },
   {
     "id": "22_qa_numbers_4",
-    "title": "22 QA Numbers-4",
+    "title": "Divisibility; Remainders Practice 4",
     "topic": "Divisibility; Remainders",
     "topicSlug": "divisibility-remainders",
+    "type": "TOPIC_TEST",
     "isFree": false,
-    "name": "22 QA Numbers-4",
+    "name": "Divisibility; Remainders Practice 4",
     "slug": "22_qa_numbers_4",
     "durationMinutes": 60,
     "sections": [
       {
-        "name": "VARC",
-        "time": 40
-      },
-      {
-        "name": "DILR",
-        "time": 40
-      },
-      {
         "name": "QA",
-        "time": 40
+        "time": 60
       }
     ],
     "questions": [
@@ -6347,25 +6249,18 @@
   },
   {
     "id": "23_qa_numbers_rt",
-    "title": "23 QA Numbers RT",
+    "title": "Numbers RT",
     "topic": "Review Test",
     "topicSlug": "review-test",
+    "type": "TOPIC_TEST",
     "isFree": false,
-    "name": "23 QA Numbers RT",
+    "name": "Numbers RT",
     "slug": "23_qa_numbers_rt",
     "durationMinutes": 60,
     "sections": [
       {
-        "name": "VARC",
-        "time": 40
-      },
-      {
-        "name": "DILR",
-        "time": 40
-      },
-      {
         "name": "QA",
-        "time": 40
+        "time": 60
       }
     ],
     "questions": [
@@ -6858,25 +6753,18 @@
   },
   {
     "id": "27_qa_algebra_4",
-    "title": "27 QA Algebra-4",
+    "title": "Sequences, Series Practice 4",
     "topic": "Sequences, Series",
     "topicSlug": "sequences-series",
+    "type": "TOPIC_TEST",
     "isFree": false,
-    "name": "27 QA Algebra-4",
+    "name": "Sequences, Series Practice 4",
     "slug": "27_qa_algebra_4",
     "durationMinutes": 60,
     "sections": [
       {
-        "name": "VARC",
-        "time": 40
-      },
-      {
-        "name": "DILR",
-        "time": 40
-      },
-      {
         "name": "QA",
-        "time": 40
+        "time": 60
       }
     ],
     "questions": [
@@ -7539,25 +7427,18 @@
   },
   {
     "id": "28_qa_algebra_5",
-    "title": "28 QA Algebra-5",
+    "title": "Modulus; Logarithms Practice 5",
     "topic": "Modulus; Logarithms",
     "topicSlug": "modulus-logarithms",
+    "type": "TOPIC_TEST",
     "isFree": false,
-    "name": "28 QA Algebra-5",
+    "name": "Modulus; Logarithms Practice 5",
     "slug": "28_qa_algebra_5",
     "durationMinutes": 60,
     "sections": [
       {
-        "name": "VARC",
-        "time": 40
-      },
-      {
-        "name": "DILR",
-        "time": 40
-      },
-      {
         "name": "QA",
-        "time": 40
+        "time": 60
       }
     ],
     "questions": [
@@ -8273,25 +8154,18 @@
   },
   {
     "id": "29_qa_algebra_6",
-    "title": "29 QA Algebra-6",
+    "title": "Greatest Integer Function; Maxima and Minima Practice 6",
     "topic": "Greatest Integer Function; Maxima and Minima",
     "topicSlug": "greatest-integer-function-maxima-and-minima",
+    "type": "TOPIC_TEST",
     "isFree": false,
-    "name": "29 QA Algebra-6",
+    "name": "Greatest Integer Function; Maxima and Minima Practice 6",
     "slug": "29_qa_algebra_6",
     "durationMinutes": 60,
     "sections": [
       {
-        "name": "VARC",
-        "time": 40
-      },
-      {
-        "name": "DILR",
-        "time": 40
-      },
-      {
         "name": "QA",
-        "time": 40
+        "time": 60
       }
     ],
     "questions": [
@@ -8924,25 +8798,18 @@
   },
   {
     "id": "30_qa_algebra_7",
-    "title": "30 QA Algebra-7",
+    "title": "Co-ordinate Geometry Practice 7",
     "topic": "Co-ordinate Geometry",
     "topicSlug": "co-ordinate-geometry",
+    "type": "TOPIC_TEST",
     "isFree": false,
-    "name": "30 QA Algebra-7",
+    "name": "Co-ordinate Geometry Practice 7",
     "slug": "30_qa_algebra_7",
     "durationMinutes": 60,
     "sections": [
       {
-        "name": "VARC",
-        "time": 40
-      },
-      {
-        "name": "DILR",
-        "time": 40
-      },
-      {
         "name": "QA",
-        "time": 40
+        "time": 60
       }
     ],
     "questions": [
@@ -9494,25 +9361,18 @@
   },
   {
     "id": "31_qa_algebra_rt_1",
-    "title": "31 QA Algebra RT-1",
+    "title": "Review Test - 01 Practice 1",
     "topic": "Review Test - 01",
     "topicSlug": "review-test-01",
+    "type": "TOPIC_TEST",
     "isFree": false,
-    "name": "31 QA Algebra RT-1",
+    "name": "Review Test - 01 Practice 1",
     "slug": "31_qa_algebra_rt_1",
     "durationMinutes": 60,
     "sections": [
       {
-        "name": "VARC",
-        "time": 40
-      },
-      {
-        "name": "DILR",
-        "time": 40
-      },
-      {
         "name": "QA",
-        "time": 40
+        "time": 60
       }
     ],
     "questions": [
@@ -10123,25 +9983,18 @@
   },
   {
     "id": "32_qa_algebra_rt_2",
-    "title": "32 QA Algebra RT-2",
+    "title": "Review Test - 02 Practice 2",
     "topic": "Review Test - 02",
     "topicSlug": "review-test-02",
+    "type": "TOPIC_TEST",
     "isFree": false,
-    "name": "32 QA Algebra RT-2",
+    "name": "Review Test - 02 Practice 2",
     "slug": "32_qa_algebra_rt_2",
     "durationMinutes": 60,
     "sections": [
       {
-        "name": "VARC",
-        "time": 40
-      },
-      {
-        "name": "DILR",
-        "time": 40
-      },
-      {
         "name": "QA",
-        "time": 40
+        "time": 60
       }
     ],
     "questions": [
@@ -10760,25 +10613,18 @@
   },
   {
     "id": "40_qa_geometry_rt",
-    "title": "40 QA Geometry RT",
+    "title": "Geometry RT",
     "topic": "Review Test",
     "topicSlug": "review-test",
+    "type": "TOPIC_TEST",
     "isFree": false,
-    "name": "40 QA Geometry RT",
+    "name": "Geometry RT",
     "slug": "40_qa_geometry_rt",
     "durationMinutes": 60,
     "sections": [
       {
-        "name": "VARC",
-        "time": 40
-      },
-      {
-        "name": "DILR",
-        "time": 40
-      },
-      {
         "name": "QA",
-        "time": 40
+        "time": 60
       }
     ],
     "questions": [
@@ -11288,25 +11134,18 @@
   },
   {
     "id": "43_qa_modern_mathematics_3_probab",
-    "title": "43 QA Modern Mathematics-3_Probab",
+    "title": "Modern Mathematics 3 Probab",
     "topic": "Probability",
     "topicSlug": "probability",
+    "type": "TOPIC_TEST",
     "isFree": false,
-    "name": "43 QA Modern Mathematics-3_Probab",
+    "name": "Modern Mathematics 3 Probab",
     "slug": "43_qa_modern_mathematics_3_probab",
     "durationMinutes": 30,
     "sections": [
       {
-        "name": "VARC",
-        "time": 40
-      },
-      {
-        "name": "DILR",
-        "time": 40
-      },
-      {
         "name": "QA",
-        "time": 40
+        "time": 60
       }
     ],
     "questions": [
@@ -11644,25 +11483,18 @@
   },
   {
     "id": "44_qa_modern_mathematics_rt",
-    "title": "44 QA Modern Mathematics RT",
+    "title": "Modern Mathematics RT",
     "topic": "Review Test",
     "topicSlug": "review-test",
+    "type": "TOPIC_TEST",
     "isFree": false,
-    "name": "44 QA Modern Mathematics RT",
+    "name": "Modern Mathematics RT",
     "slug": "44_qa_modern_mathematics_rt",
     "durationMinutes": 60,
     "sections": [
       {
-        "name": "VARC",
-        "time": 40
-      },
-      {
-        "name": "DILR",
-        "time": 40
-      },
-      {
         "name": "QA",
-        "time": 40
+        "time": 60
       }
     ],
     "questions": [
