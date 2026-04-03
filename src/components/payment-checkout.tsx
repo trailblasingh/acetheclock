@@ -72,6 +72,7 @@ export function PaymentCheckout({ amountInPaise }: { amountInPaise: number }) {
 
           if (data.success) {
             localStorage.setItem("is_premium", "true");
+            localStorage.setItem("isPaidUser", "true");
             window.location.href = "/topics";
           } else {
             alert("Payment verification failed");

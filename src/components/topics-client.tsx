@@ -19,7 +19,7 @@ function getPremiumState() {
     return false;
   }
 
-  return window.localStorage.getItem("is_premium") === "true";
+  return window.localStorage.getItem("isPaidUser") === "true";
 }
 
 export function TopicsClient({ topics, tests }: { topics: TopicCard[]; tests: TestRecord[] }) {

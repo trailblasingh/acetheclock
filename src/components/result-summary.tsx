@@ -253,13 +253,13 @@ function QuestionReviewSection({
         const isUnattempted = !userAnswer;
 
 
-        const finalAnswer = fullQuestion.correctAnswerOverride ?? fullQuestion.correctAnswer;
+        const finalAnswer = fullQuestion.correctAnswerOverride ?? fullQuestion.correctAnswer ?? "NA";
 
         const isCorrect =
           !isUnattempted &&
           (fullQuestion.type === "MCQ"
             ? userAnswer === String(finalAnswer)
-            : Number(userAnswer) === Number(finalAnswer));
+            : String(userAnswer).trim() === String(finalAnswer).trim());
         
         const statusLabel = isUnattempted ? "Unattempted" : isCorrect ? "Correct" : "Incorrect";
         const statusClass = isUnattempted

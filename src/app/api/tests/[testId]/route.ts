@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { NextResponse } from "next/server";
 
 import { getTestById } from "@/lib/catalog";
@@ -9,21 +10,18 @@ export async function GET(
   const { testId } = await params;
   const test = getTestById(testId);
 
+  console.log("TEST DATA:", test);
+
   if (!test) {
     return NextResponse.json({ message: "Test not found." }, { status: 404 });
   }
 
-  if (test.questions.length > 0) {
-    console.log("API QUESTION:", test.questions[0]);
-  }
-
   return NextResponse.json({
-    id: test.id,
-    name: test.name,
+    ...test,
     questions: test.questions.map((q) => ({
       ...q,
-      correctAnswer: q.correctAnswer,
-      correctAnswerOverride: q.correctAnswerOverride
+      correctAnswer: q.correctAnswer ?? null,
+      correctAnswerOverride: q.correctAnswerOverride ?? null
     }))
   });
 }

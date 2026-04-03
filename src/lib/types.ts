@@ -12,16 +12,24 @@ export type QuestionRecord = {
   explanation: string;
   sourceQuestionPdf?: string;
   sourceSolutionPdf?: string;
+  topic?: string;
+  subtopic?: string;
+  difficulty?: "Easy" | "Medium" | "Hard";
+  year?: number | null;
+  slot?: number | null;
+  section?: "VARC" | "DILR" | "QA" | null;
 };
 
 export type TestRecord = {
   id: string;
+  title?: string;
   topic: string;
   topicSlug: string;
   isFree: boolean;
   name: string;
   slug: string;
   durationMinutes: number;
+  sections?: { name: "VARC" | "DILR" | "QA"; time: number }[];
   questions: QuestionRecord[];
 };
 

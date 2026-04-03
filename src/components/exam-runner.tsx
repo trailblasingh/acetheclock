@@ -17,6 +17,8 @@ type StoredState = {
   visited: string[];
   timeSpent: Record<string, number>;
   remainingSeconds: number;
+
+
 };
 
 const storagePrefix = "ace-the-clock:test:";
@@ -44,6 +46,8 @@ function getStoredState(test: TestRecord): StoredState {
 export function ExamRunner({ test }: { test: TestRecord }) {
   const router = useRouter();
   const [isSubmitting, startTransition] = useTransition();
+  const [hydratedTest, setHydratedTest] = useState<TestRecord | null>(test);
+  const [isPaidUser, setIsPaidUser] = useState<boolean>(() => (typeof window === "undefined" ? false : window.localStorage.getItem("isPaidUser") === "true"));
   const [currentIndex, setCurrentIndex] = useState(() => getStoredState(test).currentIndex);
   const [answers, setAnswers] = useState<Record<string, string>>(() => getStoredState(test).answers);
   const [marked, setMarked] = useState<Record<string, boolean>>(() =>
@@ -55,7 +59,18 @@ export function ExamRunner({ test }: { test: TestRecord }) {
   const [timeSpent, setTimeSpent] = useState<Record<string, number>>(() => getStoredState(test).timeSpent);
   const [remainingSeconds, setRemainingSeconds] = useState(() => getStoredState(test).remainingSeconds);
 
-  const currentQuestion = test.questions[currentIndex];
+  useEffect(() => {
+    fetch(`/api/tests/${test.id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("FRONTEND DATA:", data);
+        setHydratedTest(data);
+      })
+      .catch((error) => console.error(error));
+  }, [test.id]);
+
+  const currentQuestion = test.questions[currentIndex] ?? test.questions[0] ?? { id: "placeholder", questionNumber: 0, type: "MCQ", question: "", options: [] as any[] } as any;
+
 
   function buildResponses(): AttemptResponse[] {
     return test.questions.map((question) => ({
@@ -147,6 +162,7 @@ export function ExamRunner({ test }: { test: TestRecord }) {
     window.localStorage.setItem(`${storagePrefix}${test.id}`, JSON.stringify(state));
   }, [answers, currentIndex, marked, remainingSeconds, test.id, timeSpent, visited]);
 
+
   const statuses = useMemo(() => {
     return Object.fromEntries(
       test.questions.map((question) => {
@@ -203,6 +219,25 @@ export function ExamRunner({ test }: { test: TestRecord }) {
       default:
         return "bg-slate-700 text-slate-200 ring-slate-500 not-dark:bg-slate-200 not-dark:text-slate-700";
     }
+  }
+
+  if (!test || !test.questions || test.questions.length === 0) {
+    return <div>Loading...</div>;
+  }
+
+  if (!test.isFree && !isPaidUser) {
+    return (
+      <div className="rounded-3xl border border-white/10 bg-white/5 p-6 text-slate-200 not-dark:border-slate-200 not-dark:bg-white/80 not-dark:text-slate-800">
+        <p className="text-lg font-semibold">This mock is locked.</p>
+        <p className="mt-2 text-sm text-slate-400 not-dark:text-slate-600">Unlock all CAT mocks for Rs 129.</p>
+        <button
+          onClick={() => router.push("/payment")}
+          className="mt-4 rounded-full bg-indigo-500 px-5 py-3 text-white hover:bg-indigo-400"
+        >
+          Unlock All CAT Mocks - Rs 129
+        </button>
+      </div>
+    );
   }
 
   return (
@@ -367,3 +402,4 @@ function formatTime(totalSeconds: number) {
   const seconds = String(totalSeconds % 60).padStart(2, "0");
   return `${hours}:${minutes}:${seconds}`;
 }
+

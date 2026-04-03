@@ -1,11 +1,10 @@
-﻿import fs from "node:fs";
+import fs from "node:fs";
 import path from "node:path";
 
 import { PDFParse } from "pdf-parse";
 
 const root = process.cwd();
 const outputPath = path.join(root, "data", "generated", "tests.json");
-const freeTopics = new Set(["percentages", "basics-of-percentage"]);
 
 const pairs = discoverPdfPairs(root);
 const tests = [];
@@ -63,7 +62,9 @@ function buildTestRecord(pair, questionText, solutionText) {
   const topicLine = lines.find((line, index) => index > 0 && !line.startsWith("--")) ?? pair.baseName;
   const topic = normalizeTopicName(topicLine);
   const topicSlug = slugify(topic);
-  const questions = parseQuestions(questionText, pair);
+
+  const meta = inferMeta(pair.baseName, topic);
+  const questions = parseQuestions(questionText, pair, meta);
   const solutions = parseSolutions(solutionText, questions);
 
   const mergedQuestions = questions.map((question) => {
@@ -85,39 +86,52 @@ function buildTestRecord(pair, questionText, solutionText) {
       correctAnswer: finalAnswer,
       explanation,
       sourceQuestionPdf: path.basename(pair.questionFile),
-      sourceSolutionPdf: path.basename(pair.solutionFile)
+      sourceSolutionPdf: path.basename(pair.solutionFile),
+      topic,
+      subtopic: topic,
+      difficulty: question.difficulty ?? "Medium",
+      year: meta.year,
+      slot: meta.slot,
+      section: meta.section
     };
   });
 
-  const testSlug = slugify(pair.baseName);
+  const testSlug = meta.testId ?? slugify(pair.baseName);
+  const title = meta.title ?? titleLine.replace("QA", "CAT").trim();
 
   return {
-    id: testSlug.replace(/[^a-z0-9_]+/g, "_"),
+    id: testSlug,
+    title,
     topic,
     topicSlug,
-    isFree: freeTopics.has(topicSlug),
-    name: titleLine.replace("QA", "CAT").trim(),
+    isFree: testSlug === "cat_2025_slot_1",
+    name: title,
     slug: testSlug,
-    durationMinutes: mergedQuestions.length >= 20 ? 60 : 30,
+    durationMinutes: mergedQuestions.length >= 60 ? 120 : mergedQuestions.length >= 20 ? 60 : 30,
+    sections: [
+      { name: "VARC", time: 40 },
+      { name: "DILR", time: 40 },
+      { name: "QA", time: 40 }
+    ],
     questions: mergedQuestions
   };
 }
 
-function parseQuestions(questionText, pair) {
+function parseQuestions(questionText, pair, meta) {
   const standardChunks = questionText.split(/(?:^|\n)Question\s+(\d+)\s*\n/g);
   if (standardChunks.length > 1) {
-    return buildQuestionRecords(standardChunks, pair, "after");
+    return buildQuestionRecords(standardChunks, pair, "after", meta);
   }
 
   const alternateChunks = questionText.split(/(?:^|\n)Question\s*[--]\s*(\d+)\s*\n/g);
   if (alternateChunks.length > 1) {
-    return buildQuestionRecords(alternateChunks, pair, "before");
+    return buildQuestionRecords(alternateChunks, pair, "before", meta);
   }
 
   return [];
 }
 
-function buildQuestionRecords(chunks, pair, mode) {
+function buildQuestionRecords(chunks, pair, mode, meta) {
   const questions = [];
 
   for (let index = 1; index < chunks.length; index += 2) {
@@ -136,7 +150,13 @@ function buildQuestionRecords(chunks, pair, mode) {
       question,
       options,
       correctAnswer: "",
-      explanation: ""
+      explanation: "",
+      difficulty: "Medium",
+      year: meta.year,
+      slot: meta.slot,
+      section: meta.section ?? "QA",
+      topic: meta.topic,
+      subtopic: meta.topic
     });
   }
 
@@ -217,6 +237,24 @@ function extractAnswerKey(solutionText) {
   return map;
 }
 
+function inferMeta(baseName, topic) {
+  const lower = baseName.toLowerCase();
+  const yearMatch = baseName.match(/(20\d{2}|19\d{2})/);
+  const slotMatch = baseName.match(/slot[-_\s]*([123])/i);
+  const year = yearMatch ? Number(yearMatch[1]) : null;
+  const slot = slotMatch ? Number(slotMatch[1]) : null;
+  const section = /varc|verbal/.test(lower)
+    ? "VARC"
+    : /dilr|lrdi|logical|data/.test(lower)
+      ? "DILR"
+      : "QA";
+
+  const testId = year ? `cat_${year}_slot_${slot ?? 1}` : slugify(baseName).replace(/-/g, "_");
+  const title = year ? `CAT ${year} Slot ${slot ?? 1} Mock` : baseName;
+
+  return { year, slot, section, testId, title, topic };
+}
+
 function normalizeRawText(text) {
   return text
     .replace(/\r/g, "\n")
@@ -254,10 +292,10 @@ function stripHeader(value) {
 function normalizeTopicName(raw) {
   return raw
     .replace(/^QA\s*[:-]?\s*/i, "")
-    .replace(/^Arithmetic\s*-\s*\d+\s*/i, "")
-    .replace(/^Numbers\s*-\s*\d+\s*/i, "")
-    .replace(/^Algebra\s*-\s*\d+\s*/i, "")
-    .replace(/^Modern Mathematics\s*-\s*\d+\s*/i, "")
+    .replace(/^Arithmetic\s*-\s*\d+\s*/i, "Arithmetic")
+    .replace(/^Numbers\s*-\s*\d+\s*/i, "Numbers")
+    .replace(/^Algebra\s*-\s*\d+\s*/i, "Algebra")
+    .replace(/^Modern Mathematics\s*-\s*\d+\s*/i, "Modern Mathematics")
     .replace(/^Geometry\s*RT\s*/i, "Geometry")
     .trim();
 }
@@ -267,10 +305,6 @@ function slugify(value) {
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
-}
-
-function escapeRegex(value) {
-  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
 function extractLastNumber(text) {
@@ -287,4 +321,3 @@ function normalizeAnswer(question, rawAnswer) {
   const num = extractLastNumber(String(rawAnswer));
   return num || String(rawAnswer).trim();
 }
-
