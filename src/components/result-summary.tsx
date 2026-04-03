@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
@@ -290,7 +290,7 @@ function QuestionReviewSection({
 
               {fullQuestion.type === "MCQ" ? (
                 <div className="grid gap-3">
-                  {fullQuestion.options.map((option: any, index: number) => {
+                  {(fullQuestion.options || []).map((option: string, index: number) => {
                     const label = String(index + 1);
                     const isSelected = userAnswer === label;
                     const isCorrectOption = String(finalAnswer) === label;
@@ -464,5 +464,6 @@ function FormattedExplanation({
     </div>
   );
 }
+
 
 

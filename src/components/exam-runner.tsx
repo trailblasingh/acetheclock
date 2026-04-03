@@ -277,7 +277,7 @@ export function ExamRunner({ test }: { test: TestRecord }) {
 
           {currentQuestion.type === "MCQ" ? (
             <div className="mt-6 grid gap-3">
-              {currentQuestion.options.map((option: any, index: number) => {
+              {(currentQuestion.options || []).map((option: string, index: number) => {
                 const label = String(index + 1);
                 const selected = answers[currentQuestion.id] === label || answers[currentQuestion.id] === option;
 
@@ -402,4 +402,5 @@ function formatTime(totalSeconds: number) {
   const seconds = String(totalSeconds % 60).padStart(2, "0");
   return `${hours}:${minutes}:${seconds}`;
 }
+
 

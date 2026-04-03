@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useState } from "react";
 
@@ -19,14 +19,16 @@ export default function MockSection() {
       .catch((error) => console.error(error));
   }, []);
 
-  if (!tests.length) return null;
+  if (!tests.length) {
+    return <div className="p-4 text-sm">No mocks available</div>;
+  }
 
   return (
     <div className="mb-10">
       <h2 className="text-2xl font-bold mb-4">Full-Length CAT Mocks</h2>
 
       <div className="grid md:grid-cols-3 gap-4">
-        {tests.map((t: Test) => (
+        {(tests || []).map((t: Test) => (
           <div key={t.id} className="p-4 border rounded-xl">
             <div>{t.title || t.name || t.id}</div>
             <div className="text-xs mt-2">{t.isFree ? "FREE" : "LOCKED"}</div>
@@ -36,4 +38,3 @@ export default function MockSection() {
     </div>
   );
 }
-
