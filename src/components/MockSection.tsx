@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState } from "react";
 
@@ -29,9 +29,21 @@ export default function MockSection() {
 
       <div className="grid md:grid-cols-3 gap-4">
         {(tests || []).map((t: Test) => (
-          <div key={t.id} className="p-4 border rounded-xl">
-            <div>{t.title || t.name || t.id}</div>
-            <div className="text-xs mt-2">{t.isFree ? "FREE" : "LOCKED"}</div>
+          <div
+            key={t.id}
+            className="p-5 rounded-xl border bg-white shadow-sm hover:shadow-md transition"
+          >
+            <div className="font-semibold">{t.title || t.name || t.id}</div>
+
+            <div className="text-xs text-gray-500 mt-1">120 mins � 3 sections</div>
+
+            <div className="mt-3">
+              {t.isFree ? (
+                <span className="text-green-600 text-xs font-bold">FREE</span>
+              ) : (
+                <span className="text-red-500 text-xs font-bold">LOCKED</span>
+              )}
+            </div>
           </div>
         ))}
       </div>
