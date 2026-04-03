@@ -34,7 +34,7 @@ function getStoredAttempt(attemptId: string) {
 export function ResultSummary({ attemptId }: { attemptId: string }) {
   const [attempt] = useState<AttemptReviewRecord | null>(() => getStoredAttempt(attemptId));
   const [review, setReview] = useState<ReviewPayload | null>(null);
-  const [showSolutions, setShowSolutions] = useState(false);
+  const [showSolutions, setShowSolutions] = useState(true);
 
   useEffect(() => {
     if (!attempt) {
@@ -252,7 +252,6 @@ function QuestionReviewSection({
         const userAnswer = response.userAnswer?.trim() ?? "";
         const isUnattempted = !userAnswer;
 
-        console.log("DEBUG: response", { response, fullQuestion });
 
         const finalAnswer = fullQuestion.correctAnswerOverride ?? fullQuestion.correctAnswer;
 
@@ -260,7 +259,7 @@ function QuestionReviewSection({
           !isUnattempted &&
           (fullQuestion.type === "MCQ"
             ? userAnswer === String(finalAnswer)
-            : Math.abs(Number(userAnswer) - Number(finalAnswer)) < 1e-6);
+            : Number(userAnswer) === Number(finalAnswer));
         
         const statusLabel = isUnattempted ? "Unattempted" : isCorrect ? "Correct" : "Incorrect";
         const statusClass = isUnattempted
@@ -325,7 +324,7 @@ function QuestionReviewSection({
                     {String(
                       fullQuestion.correctAnswerOverride ??
                       fullQuestion.correctAnswer ??
-                      "NA"
+                      "Answer not available"
                     )}
                   </div>
                 </div>
@@ -465,3 +464,4 @@ function FormattedExplanation({
     </div>
   );
 }
+

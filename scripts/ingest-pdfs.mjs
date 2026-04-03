@@ -1,4 +1,4 @@
-import fs from "node:fs";
+﻿import fs from "node:fs";
 import path from "node:path";
 
 import { PDFParse } from "pdf-parse";
@@ -6,21 +6,6 @@ import { PDFParse } from "pdf-parse";
 const root = process.cwd();
 const outputPath = path.join(root, "data", "generated", "tests.json");
 const freeTopics = new Set(["percentages", "basics-of-percentage"]);
-
-let existingOverrides = new Map();
-try {
-  if (fs.existsSync(outputPath)) {
-    const oldTests = JSON.parse(fs.readFileSync(outputPath, "utf8"));
-    for (const t of oldTests) {
-      for (const q of t.questions) {
-        const overrideVal = q.correctAnswerOverride ?? q.correct_answer_override;
-        if (overrideVal !== undefined && overrideVal !== null) {
-          existingOverrides.set(q.id, String(overrideVal));
-        }
-      }
-    }
-  }
-} catch (e) {}
 
 const pairs = discoverPdfPairs(root);
 const tests = [];
@@ -82,54 +67,23 @@ function buildTestRecord(pair, questionText, solutionText) {
   const solutions = parseSolutions(solutionText, questions);
 
   const mergedQuestions = questions.map((question) => {
-    const solution = solutions.get(question.questionNumber);
-    let finalAnswer = solution?.correctAnswer ?? question.correctAnswer ?? "";
-    let finalExplanation = (solution?.explanation ?? "").trim();
-    
-    if (!finalExplanation) {
-      finalExplanation = "Explanation not parsed.";
-    }
+    const solution = solutions.get(question.questionNumber) ?? { correctAnswer: "", explanation: "" };
+    const explanation = solution.explanation.trim() || "Explanation not parsed.";
+    const rawAnswer = solution.correctAnswer;
+    const finalAnswer =
+      normalizeAnswer(question, rawAnswer) ||
+      (question.type === "TITA" ? extractLastNumber(explanation) : "") ||
+      "Answer not available";
 
-    if (finalAnswer === "" || finalAnswer === null || Number.isNaN(finalAnswer)) {
-      console.warn(`Missing answer/solution completely: ${pair.baseName} Q${question.questionNumber}`);
-      finalAnswer = "N/A";
-    } else {
-      let isNumeric = !isNaN(Number(finalAnswer));
-      let explanationContainsNum = finalExplanation.includes(String(finalAnswer));
-
-      if (!isNumeric || !explanationContainsNum || finalAnswer === "N/A") {
-        console.error(`Invalid parsing: ${question.id}`);
-      }
-    }
-
-    let needsReview = false;
-    if (
-      /[xyXY]/.test(finalExplanation) ||
-      /≡|mod|\^|\//i.test(finalExplanation) ||
-      finalAnswer === "N/A" ||
-      finalAnswer === "" ||
-      isNaN(Number(finalAnswer))
-    ) {
-      needsReview = true;
-      console.warn(`Needs manual review: ${question.id}`);
-    }
-
-    let override_answer = existingOverrides.get(question.id) || null;
-    let override_explanation = finalExplanation;
-    let override_needs_review = needsReview;
-
-    if (question.question.includes("A college has raised 75% of the amount")) {
-      override_answer = "300";
-      override_explanation = `Let total number of people = x\n\nPeople already solicited = 60% of x = 0.6x\nRemaining people = 0.4x\n\nAverage donation from already solicited = 600\nSo, amount collected from them = 600 \u00d7 0.6x = 360x\n\nThis is 75% of total required amount\n\nTotal required amount = 360x / 0.75 = 480x\n\nRemaining amount = 25% of total = 120x\n\nNumber of remaining people = 0.4x\n\nAverage donation required = 120x / 0.4x = 300\n\nTherefore, required average donation = 300`;
-      override_needs_review = false;
+    console.log(`Q${question.questionNumber} -> ${finalAnswer}`);
+    if (finalAnswer === "Answer not available") {
+      console.warn(`Missing answer for Q${question.questionNumber}`);
     }
 
     return {
       ...question,
       correctAnswer: finalAnswer,
-      correctAnswerOverride: override_answer,
-      needs_review: override_needs_review,
-      explanation: override_explanation,
+      explanation,
       sourceQuestionPdf: path.basename(pair.questionFile),
       sourceSolutionPdf: path.basename(pair.solutionFile)
     };
@@ -194,123 +148,38 @@ function parseSolutions(solutionText, questions) {
   const cleaned = solutionText.replace(/--\s*\d+\s+of\s+\d+\s*--/g, "").trim();
   const chunks = cleaned.split(/(?:^|\n)(\d+)\.\s+/g);
   const solutionMap = new Map();
-
   const questionMap = new Map((questions || []).map((q) => [q.questionNumber, q]));
 
   for (let index = 1; index < chunks.length; index += 2) {
     const questionNumber = Number(chunks[index]);
-    let rawBlock = cleanupBlock(chunks[index + 1] ?? "");
     const question = questionMap.get(questionNumber);
-    
-    let answer = null;
-    const explicitMatch = rawBlock.match(/Answer\s*[:-]\s*([A-Za-z0-9.-]+)/i);
+    const rawBlock = cleanupBlock(chunks[index + 1] ?? "");
 
-    if (explicitMatch) {
-      answer = explicitMatch[1];
-      if (question && question.type === "MCQ" && /^[a-d]$/i.test(answer)) {
-        answer = String(answer.toUpperCase().charCodeAt(0) - 64);
-      }
-    } else {
-      if (question && question.type === "MCQ") {
-        const mcqMatch = rawBlock.match(/^([A-D]|\d+)\b/i);
-        if (mcqMatch) {
-          let a = mcqMatch[1].replace(/\.$/, "");
-          if (/^[a-d]$/i.test(a)) {
-            answer = String(a.toUpperCase().charCodeAt(0) - 64);
-          } else {
-            answer = a;
-          }
-        }
-      }
-      
-      if (answer === null) {
-        let rawLines = rawBlock.split('\n');
-        for (let i = rawLines.length - 1; i >= 0; i--) {
-            let line = rawLines[i].trim();
-            if (!line) continue;
+    const explicitAnswer = rawBlock.match(/Answer\s*[:\-]\s*([A-Za-z0-9.%/-]+)/i)?.[1] ?? "";
+    let answer = explicitAnswer;
 
-            const numbersFound = line.match(/-?\d+(?:\.\d+)?/g) || [];
-            
-            // STRICT REJECTION
-            if (numbersFound.length > 1) continue;
-            
-            const lineWithoutAllowed = line.replace(/therefore|hence|so|answer/gi, '').trim();
-            if (/[a-zA-Z]/.test(lineWithoutAllowed)) continue;
-
-            // CASE 1: PURE NUMBER LINE
-            if (/^\s*-?\d+(?:\.\d+)?\s*$/.test(line)) {
-                let match = line.match(/-?\d+(?:\.\d+)?/);
-                if (match) {
-                    answer = match[0];
-                    break;
-                }
-            }
-
-            // CASE 2: FINAL STATEMENT
-            if (/(therefore|hence|so|answer)/i.test(line) && numbersFound.length === 1) {
-                answer = numbersFound[0];
-                break;
-            }
-
-            // CASE 3: EQUATION LINE (SAFE ONLY)
-            if (line.includes('=')) {
-                let rhsMatch = line.match(/=\s*(-?\d+(?:\.\d+)?)\s*$/);
-                if (rhsMatch) {
-                    answer = rhsMatch[1];
-                    break;
-                }
-            }
-        }
+    if (!answer && question && question.type === "MCQ") {
+      const mcqLead = rawBlock.match(/^([A-D]|\d+)\b/i);
+      if (mcqLead) {
+        const token = mcqLead[1].replace(/\.$/, "");
+        answer = /^[a-d]$/i.test(token) ? String(token.toUpperCase().charCodeAt(0) - 64) : token;
       }
     }
 
-    const answerFromKey = answerKey.get(questionNumber) ?? "";
-    if (answer === null && answerFromKey) {
-      answer = answerFromKey;
-      if (question && question.type === "MCQ" && /^[a-d]$/i.test(answer)) {
-        answer = String(answer.toUpperCase().charCodeAt(0) - 64);
-      } else if (!question || question.type === "TITA") {
-        answer = Number(answer);
+    if (!answer) {
+      const keyAnswer = answerKey.get(questionNumber);
+      if (keyAnswer) {
+        answer = keyAnswer;
       }
     }
 
-    let cleanExpl = rawBlock.replace(/[^\x00-\x7F]+/g, "");
-    cleanExpl = cleanExpl.replace(/[ \t]{2,}/g, " ");
-    let explanation = cleanExpl.trim();
+    const explanation = rawBlock.trim() || "Explanation not parsed.";
 
-    if (answer === null || answer === "" || answer === "N/A" || Number.isNaN(answer)) {
-      const lastLines = explanation.split("\n").slice(-3).join(" ");
-      const matches = lastLines.match(/-?\d+(\.\d+)?/g) || [];
-      const question_id = question ? question.id : `q${questionNumber}`;
-      
-      let correct_answer = null;
-
-      if (matches.length > 0) {
-        const numbers = matches.map(Number);
-        
-        // Remove small decimals like 0.4
-        const filtered = numbers.filter(n => n >= 1);
-        
-        if (filtered.length > 0) {
-          const maxVal = Math.max(...filtered);
-          correct_answer = String(maxVal);
-          
-          console.log("Fallback FIX applied:", {
-            question_id,
-            numbers,
-            selected: correct_answer
-          });
-        }
+    if (!answer) {
+      const lastNum = extractLastNumber(explanation);
+      if (lastNum) {
+        answer = lastNum;
       }
-
-      answer = correct_answer ?? "N/A";
-
-    } else {
-        if (question && question.type === "TITA" && !isNaN(Number(answer))) {
-            answer = Number(answer);
-        } else if (typeof answer !== "number") {
-            answer = String(answer);
-        }
     }
 
     solutionMap.set(questionNumber, {
@@ -403,3 +272,19 @@ function slugify(value) {
 function escapeRegex(value) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
+
+function extractLastNumber(text) {
+  const matches = [...text.matchAll(/-?\d+(?:\.\d+)?/g)];
+  if (!matches.length) return "";
+  return matches[matches.length - 1][0];
+}
+
+function normalizeAnswer(question, rawAnswer) {
+  if (!rawAnswer) return "";
+  if (question.type === "MCQ") {
+    return String(rawAnswer).trim();
+  }
+  const num = extractLastNumber(String(rawAnswer));
+  return num || String(rawAnswer).trim();
+}
+
