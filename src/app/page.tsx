@@ -3,6 +3,7 @@ import Image from "next/image";
 import { ArrowRight, BrainCircuit, ChartColumnIncreasing, ShieldCheck } from "lucide-react";
 
 import { getTopics } from "@/lib/catalog";
+import MockSection from "@/components/mock-section";
 
 export default function HomePage() {
   const topics = getTopics();
@@ -54,6 +55,8 @@ export default function HomePage() {
           />
         </div>
       </section>
+
+      <MockSection />
 
       <section className="grid gap-6 lg:grid-cols-[1fr_340px]">
         <div className="rounded-[32px] border border-white/10 bg-white/5 p-6 not-dark:border-slate-200 not-dark:bg-white/80">
