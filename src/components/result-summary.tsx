@@ -88,16 +88,18 @@ export function ResultSummary({ attemptId }: { attemptId: string }) {
       tone: attempt.accuracy < 60 ? "rose" : attempt.accuracy <= 80 ? "amber" : "emerald"
     };
 
-    const topTimeResponses = [...attempt.responses]
+            const topTimeResponses = [...attempt.responses]
       .sort((left, right) => right.timeTaken - left.timeTaken)
       .slice(0, 3);
 
     const timeInsightDescription = topTimeResponses.length > 0
-      ? topTimeResponses.map((response: AttemptResponse) => {
-          const question = review.questions.find((item: QuestionRecord) => item.id === response.questionId);
-          const questionLabel = question ? `Q${question.questionNumber}` : `Q?`;
-          return `${questionLabel} \u2192 ${Math.ceil(response.timeTaken / 60)} min`;
-        }).join("\n")
+      ? topTimeResponses
+          .map((response: AttemptResponse) => {
+            const question = review.questions.find((item: QuestionRecord) => item.id === response.questionId);
+            const questionLabel = question ? `Q${question.questionNumber}` : `Q?`;
+            return `${questionLabel} \u2192 ${Math.ceil(response.timeTaken / 60)} min`;
+          })
+          .join("\n")
       : "Great pacing, no significant time sinks detected.";
 
     const timeInsight: InsightCard = {
@@ -250,16 +252,15 @@ function QuestionReviewSection({
         if (!fullQuestion) return null;
         
         const userAnswer = response.userAnswer?.trim() ?? "";
-                const isUnattempted = !userAnswer;
+        const isUnattempted = !userAnswer;
 
         const finalAnswer =
-          fullQuestion.correctAnswerOverride ??
-          fullQuestion.correctAnswer ??
-          (fullQuestion as any).answer ??
+          fullQuestion.correctAnswer ||
+          (fullQuestion as any).answer ||
           null;
 
         if (finalAnswer === null) {
-          console.error("MISSING ANSWER:", fullQuestion);
+          console.error("❌ Missing answer:", fullQuestion);
         }
 
         const isCorrect =
@@ -328,11 +329,7 @@ function QuestionReviewSection({
                 <div className="p-4 border rounded-xl bg-white">
                   <div className="text-sm text-gray-500">Correct Answer</div>
                   <div className="text-lg font-semibold text-black">
-                    {String(
-                      fullQuestion.correctAnswerOverride ??
-                      fullQuestion.correctAnswer ??
-                      "Answer not available"
-                    )}
+                    {finalAnswer === null ? "Answer not found" : String(finalAnswer)}
                   </div>
                 </div>
                 <AnswerBox label="Status" value={statusLabel} />
@@ -471,6 +468,21 @@ function FormattedExplanation({
     </div>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
