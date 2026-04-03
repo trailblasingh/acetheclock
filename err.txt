@@ -1,0 +1,2295 @@
+❌ Missing answer: {
+  id: '05_qa_arithmetic_1_q3',
+  questionNumber: 3,
+  type: 'TITA',
+  question: 'A college has raised 75% of the amount it needs for a new building by receiving an average\n' +
+    'donation of Rs. 600 from people already solicited. People already solicited represents 60%\n' +
+    'of people, the college will ask for donations. If college is to raise exactly the amount needed\n' +
+    'for the new building, what should be the average donation (in Rs.) from remaining people to\n' +
+    'be solicited?',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Basics of percentage',
+  subtopic: 'Basics of percentage'
+}
+❌ Missing answer: {
+  id: '05_qa_arithmetic_1_q8',
+  questionNumber: 8,
+  type: 'TITA',
+  question: 'A and B are two friends, each having at least a rupee. If A gives B a sum of Rs. 20, then A\n' +
+    'has 40% of the amount with B. If B gives A, a sum of Rs. 40, then B will have 40% of the\n' +
+    'amount with A. What is the amount (in Rs.) with A initially?',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Basics of percentage',
+  subtopic: 'Basics of percentage'
+}
+TEST TYPE: Basics of percentage Practice 1 TOPIC_TEST true
+❌ Missing answer: {
+  id: '06_qa_arithmetic_2_q2',
+  questionNumber: 2,
+  type: 'TITA',
+  question: 'The cost of manufacturing a commodity increased by 20%. A trader who did not revise the\n' +
+    'selling price noted that there was a drop of Rs.20 in his profit. What was the original cost\n' +
+    'price (in Rs.)?',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Profit, Loss and Discount; Faulty Weights',
+  subtopic: 'Profit, Loss and Discount; Faulty Weights'
+}
+❌ Missing answer: {
+  id: '06_qa_arithmetic_2_q3',
+  questionNumber: 3,
+  type: 'TITA',
+  question: 'A man sells an article at a profit of 20%. If he had bought it at 20% less and sold it for Rs. 5\n' +
+    'less, he would have gained 25%. Find the cost price (in Rs.) of the article.',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Profit, Loss and Discount; Faulty Weights',
+  subtopic: 'Profit, Loss and Discount; Faulty Weights'
+}
+❌ Missing answer: {
+  id: '06_qa_arithmetic_2_q6',
+  questionNumber: 6,
+  type: 'TITA',
+  question: 'The Santabil shop offers “one T-shirt free on the purchase of every three T-shirts”. But they\n' +
+    'mark-up the price of the T-shirts by 60%. If a customer buys three T-shirts, then what is the\n' +
+    'profit or loss percentage for the store?',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Profit, Loss and Discount; Faulty Weights',
+  subtopic: 'Profit, Loss and Discount; Faulty Weights'
+}
+TEST TYPE: Profit, Loss and Discount; Faulty Weights Practice 2 TOPIC_TEST false
+❌ Missing answer: {
+  id: '07_qa_arithmetic_3_q2',
+  questionNumber: 2,
+  type: 'TITA',
+  question: 'Bhawna lent part of Rs.10,000 to Myra, one of her friends at 8% SI for 4 years. She\n' +
+    'invested the remaining amount at 12% SI. Total income from interest after 4 years was\n' +
+    'Rs. 3,800. What was sum (in Rs.) lent to Myra?',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'SI and CI; Instalments',
+  subtopic: 'SI and CI; Instalments'
+}
+❌ Missing answer: {
+  id: '07_qa_arithmetic_3_q6',
+  questionNumber: 6,
+  type: 'TITA',
+  question: 'An amount of Rs. 7,000 was divided into two equal parts. The first part was deposited in a\n' +
+    'bank at simple interest rate of 8% per annum for three years. The second part was\n' +
+    'deposited in another bank at the rate of 10% per annum, compounded annualy, for 2 years.\n' +
+    'What is the difference in the interests earned from the two amounts?',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'SI and CI; Instalments',
+  subtopic: 'SI and CI; Instalments'
+}
+❌ Missing answer: {
+  id: '07_qa_arithmetic_3_q14',
+  questionNumber: 14,
+  type: 'MCQ',
+  question: 'Bank A offers 6% interest rate per annum compounded half yearly. Bank B and Bank C\n' +
+    'offer simple interest but the annual interest rate offered by Bank C is twice that of Bank B.\n' +
+    'Raju invests a certain amount in Bank B for a certain period and Rupa invests Rs. 10,000 in\n' +
+    'Bank C for twice that period. The interest that would accrue to Raju during that period is\n' +
+    'equal to the interest that would have accrued had he invested the same amount in Bank A\n' +
+    'for one year. The interest accrued, in INR, to Rupa is',
+  options: [ '1436', '2346', '2436', '3436' ],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'SI and CI; Instalments',
+  subtopic: 'SI and CI; Instalments'
+}
+❌ Missing answer: {
+  id: '07_qa_arithmetic_3_q15',
+  questionNumber: 15,
+  type: 'MCQ',
+  question: 'Anil invests some money at a fixed rate of interest, compounded annually. If the interests\n' +
+    'accrued during the second and third year are Rs. 806.25 and Rs. 866.72, respectively, the\n' +
+    'interest accrued, in INR, during the fourth year is nearest to',
+  options: [ '931.72', '926.84', '929.48', '934.65' ],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'SI and CI; Instalments',
+  subtopic: 'SI and CI; Instalments'
+}
+❌ Missing answer: {
+  id: '07_qa_arithmetic_3_q17',
+  questionNumber: 17,
+  type: 'TITA',
+  question: 'John borrowed Rs. 2,10,000 from a bank at an interest rate of 10% per annum,\n' +
+    'compounded annually. The loan was repaid in two equal instalments, the first after one year\n' +
+    'and the second after another year. The first instalment was interest of one year plus part of\n' +
+    'the principal amount, while the second was the rest of the principal amount plus due\n' +
+    'interest thereon. Then each instalment, in Rs., is',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'SI and CI; Instalments',
+  subtopic: 'SI and CI; Instalments'
+}
+TEST TYPE: SI and CI; Instalments Practice 3 TOPIC_TEST false
+❌ Missing answer: {
+  id: '09_qa_arithmetic_5_q1',
+  questionNumber: 1,
+  type: 'TITA',
+  question: 'Ramesh receives the following scores in his maths test: 78, 92, 83 and 99. What score\n' +
+    'does he need in the next test in order to have an average of 90 in the five tests?',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Average and Alligation - 01',
+  subtopic: 'Average and Alligation - 01'
+}
+❌ Missing answer: {
+  id: '09_qa_arithmetic_5_q3',
+  questionNumber: 3,
+  type: 'MCQ',
+  question: 'The average weight of 20 students in a class is 50 kg. Find the new average in each of\n' +
+    'these cases.',
+  options: [
+    'A student whose weight was actually 40 kg, was earlier mistaken to be 50 kg.',
+    'A student whose weight was 40.5 kg left the group.',
+    'Two students whose average weights were 45.5 kg left the group.',
+    'A student whose weight was 71 kg joined the group.',
+    'Two students whose average weight was 39 kg joined this group.'
+  ],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Average and Alligation - 01',
+  subtopic: 'Average and Alligation - 01'
+}
+❌ Missing answer: {
+  id: '09_qa_arithmetic_5_q8',
+  questionNumber: 8,
+  type: 'TITA',
+  question: 'The average age of 5 members of a committee is the same as it was 3 years ago, because\n' +
+    'an old member has been replaced by a new member. The difference between the ages of\n' +
+    'old and new member is:',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Average and Alligation - 01',
+  subtopic: 'Average and Alligation - 01'
+}
+❌ Missing answer: {
+  id: '09_qa_arithmetic_5_q9',
+  questionNumber: 9,
+  type: 'TITA',
+  question: 'Ten years ago, the ages of the members of a joint family of eight people added up to 231\n' +
+    'years. Three years later, one member died at the age of 60 years and a child was born\n' +
+    'during the same year. After another three years, one more member died, again at 60, and a\n' +
+    'child was born during the same year. The current average age of this eight-member joint\n' +
+    'family is nearest to',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Average and Alligation - 01',
+  subtopic: 'Average and Alligation - 01'
+}
+❌ Missing answer: {
+  id: '09_qa_arithmetic_5_q11',
+  questionNumber: 11,
+  type: 'TITA',
+  question: 'The average age of a group of officers goes down to 56 years from 58 years, when an old\n' +
+    'member is replaced by a young member. What is the total number of members in that team\n' +
+    'if the age difference between those two members is 30 years?',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Average and Alligation - 01',
+  subtopic: 'Average and Alligation - 01'
+}
+❌ Missing answer: {
+  id: '09_qa_arithmetic_5_q15',
+  questionNumber: 15,
+  type: 'TITA',
+  question: 'CAT aspirant appears for a certain number of tests. His average score increases by 1 if the\n' +
+    'first 10 tests are not considered, and decreases by 1 if the last 10 tests are not considered.\n' +
+    'If his average scores for the first 10 and the last 10 tests are 20 and 30, respectively, then\n' +
+    'the total number of tests taken by him is',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Average and Alligation - 01',
+  subtopic: 'Average and Alligation - 01'
+}
+TEST TYPE: Average and Alligation - 01 Practice 5 TOPIC_TEST false
+❌ Missing answer: {
+  id: '10_qa_arithmetic_6_q20',
+  questionNumber: 20,
+  type: 'TITA',
+  question: 'The arithmetic mean of scores of 25 students in an examination is 50. Five of these\n' +
+    'students top the examination with the same score. If the scores of the other students are\n' +
+    'distinct integers with the lowest being 30, then the maximum possible score of the toppers\n' +
+    'is\n' +
+    'Thanks!',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Averages and Alligation - 02; Median, Mode',
+  subtopic: 'Averages and Alligation - 02; Median, Mode'
+}
+TEST TYPE: Averages and Alligation - 02; Median, Mode Practice 6 TOPIC_TEST false
+❌ Missing answer: {
+  id: '11_qa_arithmetic_7_q3',
+  questionNumber: 3,
+  type: 'TITA',
+  question: 'A solution of 20 L of wine and water contains 80% wine. How much water (in L) must be\n' +
+    'added to this solution in order to make it a 40% wine solution?',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Mixtures and Solutions; Replacement',
+  subtopic: 'Mixtures and Solutions; Replacement'
+}
+❌ Missing answer: {
+  id: '11_qa_arithmetic_7_q5',
+  questionNumber: 5,
+  type: 'TITA',
+  question: 'After the addition of 35 liters of water to a can of diluted milk, the concentration of milk in\n' +
+    'the can becomes 30%. Now, further 40 liters of water is added to the can and the\n' +
+    'concentration of milk in the can gets reduced by 10 percentage points. How many more\n' +
+    'liters of water must be added to the can now such that the concentration of milk in the can\n' +
+    'becomes 8%?',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Mixtures and Solutions; Replacement',
+  subtopic: 'Mixtures and Solutions; Replacement'
+}
+❌ Missing answer: {
+  id: '11_qa_arithmetic_7_q14',
+  questionNumber: 14,
+  type: 'TITA',
+  question: 'A can contains a solution of two liquids A and B in the ratio of 7 : 5. When 9 L of solution is\n' +
+    'drawn off from the solution and the can is filled with B, the proportion of A and B becomes\n' +
+    '7 : 9. How many litres of liquid A was there in the can initially?',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Mixtures and Solutions; Replacement',
+  subtopic: 'Mixtures and Solutions; Replacement'
+}
+❌ Missing answer: {
+  id: '11_qa_arithmetic_7_q16',
+  questionNumber: 16,
+  type: 'TITA',
+  question: 'One-litre can is full with a mixture of water and alcohol, and alcohol content is 20% of the\n' +
+    'total mixture. If 10% of this liquid is taken out and pure alcohol is added to fill the can, what\n' +
+    'will be the percentage of alcohol in the new mixture?',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Mixtures and Solutions; Replacement',
+  subtopic: 'Mixtures and Solutions; Replacement'
+}
+❌ Missing answer: {
+  id: '11_qa_arithmetic_7_q19',
+  questionNumber: 19,
+  type: 'TITA',
+  question: 'Some amount of acid is taken out of a 54 L vessel full of acid and then an equal amount of\n' +
+    'water is added to it. The process is repeated once more. As a result, the vessel now\n' +
+    'contains 24 L pure acid. How much of the acid was taken out initially (in L)?',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Mixtures and Solutions; Replacement',
+  subtopic: 'Mixtures and Solutions; Replacement'
+}
+❌ Missing answer: {
+  id: '11_qa_arithmetic_7_q23',
+  questionNumber: 23,
+  type: 'TITA',
+  question: 'A solution, of volume 40 litres, has dye and water in the proportion 2 : 3. Water is added to\n' +
+    'the solution to change this proportion to 2 : 5. If one-fourths of this diluted solution is taken\n' +
+    'out, how many litres of dye must be added to the remaining solution to bring the proportion\n' +
+    'back to 2 : 3?',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Mixtures and Solutions; Replacement',
+  subtopic: 'Mixtures and Solutions; Replacement'
+}
+❌ Missing answer: {
+  id: '11_qa_arithmetic_7_q25',
+  questionNumber: 25,
+  type: 'TITA',
+  question: 'From a container filled with milk, 9 litres of milk are drawn and replaced with water. Next,\n' +
+    'from the same container, 9 litres are drawn and again replaced with water. If the volumes of\n' +
+    'milk and water in the container are now in the ratio of 16 : 9, then the capacity of the\n' +
+    'container, in litres, is\n' +
+    'Thanks!',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Mixtures and Solutions; Replacement',
+  subtopic: 'Mixtures and Solutions; Replacement'
+}
+TEST TYPE: Mixtures and Solutions; Replacement Practice 7 TOPIC_TEST false
+TEST TYPE: Proportionality; Average Speed Practice 9 TOPIC_TEST false
+❌ Missing answer: {
+  id: '15_qa_arithmetic_11_q2',
+  questionNumber: 2,
+  type: 'MCQ',
+  question: 'A and B start from a point P on a circular track of length 280 m, simultaneously at speeds\n' +
+    'of 7 m/s and 4 m/s. Find',
+  options: [
+    'The time after the start when they would meet for the first time and the third time if they',
+    'The time after the start when they would meet for the first time and the third time if they',
+    'Meet for the first time at P after the start, if they are both moving in the same direction.',
+    'Number of points where they meet on the circular track when they are running in'
+  ],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Circular Races; To and Fro',
+  subtopic: 'Circular Races; To and Fro'
+}
+❌ Missing answer: {
+  id: '15_qa_arithmetic_11_q3',
+  questionNumber: 3,
+  type: 'MCQ',
+  question: 'A, B, C start simultaneously from P on a circular track of length 280 m, at speeds of 7 m/s,\n' +
+    '3 m/s, and 4 m/s respectively. When would they meet for the first time if',
+  options: [
+    'A, B, C are moving in clockwise direction.',
+    'A, B are moving in the clockwise direction, whereas C is moving in the anticlockwise'
+  ],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Circular Races; To and Fro',
+  subtopic: 'Circular Races; To and Fro'
+}
+❌ Missing answer: {
+  id: '15_qa_arithmetic_11_q6',
+  questionNumber: 6,
+  type: 'TITA',
+  question: 'Two runners A and B are running on a circular track of length 14 km. If A and B started\n' +
+    'simultaneously from the same point but in opposite directions with speeds 15m/s and\n' +
+    '20m/s respectively. What is the distance covered by A by the time they cross each other for\n' +
+    'the first time?',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Circular Races; To and Fro',
+  subtopic: 'Circular Races; To and Fro'
+}
+❌ Missing answer: {
+  id: '15_qa_arithmetic_11_q7',
+  questionNumber: 7,
+  type: 'TITA',
+  question: 'A and B run a 5 km race on a round course of 400 m. If their speeds are in the ratio 5 : 4,\n' +
+    'then how many times will the winner of the race cross the other participant?',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Circular Races; To and Fro',
+  subtopic: 'Circular Races; To and Fro'
+}
+❌ Missing answer: {
+  id: '15_qa_arithmetic_11_q10',
+  questionNumber: 10,
+  type: 'MCQ',
+  question: 'In a 4000 meter race around a circular stadium having a circumference of 1000 meters, the\n' +
+    'fastest runner and the slowest runner reach the same point at the end of the 5th minute, for\n' +
+    'the first time after the start of the race. All runners have the same starting point and each\n' +
+    'runner maintains a uniform speed throughout the race. If fastest runner runs at twice the\n' +
+    'speed of slowest runner, what is the time taken by fastest runner to finish the race?\n' +
+    'For Questions 11 and 12\n' +
+    '11. If Charu and Chiku are running in\n' +
+    'the opposite direction, what is the\n' +
+    'shortest distance (in metres) along\n' +
+    'the circular path between point A\n' +
+    'and the point at which Charu and\n' +
+    'Chiku meet for the third time?',
+  options: [
+    '247.5', '412.5',
+    '660',   '1320',
+    '150',   '270',
+    '412.5', '900'
+  ],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Circular Races; To and Fro',
+  subtopic: 'Circular Races; To and Fro'
+}
+❌ Missing answer: {
+  id: '15_qa_arithmetic_11_q16',
+  questionNumber: 16,
+  type: 'MCQ',
+  question: 'A and B start from one end of a 50 m pool simultaneously, during a 1 km race. The speeds\n' +
+    'of A and B are 5 m/s and 3 m/s.',
+  options: [
+    'After the start after how much time are A, B at any end of the pool again?',
+    'How many times do they meet after the start, during the race?'
+  ],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Circular Races; To and Fro',
+  subtopic: 'Circular Races; To and Fro'
+}
+❌ Missing answer: {
+  id: '15_qa_arithmetic_11_q17',
+  questionNumber: 17,
+  type: 'MCQ',
+  question: 'A and B start from the opposite ends of a 50 m pool simultaneously, during a 1 km race.\n' +
+    'The speeds of A and B are 5 m/s and 4 m/s.',
+  options: [
+    'After the start after how much time are A, B at any end of the pool again?',
+    'How many times do they meet after the start, during the race?'
+  ],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Circular Races; To and Fro',
+  subtopic: 'Circular Races; To and Fro'
+}
+❌ Missing answer: {
+  id: '15_qa_arithmetic_11_q18',
+  questionNumber: 18,
+  type: 'TITA',
+  question: 'A and B start from one end of a 50 m pool simultaneously, during a 1 km race. The speeds\n' +
+    'of A and B are 5 m/s and 3 m/s. When do they meet the 1st , 2nd and 7th time after the\n' +
+    'start?\n' +
+    'Thanks!',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Circular Races; To and Fro',
+  subtopic: 'Circular Races; To and Fro'
+}
+TEST TYPE: Circular Races; To and Fro Practice 11 TOPIC_TEST false
+❌ Missing answer: {
+  id: '16_qa_arithmetic_12_q3',
+  questionNumber: 3,
+  type: 'MCQ',
+  question: 'Between 6 PM and 8 PM when are the hands of a clock separated by',
+  options: [ '30°', '0°' ],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Clocks; Boats and Streams; Escalators',
+  subtopic: 'Clocks; Boats and Streams; Escalators'
+}
+❌ Missing answer: {
+  id: '16_qa_arithmetic_12_q17',
+  questionNumber: 17,
+  type: 'TITA',
+  question: 'An escalator is moving at 3 steps per second. Harish walks in the same direction as the\n' +
+    'moving escalator at 2 steps per second and takes 3 second less to get out of the escalator\n' +
+    'than when he was moving on the stationary escalator. How many steps are there in the\n' +
+    'stationary escalator?',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Clocks; Boats and Streams; Escalators',
+  subtopic: 'Clocks; Boats and Streams; Escalators'
+}
+❌ Missing answer: {
+  id: '16_qa_arithmetic_12_q18',
+  questionNumber: 18,
+  type: 'TITA',
+  question: 'Rajat takes 11 steps to reach the bottom of an escalator in 35 seconds. Sharad walks on\n' +
+    'the same escalator and takes 39 steps in 21 sec to reach the bottom. How many steps are\n' +
+    'visible on the escalator when it is not moving? (Note: The escalator is coming down in both\n' +
+    'the cases)',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Clocks; Boats and Streams; Escalators',
+  subtopic: 'Clocks; Boats and Streams; Escalators'
+}
+❌ Missing answer: {
+  id: '16_qa_arithmetic_12_q19',
+  questionNumber: 19,
+  type: 'TITA',
+  question: 'An escalator is coming down at a constant speed. Vivek takes 40 steps to reach to the\n' +
+    'bottom. The time in which he takes 15 steps, Samar manages to reach the bottom by\n' +
+    'taking 45 steps. If the escalator were turned off, how many steps would they have to take to\n' +
+    'walk down?',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Clocks; Boats and Streams; Escalators',
+  subtopic: 'Clocks; Boats and Streams; Escalators'
+}
+TEST TYPE: Clocks; Boats and Streams; Escalators Practice 12 TOPIC_TEST false
+❌ Missing answer: {
+  id: '17_qa_arithmetic_rt_1_q25',
+  questionNumber: 25,
+  type: 'TITA',
+  question: 'Samrat Ashok had ten chiefs, who each had to pay obligeance to him. They were\n' +
+    'numbered 1 to 10 and the chief with number n had to give him n gold coins each\n' +
+    'weighing 10 gms. The total gold weight of all coins received turned out to be 532 gms.\n' +
+    'Ashok’s minister found that more than two chiefs had mixed brass with the gold and\n' +
+    'reduced the gold weight of each coin by a small amount, that is 20%. If the Chief\n' +
+    'numbered 1 was not involved in it, then what were the numbers of the Chiefs who gave\n' +
+    'the counterfeit coins? __________',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Review Test - 01',
+  subtopic: 'Review Test - 01'
+}
+TEST TYPE: Review Test - 01 Practice 1 TOPIC_TEST false
+❌ Missing answer: {
+  id: '18_qa_arithmetic_rt_2_q24',
+  questionNumber: 24,
+  type: 'TITA',
+  question: 'N is a set of positive integers. It has 24 elements with the smallest as 1 and largest as\n' +
+    '25. The average of the elements in this group is . Which positive integer is missing\n' +
+    'from the given set?\n' +
+    '_______________',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Review Test - 02',
+  subtopic: 'Review Test - 02'
+}
+TEST TYPE: Review Test - 02 Practice 2 TOPIC_TEST false
+❌ Missing answer: {
+  id: '20_qa_numbers_2_q4',
+  questionNumber: 4,
+  type: 'TITA',
+  question: 'Consider N = 27 x 36 x 53\n' +
+    'a. Find the total number of factors of ‘N’.\n' +
+    'b. Find the total number of factors of ‘N’ which are odd.\n' +
+    'c. Find the total number of factors of ‘N’ which are even.\n' +
+    'd. Find the total number of factors of ‘N’ which are composite.\n' +
+    'e. Find the total number of factors of ‘N’ which are multiple of 3.\n' +
+    'f. Find the total number of factors of ‘N’ which are multiple of 12.\n' +
+    'g. Find the total number of factors of ‘N’ which are perfect square.\n' +
+    'h. Find the total number of factors of ‘N’ which are perfect cube.\n' +
+    'i. Find the total number of factors of ‘N’ which has unit’s digit zero.\n' +
+    'j. Find the total number of factors of ‘N’ whose last two digits are zero.\n' +
+    'k. Find the sum of all factors of ‘N’.\n' +
+    'l. Find the product of all factors of ‘N’.',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Factors',
+  subtopic: 'Factors'
+}
+❌ Missing answer: {
+  id: '20_qa_numbers_2_q5',
+  questionNumber: 5,
+  type: 'TITA',
+  question: 'Consider N = 22 x 64 x 56 = A x B\n' +
+    'a. In how many ways ‘N’ can be written as a product of two numbers?\n' +
+    'b. In how many ways ‘N’ can be written as a product of two different numbers?\n' +
+    'c. In how many ways ‘N’ can be written as a product of two numbers which are odd?\n' +
+    'd. In how many ways ‘N’ can be written as a product of two numbers which are even?\n' +
+    'e. In how many ways ‘N’ can be written as a product of two numbers such that one of them\n' +
+    'is even and the other is odd?\n' +
+    'f. In how many ways ‘N’ can be written as a product of two numbers which are co-prime to\n' +
+    'each other?',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Factors',
+  subtopic: 'Factors'
+}
+❌ Missing answer: {
+  id: '20_qa_numbers_2_q6',
+  questionNumber: 6,
+  type: 'TITA',
+  question: 'A is a factor of 720. A itself has exactly three factors. How many values of A are possible?',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Factors',
+  subtopic: 'Factors'
+}
+❌ Missing answer: {
+  id: '20_qa_numbers_2_q9',
+  questionNumber: 9,
+  type: 'TITA',
+  question: 'How many factors of 24 x 35 x 104 are perfect squares which are greater than 1?',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Factors',
+  subtopic: 'Factors'
+}
+❌ Missing answer: {
+  id: '20_qa_numbers_2_q13',
+  questionNumber: 13,
+  type: 'TITA',
+  question: 'A perfect square number ‘N’ has nine factors below its square root. Find the number of\n' +
+    'factors of ‘N5’.',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Factors',
+  subtopic: 'Factors'
+}
+❌ Missing answer: {
+  id: '20_qa_numbers_2_q14',
+  questionNumber: 14,
+  type: 'TITA',
+  question: 'In how many ways 1000 can be written as a sum of two or more consecutive natural\n' +
+    'numbers?',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Factors',
+  subtopic: 'Factors'
+}
+❌ Missing answer: {
+  id: '20_qa_numbers_2_q16',
+  questionNumber: 16,
+  type: 'TITA',
+  question: 'The number of integers x such that 0.25 <= 2x <= 200, and 2x + 2 is perfectly divisible by\n' +
+    'either 3 or 4, is',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Factors',
+  subtopic: 'Factors'
+}
+❌ Missing answer: {
+  id: '20_qa_numbers_2_q17',
+  questionNumber: 17,
+  type: 'TITA',
+  question: 'For all possible integers n satisfying 2.25 <= 2 + 2n + 2 <= 202, the number of integer values of\n' +
+    '3 + 3n + 1 is',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Factors',
+  subtopic: 'Factors'
+}
+❌ Missing answer: {
+  id: '20_qa_numbers_2_q19',
+  questionNumber: 19,
+  type: 'TITA',
+  question: 'Let A be the largest positive integer that divides all the numbers of the form 3k + 4k + 5k, and\n' +
+    'B be the largest positive integer that divides all the numbers of the form 4k + 3(4k) + 4k+2,\n' +
+    'where k is any positive integer. Then (A + B) equals',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Factors',
+  subtopic: 'Factors'
+}
+❌ Missing answer: {
+  id: '20_qa_numbers_2_q20',
+  questionNumber: 20,
+  type: 'TITA',
+  question: 'A school has less than 5000 students and if the students are divided equally into teams of\n' +
+    'either 9 or 10 or 12 or 25 each, exactly 4 are always left out. However, if they are divided\n' +
+    'into teams of 11 each, no one is left out. The maximum number of teams of 12 each that\n' +
+    'can be formed out of the students in the school is\n' +
+    'Thanks!',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Factors',
+  subtopic: 'Factors'
+}
+TEST TYPE: Factors Practice 2 TOPIC_TEST false
+TEST TYPE: Trailing Digits; Factorials Practice 3 TOPIC_TEST false
+❌ Missing answer: {
+  id: '22_qa_numbers_4_q9',
+  questionNumber: 9,
+  type: 'TITA',
+  question: 'If 67516 and 68488 are divided by a three-digit number, they leave the same remainder.\n' +
+    'How many such three digits numbers are possible?',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Divisibility; Remainders',
+  subtopic: 'Divisibility; Remainders'
+}
+❌ Missing answer: {
+  id: '22_qa_numbers_4_q10',
+  questionNumber: 10,
+  type: 'TITA',
+  question: 'Find the smallest three-digit number which when divided by 7 and 8, leaves remainder 2\n' +
+    'and 4.',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Divisibility; Remainders',
+  subtopic: 'Divisibility; Remainders'
+}
+❌ Missing answer: {
+  id: '22_qa_numbers_4_q13',
+  questionNumber: 13,
+  type: 'TITA',
+  question: 'Find the remainder when 54k, where k is a natural number, is divided by 6.',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Divisibility; Remainders',
+  subtopic: 'Divisibility; Remainders'
+}
+TEST TYPE: Divisibility; Remainders Practice 4 TOPIC_TEST false
+TEST TYPE: Review Test Practice TOPIC_TEST false
+TEST TYPE: Sequences, Series Practice 4 TOPIC_TEST false
+❌ Missing answer: {
+  id: '28_qa_algebra_5_q5',
+  questionNumber: 5,
+  type: 'MCQ',
+  question: 'If 3x + 2|y| + y = 7 and x + |x| + 3y = 1, then x + 2y is',
+  options: [ '-4/3', '1', '0', '8/3' ],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Modulus; Logarithms',
+  subtopic: 'Modulus; Logarithms'
+}
+❌ Missing answer: {
+  id: '28_qa_algebra_5_q12',
+  questionNumber: 12,
+  type: 'MCQ',
+  question: 'What is the minimum value of the function?',
+  options: [
+    'F(x) = |x - 1| + |x - 2| + |x - 4|',
+    'F(x) = |x - 1| + |x - 2| + |x - 4| + |x - 8|'
+  ],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Modulus; Logarithms',
+  subtopic: 'Modulus; Logarithms'
+}
+❌ Missing answer: {
+  id: '28_qa_algebra_5_q13',
+  questionNumber: 13,
+  type: 'TITA',
+  question: 'The number of distinct pairs of integers (m, n) satisfying |1 + mn| < |m + n| < 5 is',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Modulus; Logarithms',
+  subtopic: 'Modulus; Logarithms'
+}
+❌ Missing answer: {
+  id: '28_qa_algebra_5_q15',
+  questionNumber: 15,
+  type: 'MCQ',
+  question: 'What is the area bounded by the graphs',
+  options: [
+    '|x| + |y| = 10',
+    '|x + 2| + |y - 3| = 10',
+    '|x - y| + |x + y| = 10'
+  ],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Modulus; Logarithms',
+  subtopic: 'Modulus; Logarithms'
+}
+❌ Missing answer: {
+  id: '28_qa_algebra_5_q17',
+  questionNumber: 17,
+  type: 'TITA',
+  question: 'The value of is5 6 7\n1 1 1\nlog 210 log 210 log 210\n \n+ +  \n ',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Modulus; Logarithms',
+  subtopic: 'Modulus; Logarithms'
+}
+❌ Missing answer: {
+  id: '28_qa_algebra_5_q18',
+  questionNumber: 18,
+  type: 'TITA',
+  question: 'If log2 log3 log2logx 21024 = 1, find the value of x?',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Modulus; Logarithms',
+  subtopic: 'Modulus; Logarithms'
+}
+❌ Missing answer: {
+  id: '28_qa_algebra_5_q32',
+  questionNumber: 32,
+  type: 'TITA',
+  question: 'If log (2a x 3b x 5c) is the arithmetic mean of log (22 x 33 x 5), log(26 x 3 x 57), and log\n' +
+    '(2 x 32 x 54), then a equals',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Modulus; Logarithms',
+  subtopic: 'Modulus; Logarithms'
+}
+TEST TYPE: Modulus; Logarithms Practice 5 TOPIC_TEST false
+❌ Missing answer: {
+  id: '29_qa_algebra_6_q6',
+  questionNumber: 6,
+  type: 'TITA',
+  question: 'If a + b + c = 10, where a, b, and c are non-negative real numbers. Find the maximum\n' +
+    'value of abc.',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Greatest Integer Function; Maxima and Minima',
+  subtopic: 'Greatest Integer Function; Maxima and Minima'
+}
+❌ Missing answer: {
+  id: '29_qa_algebra_6_q7',
+  questionNumber: 7,
+  type: 'TITA',
+  question: 'If a + b + c = 10, find the maximum value of (a - 1) (b - 2)(c - 5).Given that a >= 1, b >= 2 and\n' +
+    'c >= 5.',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Greatest Integer Function; Maxima and Minima',
+  subtopic: 'Greatest Integer Function; Maxima and Minima'
+}
+❌ Missing answer: {
+  id: '29_qa_algebra_6_q8',
+  questionNumber: 8,
+  type: 'TITA',
+  question: 'If a + b + c = 6, find the maximum value of a3b2c, where all a, b and c are positive real\n' +
+    'numbers.',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Greatest Integer Function; Maxima and Minima',
+  subtopic: 'Greatest Integer Function; Maxima and Minima'
+}
+❌ Missing answer: {
+  id: '29_qa_algebra_6_q22',
+  questionNumber: 22,
+  type: 'TITA',
+  question: 'If a, b, c, and d are integers such that a + b + c + d = 30, then the minimum possible value\n' +
+    'of (a - b)2 + (a - c)2 + (a - d)2 is',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Greatest Integer Function; Maxima and Minima',
+  subtopic: 'Greatest Integer Function; Maxima and Minima'
+}
+❌ Missing answer: {
+  id: '29_qa_algebra_6_q24',
+  questionNumber: 24,
+  type: 'TITA',
+  question: 'If x and y are positive real numbers satisfying x + y = 102, then the minimum possible\n' +
+    'value of 2601 is1 1\n' +
+    '1 1\n' +
+    'x y\n' +
+    ' \t \n' +
+    '+ +  \t \n' +
+    '  ',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Greatest Integer Function; Maxima and Minima',
+  subtopic: 'Greatest Integer Function; Maxima and Minima'
+}
+❌ Missing answer: {
+  id: '29_qa_algebra_6_q25',
+  questionNumber: 25,
+  type: 'TITA',
+  question: 'For natural numbers x, y, and z, if xy + yz = 19 and yz + xz = 51, then the minimum\n' +
+    'possible value of xyz is',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Greatest Integer Function; Maxima and Minima',
+  subtopic: 'Greatest Integer Function; Maxima and Minima'
+}
+❌ Missing answer: {
+  id: '29_qa_algebra_6_q28',
+  questionNumber: 28,
+  type: 'TITA',
+  question: 'Let f(x) = min {2x2, 52 - 5x}, where x is any positive real number. Then the maximum\n' +
+    'possible value of f(x) is\n' +
+    'For Questions 29 and 30\n' +
+    'Answer the questions on the basis of the information given below.\n' +
+    'Shabnam is considering three alternatives to invest her surplus cash for a week. She wishes\n' +
+    'to guarantee maximum returns on her investment. She has three options, each of which can\n' +
+    'be utilized fully or partially in conjunction with others.\n' +
+    'Option A: Invest in a public sector bank. It promises a return of +0.10%.\n' +
+    'Option B: Invest in mutual funds of ABC Ltd. A rise in the stock market will result in a return\n' +
+    'of + 5% while a fall will entail a return of -3%.\n' +
+    'Option C: Invest in mutual funds of CBA Ltd. A rise in the stock market will result in a return\n' +
+    'of -2.5%, while a fall will entail a return of +2%.',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Greatest Integer Function; Maxima and Minima',
+  subtopic: 'Greatest Integer Function; Maxima and Minima'
+}
+TEST TYPE: Greatest Integer Function; Maxima and Minima Practice 6 TOPIC_TEST false
+❌ Missing answer: {
+  id: '30_qa_algebra_7_q1',
+  questionNumber: 1,
+  type: 'MCQ',
+  question: 'Two points A( 3, 7) and B(-5, 13) are located on a coordinate plane. Find',
+  options: [
+    'The distance between A, B',
+    'The mid-point of AB',
+    'Coordinates of C such that AC : CB is 1 : 2',
+    'Equation of the line passing through A, B'
+  ],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Co-ordinate Geometry',
+  subtopic: 'Co-ordinate Geometry'
+}
+❌ Missing answer: {
+  id: '30_qa_algebra_7_q6',
+  questionNumber: 6,
+  type: 'MCQ',
+  question: 'Find the area enclosed by the graphs',
+  options: [
+    '|x| = 4 ; |y| = 3',
+    '|x - 3| = 4 ; | y + 3| = 5',
+    '|x + y | = 3 ; | x - y | = 5'
+  ],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Co-ordinate Geometry',
+  subtopic: 'Co-ordinate Geometry'
+}
+❌ Missing answer: {
+  id: '30_qa_algebra_7_q21',
+  questionNumber: 21,
+  type: 'TITA',
+  question: 'Let T be the triangle formed by the straight line 3x + 5y - 45 = 0 and the coordinate axes.\n' +
+    'Let the circumcircle of T have radius of length L, measured in the same unit as the\n' +
+    'coordinate axes. Then, the integer closest to L is',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Co-ordinate Geometry',
+  subtopic: 'Co-ordinate Geometry'
+}
+TEST TYPE: Co-ordinate Geometry Practice 7 TOPIC_TEST false
+❌ Missing answer: {
+  id: '31_qa_algebra_rt_1_q6',
+  questionNumber: 6,
+  type: 'TITA',
+  question: '',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Review Test - 01',
+  subtopic: 'Review Test - 01'
+}
+TEST TYPE: Review Test - 01 Practice 1 TOPIC_TEST false
+❌ Missing answer: {
+  id: '32_qa_algebra_rt_2_q12',
+  questionNumber: 12,
+  type: 'TITA',
+  question: '',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Review Test - 02',
+  subtopic: 'Review Test - 02'
+}
+❌ Missing answer: {
+  id: '32_qa_algebra_rt_2_q13',
+  questionNumber: 13,
+  type: 'TITA',
+  question: 'a and b are positive integers such that a2 + 2b = b2 + 2a + 5. The value of b is _________.\n' +
+    'In the sequences 1, 2, 2, 4, 4, 4, 4, 8, 8, 8, 8, 8, 8, 8, 8, ........ the 2016th term is 2n. Then n\n' +
+    '= ________.',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Review Test - 02',
+  subtopic: 'Review Test - 02'
+}
+❌ Missing answer: {
+  id: '32_qa_algebra_rt_2_q18',
+  questionNumber: 18,
+  type: 'MCQ',
+  question: 'What is the minimum value of where a and b are positive real\n' +
+    'numbers and a > b.',
+  options: [ '2 (2) 3', '4 (4) 5' ],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Review Test - 02',
+  subtopic: 'Review Test - 02'
+}
+❌ Missing answer: {
+  id: '32_qa_algebra_rt_2_q30',
+  questionNumber: 30,
+  type: 'TITA',
+  question: 'x, y, z are distinct real numbers, not equals to 0, such that\n' +
+    'The value of x2y2z2 is ______.',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Review Test - 02',
+  subtopic: 'Review Test - 02'
+}
+TEST TYPE: Review Test - 02 Practice 2 TOPIC_TEST false
+❌ Missing answer: {
+  id: '40_qa_geometry_rt_q17',
+  questionNumber: 17,
+  type: 'TITA',
+  question: '250\t260\n' +
+    'A B\n' +
+    'C\tD\n' +
+    'The line is tangent to a circle centre at the origin. Find the radius of the circle.',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Review Test',
+  subtopic: 'Review Test'
+}
+TEST TYPE: Review Test Practice TOPIC_TEST false
+TEST TYPE: Probability Practice TOPIC_TEST false
+❌ Missing answer: {
+  id: '44_qa_modern_mathematics_rt_q2',
+  questionNumber: 2,
+  type: 'TITA',
+  question: 'The ratio of the sum of odd factors to that of even factors of a natural number is 1: 62. If\n' +
+    'one of factors of the number is chosen randomly, what is the probability that the chosen\n' +
+    'factor is an even natural number?\n' +
+    '(a) 1/7 (b) 6/7 (c) 1/6 (d) 5/6',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Review Test',
+  subtopic: 'Review Test'
+}
+❌ Missing answer: {
+  id: '44_qa_modern_mathematics_rt_q6',
+  questionNumber: 6,
+  type: 'TITA',
+  question: '',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Review Test',
+  subtopic: 'Review Test'
+}
+❌ Missing answer: {
+  id: '44_qa_modern_mathematics_rt_q12',
+  questionNumber: 12,
+  type: 'TITA',
+  question: '',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Review Test',
+  subtopic: 'Review Test'
+}
+❌ Missing answer: {
+  id: '44_qa_modern_mathematics_rt_q14',
+  questionNumber: 14,
+  type: 'TITA',
+  question: 'An eight-digit number is formed by using the digits 1 through 8, without repetition. What is\n' +
+    'the probability that the number thus formed is divisible by 11?\n' +
+    '(a) (b) (c) (d)',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Review Test',
+  subtopic: 'Review Test'
+}
+❌ Missing answer: {
+  id: '44_qa_modern_mathematics_rt_q15',
+  questionNumber: 15,
+  type: 'TITA',
+  question: '3\n' +
+    '35\n' +
+    '2\n' +
+    '35\n' +
+    '4\n' +
+    '35\n' +
+    '6\n' +
+    '35\n' +
+    'The following tile consists of four identical tiles of unit area each.\n' +
+    'If the tiles can be placed in any orientation as long as no two tiles overlap each other,\n' +
+    'then what is the minimum possible number of such tiles required to obtain a rectangular\n' +
+    'figure?\n' +
+    '(a) 6 (b) 4 (c) 3 (d) 5',
+  options: [],
+  correctAnswer: null,
+  explanation: '',
+  difficulty: 'Medium',
+  year: null,
+  slot: null,
+  section: 'QA',
+  topic: 'Review Test',
+  subtopic: 'Review Test'
+}
+TEST TYPE: Review Test Practice TOPIC_TEST false
+{
+  "id": "05_qa_arithmetic_1",
+  "title": "Basics of percentage Practice 1",
+  "topic": "Basics of percentage",
+  "topicSlug": "basics-of-percentage",
+  "type": "TOPIC_TEST",
+  "isFree": true,
+  "name": "Basics of percentage Practice 1",
+  "slug": "05_qa_arithmetic_1",
+  "durationMinutes": 60,
+  "sections": [
+    {
+      "name": "QA",
+      "time": 60,
+      "questions": [
+        {
+          "id": "05_qa_arithmetic_1_q1",
+          "questionNumber": 1,
+          "type": "MCQ",
+          "question": "In an election between two candidates, the candidate who gets 30% of the votes polled is\ndefeated by 15,000 votes. The number of votes polled in favour of the winning candidate is",
+          "options": [
+            "11,250",
+            "15,000",
+            "26,250",
+            "37,500"
+          ],
+          "correctAnswer": "3",
+          "explanation": "3 Let total number of votes be x.\nThen, 30% of x + 15000 = 70% of x\n => 15000 = 0.4x\n => x = 37500\nThe required number = 70% of 37500\n= \n70 37500\n100 = 26250",
+          "difficulty": "Medium",
+          "year": null,
+          "slot": null,
+          "section": "QA",
+          "topic": "Basics of percentage",
+          "subtopic": "Basics of percentage",
+          "sourceQuestionPdf": "05 QA Arithmetic-1 Q.pdf",
+          "sourceSolutionPdf": "05 QA Arithmetic-1 Sol.pdf"
+        },
+        {
+          "id": "05_qa_arithmetic_1_q2",
+          "questionNumber": 2,
+          "type": "MCQ",
+          "question": "Out of the shirts produced in a factory, 15% are defective, while 20% of the rest are sold in\nthe domestic market. If the remaining 8840 shirts are left for export, then the number of\nshirts produced in the factory is",
+          "options": [
+            "13600",
+            "13000",
+            "13400",
+            "14000"
+          ],
+          "correctAnswer": "2",
+          "explanation": "2 Let total shirts produced = 100x\nDefective = 15x\nRest = 85x\nShirts sold in domestic market = 17x\nRemaining shirts = 68x\nSo, 68x =  8840\n => 100x =  13000.",
+          "difficulty": "Medium",
+          "year": null,
+          "slot": null,
+          "section": "QA",
+          "topic": "Basics of percentage",
+          "subtopic": "Basics of percentage",
+          "sourceQuestionPdf": "05 QA Arithmetic-1 Q.pdf",
+          "sourceSolutionPdf": "05 QA Arithmetic-1 Sol.pdf"
+        },
+        {
+          "id": "05_qa_arithmetic_1_q3",
+          "questionNumber": 3,
+          "type": "TITA",
+          "question": "A college has raised 75% of the amount it needs for a new building by receiving an average\ndonation of Rs. 600 from people already solicited. People already solicited represents 60%\nof people, the college will ask for donations. If college is to raise exactly the amount needed\nfor the new building, what should be the average donation (in Rs.) from remaining people to\nbe solicited?",
+          "options": [],
+          "correctAnswer": null,
+          "explanation": "Let x be the total number of people, college will ask for\ndonations.\n Therefore  People already solicited = 0.6x\nAmount raised from the people solicited\n= 600 x 0.6x = 360x\nNow 360x constitutes 75% of the amount.\nHence, remaining 25% constitutes 120x\n Therefore Average donation from remaining people\n= =\n120x 300\n0.4x",
+          "difficulty": "Medium",
+          "year": null,
+          "slot": null,
+          "section": "QA",
+          "topic": "Basics of percentage",
+          "subtopic": "Basics of percentage",
+          "sourceQuestionPdf": "05 QA Arithmetic-1 Q.pdf",
+          "sourceSolutionPdf": "05 QA Arithmetic-1 Sol.pdf"
+        },
+        {
+          "id": "05_qa_arithmetic_1_q4",
+          "questionNumber": 4,
+          "type": "MCQ",
+          "question": "The income of Amala is 20% more than that of Bimala and 20% less than that of Kamala. If\nKamala's income goes down by 4% and Bimala's goes up by 10%, then the percentage by\nwhich Kamala's income would exceed Bimala's is nearest to",
+          "options": [
+            "29",
+            "31",
+            "28",
+            "32"
+          ],
+          "correctAnswer": "2",
+          "explanation": "2 Let income of Bimala = 100\nThen, Amala’s income = 100 x 1.2 = 120.\nKamala’s income = 120 100 150.\n80\n =\nKamala income down by 4% = 144.\nBimala’s income goes up by 10% = 110.\n Therefore Percentage by which Kamala’s income would\nexceed Bimala’s income\n= 144 110 100 30.91%\n110\n -  =  31%",
+          "difficulty": "Medium",
+          "year": null,
+          "slot": null,
+          "section": "QA",
+          "topic": "Basics of percentage",
+          "subtopic": "Basics of percentage",
+          "sourceQuestionPdf": "05 QA Arithmetic-1 Q.pdf",
+          "sourceSolutionPdf": "05 QA Arithmetic-1 Sol.pdf"
+        },
+        {
+          "id": "05_qa_arithmetic_1_q5",
+          "questionNumber": 5,
+          "type": "MCQ",
+          "question": "A vendor sells 30% of his fruits and throws away 40% of the rest of the fruits. Next day he\nsells 50% of the remainder fruits and throws away the rest. What percent of the fruits does\nthe vendor throw?",
+          "options": [
+            "51%",
+            "49%",
+            "63%",
+            "72%"
+          ],
+          "correctAnswer": "2",
+          "explanation": "2 Suppose, he has 100 fruits. He sells 30 fruits and\nthrows away 40% of 70 i.e. 28 fruits. Now he was\nleft with 42 fruits. Next day, he sells 50% of 42 = 21\nfruits. So, he throws 21 + 28 = 49 fruits.\nHence, the required percentage = 49.",
+          "difficulty": "Medium",
+          "year": null,
+          "slot": null,
+          "section": "QA",
+          "topic": "Basics of percentage",
+          "subtopic": "Basics of percentage",
+          "sourceQuestionPdf": "05 QA Arithmetic-1 Q.pdf",
+          "sourceSolutionPdf": "05 QA Arithmetic-1 Sol.pdf"
+        },
+        {
+          "id": "05_qa_arithmetic_1_q6",
+          "questionNumber": 6,
+          "type": "MCQ",
+          "question": "In a tournament, a team has played 40 matches so far and won 30% of them. If they win\n60% of the remaining matches, their overall win percentage will be 50%. Suppose they win\n90% of the remaining matches, then the total number of matches won by the team in the\ntournament will be",
+          "options": [
+            "86",
+            "84",
+            "80",
+            "78"
+          ],
+          "correctAnswer": "2",
+          "explanation": "2 Let the remaining number of matches be x\nUsing alligation:\nOver Upcoming\n30% 60%\n50%\n10 20\nGiven 40 : x = 10 : 20 => x = 80.\nOut of 80 they win 90% => 0.9 x 80 = 72\nOut of 40 they won 30% => 0.3 x 40 = 12\nHence, total number of matches won = 84.",
+          "difficulty": "Medium",
+          "year": null,
+          "slot": null,
+          "section": "QA",
+          "topic": "Basics of percentage",
+          "subtopic": "Basics of percentage",
+          "sourceQuestionPdf": "05 QA Arithmetic-1 Q.pdf",
+          "sourceSolutionPdf": "05 QA Arithmetic-1 Sol.pdf"
+        },
+        {
+          "id": "05_qa_arithmetic_1_q7",
+          "questionNumber": 7,
+          "type": "TITA",
+          "question": "Gun powder contains 75% nitre, 10% of sulphur and the rest is charcoal by weight. If",
+          "options": [],
+          "correctAnswer": "1",
+          "explanation": "1 The percentage of charcoal\n= [100 - (75 + 10)] % = 15 %\nQuantity of charcoal = 15 % of 24 kg\n= \n15 24\n100 = 3.6 kg.",
+          "difficulty": "Medium",
+          "year": null,
+          "slot": null,
+          "section": "QA",
+          "topic": "Basics of percentage",
+          "subtopic": "Basics of percentage",
+          "sourceQuestionPdf": "05 QA Arithmetic-1 Q.pdf",
+          "sourceSolutionPdf": "05 QA Arithmetic-1 Sol.pdf"
+        },
+        {
+          "id": "05_qa_arithmetic_1_q8",
+          "questionNumber": 8,
+          "type": "TITA",
+          "question": "A and B are two friends, each having at least a rupee. If A gives B a sum of Rs. 20, then A\nhas 40% of the amount with B. If B gives A, a sum of Rs. 40, then B will have 40% of the\namount with A. What is the amount (in Rs.) with A initially?",
+          "options": [],
+          "correctAnswer": null,
+          "explanation": "We have (A - 20 ) = 0.4(B + 20), i.e. A - 0.4B = 28\nAnd (B - 40) = 0.4(A + 40), i.e. B - 0.4A = 56\nSolving, we get A = Rs. 60",
+          "difficulty": "Medium",
+          "year": null,
+          "slot": null,
+          "section": "QA",
+          "topic": "Basics of percentage",
+          "subtopic": "Basics of percentage",
+          "sourceQuestionPdf": "05 QA Arithmetic-1 Q.pdf",
+          "sourceSolutionPdf": "05 QA Arithmetic-1 Sol.pdf"
+        },
+        {
+          "id": "05_qa_arithmetic_1_q9",
+          "questionNumber": 9,
+          "type": "MCQ",
+          "question": "In a certain town, people are either married or unmarried. Similarly, either they work or they\ndon't work. 37% of the total population was married and 76% of the married people were\nworking. Similarly, 54% of the unmarried people were working. If the total number of people\nwho work was 1,24,280, then the total population of the town was:",
+          "options": [
+            "90,000",
+            "2,00,000",
+            "1,80,000",
+            "2,16,000"
+          ],
+          "correctAnswer": "2",
+          "explanation": "2 Assume x be population of the town.\nNumber of people who work\n= 0.37x x 0.76 + 0.63x x 0.54 = 0.6214x\n => 0.6214x = 124280\n => x = 2,00,000",
+          "difficulty": "Medium",
+          "year": null,
+          "slot": null,
+          "section": "QA",
+          "topic": "Basics of percentage",
+          "subtopic": "Basics of percentage",
+          "sourceQuestionPdf": "05 QA Arithmetic-1 Q.pdf",
+          "sourceSolutionPdf": "05 QA Arithmetic-1 Sol.pdf"
+        },
+        {
+          "id": "05_qa_arithmetic_1_q10",
+          "questionNumber": 10,
+          "type": "TITA",
+          "question": "A watermelon is kept under sun for 3 days. Due to which its water content reduces from\n85% to 80%. If 3 kg of water got evaporated, then what was the initial weight (in kg) of the\nwatermelon?",
+          "options": [],
+          "correctAnswer": "12",
+          "explanation": "12 Let the initial weight of watermelon be 100x.\nWeight of solid part = 15% of 100x = 15x\nFinally, 15x 100 20%\n100x 3\n   =  \t  -\n3\nx 25\n =\n Therefore Weight of watermelon = 100x 3\n100 12\n25\n =  =",
+          "difficulty": "Medium",
+          "year": null,
+          "slot": null,
+          "section": "QA",
+          "topic": "Basics of percentage",
+          "subtopic": "Basics of percentage",
+          "sourceQuestionPdf": "05 QA Arithmetic-1 Q.pdf",
+          "sourceSolutionPdf": "05 QA Arithmetic-1 Sol.pdf"
+        },
+        {
+          "id": "05_qa_arithmetic_1_q11",
+          "questionNumber": 11,
+          "type": "MCQ",
+          "question": "Fresh grapes contain 80% water by weight while dried grapes contain 20% water by weight.\nWhat is the weight of dry grapes available from 40 kg of fresh grapes?",
+          "options": [
+            "4 kg",
+            "5.5 kg",
+            "10 kg",
+            "None of these"
+          ],
+          "correctAnswer": "3",
+          "explanation": "3 Fresh grapes contain 20% pulp.\n Therefore 40 kg fresh grapes contain 8 kg pulp. Dry grapes\ncontain 80% pulp.\n Therefore 8 kg pulp will contain 8\n0.8 = 10 kg dry grapes.\n1 3 2 2 3 - 4 2 5 2 6 2 7 1 8 - 9 2 10 12\n11 3 12 4 13 3 14 4 15 4 16 4 17 3 18 1 19 2 20 2",
+          "difficulty": "Medium",
+          "year": null,
+          "slot": null,
+          "section": "QA",
+          "topic": "Basics of percentage",
+          "subtopic": "Basics of percentage",
+          "sourceQuestionPdf": "05 QA Arithmetic-1 Q.pdf",
+          "sourceSolutionPdf": "05 QA Arithmetic-1 Sol.pdf"
+        },
+        {
+          "id": "05_qa_arithmetic_1_q12",
+          "questionNumber": 12,
+          "type": "MCQ",
+          "question": "Two lumps having mixture of gold and silver together weighs 20 kg. One lump contains\n75% gold and 31.25 gm silver per kg. Another lump contains 85% gold and 30 gm silver per\nkg. Total quantity of silver in two lumps is 617.5 gm. If two lumps are melted to form one,\nthen percentage of gold in it will be",
+          "options": [
+            "75%",
+            "87%",
+            "15.6%",
+            "78%"
+          ],
+          "correctAnswer": "4",
+          "explanation": "4 Weight of first lump = x kg\nWeight of second lump = (20 - x) kg\n31.25x + 30(20 - x) = 617.5 => x = 14 kg\nTotal gold = 75% of 14 + 85% of 6 kg = 15.6 kg\nNow percentage of gold = \n15.6 100\n20 = 78%.",
+          "difficulty": "Medium",
+          "year": null,
+          "slot": null,
+          "section": "QA",
+          "topic": "Basics of percentage",
+          "subtopic": "Basics of percentage",
+          "sourceQuestionPdf": "05 QA Arithmetic-1 Q.pdf",
+          "sourceSolutionPdf": "05 QA Arithmetic-1 Sol.pdf"
+        },
+        {
+          "id": "05_qa_arithmetic_1_q13",
+          "questionNumber": 13,
+          "type": "MCQ",
+          "question": "A candidate scores 39% of the maximum marks and fails by 58 marks, while another\ncandidate who scores 55% of the maximum marks, gets 22 marks more than minimum\nrequired marks to pass the examination. Find maximum marks of examination.",
+          "options": [
+            "450",
+            "650",
+            "500",
+            "550"
+          ],
+          "correctAnswer": "3",
+          "explanation": "3 Let total score = x\nPassing marks = 0.39x + 58 = 0.55x - 22\n => 80 = 0.16x\n => x = \n80 100\n16\nHence, maximum marks = 500",
+          "difficulty": "Medium",
+          "year": null,
+          "slot": null,
+          "section": "QA",
+          "topic": "Basics of percentage",
+          "subtopic": "Basics of percentage",
+          "sourceQuestionPdf": "05 QA Arithmetic-1 Q.pdf",
+          "sourceSolutionPdf": "05 QA Arithmetic-1 Sol.pdf"
+        },
+        {
+          "id": "05_qa_arithmetic_1_q14",
+          "questionNumber": 14,
+          "type": "MCQ",
+          "question": "In an examination, the maximum possible score is N while the pass mark is 45% of N. A\ncandidate obtains 36 marks, but falls short of the pass mark by 68%. Which one of the\nfollowing is then correct?",
+          "options": [
+            "201 <= N <= 242.",
+            "N >= 253.",
+            "N <= 200.",
+            "243 <= N <= 252."
+          ],
+          "correctAnswer": "4",
+          "explanation": "4 According to the question,\n68 45\n36 1 N\n100 100\n  \n = -   \n  \n32 45\n36 N\n100 100\n =  \n => N = 250\nHence, 243 N 252 <= <=",
+          "difficulty": "Medium",
+          "year": null,
+          "slot": null,
+          "section": "QA",
+          "topic": "Basics of percentage",
+          "subtopic": "Basics of percentage",
+          "sourceQuestionPdf": "05 QA Arithmetic-1 Q.pdf",
+          "sourceSolutionPdf": "05 QA Arithmetic-1 Sol.pdf"
+        },
+        {
+          "id": "05_qa_arithmetic_1_q15",
+          "questionNumber": 15,
+          "type": "MCQ",
+          "question": "A factory has 900 employees, 25% of whom are men. The factory has to hire 200 additional\nemployees to increases production. What percentage of the additional employees hired\nmust be men in order to raise the percentage of men employees in the factory to 35%?\n(Assume transgender for this situation.)",
+          "options": [
+            "70%",
+            "90%",
+            "75%",
+            "80%"
+          ],
+          "correctAnswer": "4",
+          "explanation": "4 Total number of men employee in company before\nhiring\n =  =\n25\n900 225\n100\nLet x men are hired to raise the percentage of men to\n35%.\n +  \n Therefore  =  \t  +\n225 x 100 35\n900 200\n  +\n =>  =\n225 x 100 35\n1100\n => x = 385 - 225\n => x = 160\nThus, percentage of additional hired men employees\n =  =\n160 100% 80%\n200",
+          "difficulty": "Medium",
+          "year": null,
+          "slot": null,
+          "section": "QA",
+          "topic": "Basics of percentage",
+          "subtopic": "Basics of percentage",
+          "sourceQuestionPdf": "05 QA Arithmetic-1 Q.pdf",
+          "sourceSolutionPdf": "05 QA Arithmetic-1 Sol.pdf"
+        },
+        {
+          "id": "05_qa_arithmetic_1_q16",
+          "questionNumber": 16,
+          "type": "MCQ",
+          "question": "If sides of a square is increased by 30%, then what is the percentage increase in its area?",
+          "options": [
+            "9%",
+            "30%",
+            "60%",
+            "69%"
+          ],
+          "correctAnswer": "4",
+          "explanation": "4 Net percentage change\n= a + b + ab\n100 = 30 + 30 + \t30 30\n100 = 69%",
+          "difficulty": "Medium",
+          "year": null,
+          "slot": null,
+          "section": "QA",
+          "topic": "Basics of percentage",
+          "subtopic": "Basics of percentage",
+          "sourceQuestionPdf": "05 QA Arithmetic-1 Q.pdf",
+          "sourceSolutionPdf": "05 QA Arithmetic-1 Sol.pdf"
+        },
+        {
+          "id": "05_qa_arithmetic_1_q17",
+          "questionNumber": 17,
+          "type": "MCQ",
+          "question": "The price per unit of an article decreases by 4%, and the consumption (in units) decreases\nby 8%. The expenditure would decrease by",
+          "options": [
+            "12%",
+            "12.32%",
+            "11.68%",
+            "4.32%"
+          ],
+          "correctAnswer": "3",
+          "explanation": "3 Expenditure in this case will be 0.96 x 0.92 times the\nearlier expenditure. Using the base of 100, the product\nwill be (96 - 8) x 100 + (-4) x (-8) = 0.8832\nThus, the expenditure will decrease by\n(1 - 0.8832) x 100 = 11.68%.",
+          "difficulty": "Medium",
+          "year": null,
+          "slot": null,
+          "section": "QA",
+          "topic": "Basics of percentage",
+          "subtopic": "Basics of percentage",
+          "sourceQuestionPdf": "05 QA Arithmetic-1 Q.pdf",
+          "sourceSolutionPdf": "05 QA Arithmetic-1 Sol.pdf"
+        },
+        {
+          "id": "05_qa_arithmetic_1_q18",
+          "questionNumber": 18,
+          "type": "MCQ",
+          "question": "During a landscaping operation, the length of a rectangular garden is decreased by 10%\nand its breadth is increased by 10%. The area of the new rectangular garden is:",
+          "options": [
+            "Decreased by 1%",
+            "Decreased by 10%",
+            "Increased by 1%",
+            "Neither increased nor decreased"
+          ],
+          "correctAnswer": "1",
+          "explanation": "1 % change = x + y + xy\n100\n-10x 10\n-10 10 1%\n100\n +\n = + + = -",
+          "difficulty": "Medium",
+          "year": null,
+          "slot": null,
+          "section": "QA",
+          "topic": "Basics of percentage",
+          "subtopic": "Basics of percentage",
+          "sourceQuestionPdf": "05 QA Arithmetic-1 Q.pdf",
+          "sourceSolutionPdf": "05 QA Arithmetic-1 Sol.pdf"
+        },
+        {
+          "id": "05_qa_arithmetic_1_q19",
+          "questionNumber": 19,
+          "type": "MCQ",
+          "question": "If the price of a bicycle is increased by 9.09%, then by 8.33% and then by 7.7%, the price\nbecomes Rs. 1,274. What is the original price of the bicycle?",
+          "options": [
+            "Rs. 999",
+            "Rs. 1,001",
+            "Rs. 1,100",
+            "Rs. 1,150"
+          ],
+          "correctAnswer": "2",
+          "explanation": "2 Let the original price of the bicycle be Rs. x. Then,\n9.09 8.33 7.7\nx 1 1 1 1274\n100 100 100\n     \n\t +  +  + =      \n     \n1 1 1\nx 1 1 1 1274\n11 12 13\n     \n =>  +  +  + =      \n     \n12 13 14\nx 1274\n11 12 13\n =>    =\n => x = 91 x 11 = Rs. 1,001.",
+          "difficulty": "Medium",
+          "year": null,
+          "slot": null,
+          "section": "QA",
+          "topic": "Basics of percentage",
+          "subtopic": "Basics of percentage",
+          "sourceQuestionPdf": "05 QA Arithmetic-1 Q.pdf",
+          "sourceSolutionPdf": "05 QA Arithmetic-1 Sol.pdf"
+        },
+        {
+          "id": "05_qa_arithmetic_1_q20",
+          "questionNumber": 20,
+          "type": "MCQ",
+          "question": "If the price of Sugar increases by 20%, and Salman intends to spend only an additional 5%\non Sugar, then find out the percentage decrease in his sugar consumption.",
+          "options": [
+            "5.25",
+            "12.5",
+            "11.75",
+            "10.25"
+          ],
+          "correctAnswer": "2",
+          "explanation": "2 As Expenditure (E) = Price (P) x Consumption (C)\nAs price increases by 20%, therefore New price\n =  6P\nP 5\nExpenditure also increases by 5%\n Therefore New expenditure =  21\nE E\n20\n Therefore E = P x C\n =  \n21 6\nE P f C\n20 5\n(where f is the factor by which the consumption has\nreduced)\n  = \n21 6\nP C P fC\n20 5\n => = 7\nf 8\n Therefore % Reduction in sugar consumption\n \n = - \t \t \n7\n1 100\n8\n =  =\n1 100 12.5%\n8",
+          "difficulty": "Medium",
+          "year": null,
+          "slot": null,
+          "section": "QA",
+          "topic": "Basics of percentage",
+          "subtopic": "Basics of percentage",
+          "sourceQuestionPdf": "05 QA Arithmetic-1 Q.pdf",
+          "sourceSolutionPdf": "05 QA Arithmetic-1 Sol.pdf"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "05_qa_arithmetic_1_q1",
+      "questionNumber": 1,
+      "type": "MCQ",
+      "question": "In an election between two candidates, the candidate who gets 30% of the votes polled is\ndefeated by 15,000 votes. The number of votes polled in favour of the winning candidate is",
+      "options": [
+        "11,250",
+        "15,000",
+        "26,250",
+        "37,500"
+      ],
+      "correctAnswer": "3",
+      "explanation": "3 Let total number of votes be x.\nThen, 30% of x + 15000 = 70% of x\n => 15000 = 0.4x\n => x = 37500\nThe required number = 70% of 37500\n= \n70 37500\n100 = 26250",
+      "difficulty": "Medium",
+      "year": null,
+      "slot": null,
+      "section": "QA",
+      "topic": "Basics of percentage",
+      "subtopic": "Basics of percentage",
+      "sourceQuestionPdf": "05 QA Arithmetic-1 Q.pdf",
+      "sourceSolutionPdf": "05 QA Arithmetic-1 Sol.pdf"
+    },
+    {
+      "id": "05_qa_arithmetic_1_q2",
+      "questionNumber": 2,
+      "type": "MCQ",
+      "question": "Out of the shirts produced in a factory, 15% are defective, while 20% of the rest are sold in\nthe domestic market. If the remaining 8840 shirts are left for export, then the number of\nshirts produced in the factory is",
+      "options": [
+        "13600",
+        "13000",
+        "13400",
+        "14000"
+      ],
+      "correctAnswer": "2",
+      "explanation": "2 Let total shirts produced = 100x\nDefective = 15x\nRest = 85x\nShirts sold in domestic market = 17x\nRemaining shirts = 68x\nSo, 68x =  8840\n => 100x =  13000.",
+      "difficulty": "Medium",
+      "year": null,
+      "slot": null,
+      "section": "QA",
+      "topic": "Basics of percentage",
+      "subtopic": "Basics of percentage",
+      "sourceQuestionPdf": "05 QA Arithmetic-1 Q.pdf",
+      "sourceSolutionPdf": "05 QA Arithmetic-1 Sol.pdf"
+    },
+    {
+      "id": "05_qa_arithmetic_1_q3",
+      "questionNumber": 3,
+      "type": "TITA",
+      "question": "A college has raised 75% of the amount it needs for a new building by receiving an average\ndonation of Rs. 600 from people already solicited. People already solicited represents 60%\nof people, the college will ask for donations. If college is to raise exactly the amount needed\nfor the new building, what should be the average donation (in Rs.) from remaining people to\nbe solicited?",
+      "options": [],
+      "correctAnswer": null,
+      "explanation": "Let x be the total number of people, college will ask for\ndonations.\n Therefore  People already solicited = 0.6x\nAmount raised from the people solicited\n= 600 x 0.6x = 360x\nNow 360x constitutes 75% of the amount.\nHence, remaining 25% constitutes 120x\n Therefore Average donation from remaining people\n= =\n120x 300\n0.4x",
+      "difficulty": "Medium",
+      "year": null,
+      "slot": null,
+      "section": "QA",
+      "topic": "Basics of percentage",
+      "subtopic": "Basics of percentage",
+      "sourceQuestionPdf": "05 QA Arithmetic-1 Q.pdf",
+      "sourceSolutionPdf": "05 QA Arithmetic-1 Sol.pdf"
+    },
+    {
+      "id": "05_qa_arithmetic_1_q4",
+      "questionNumber": 4,
+      "type": "MCQ",
+      "question": "The income of Amala is 20% more than that of Bimala and 20% less than that of Kamala. If\nKamala's income goes down by 4% and Bimala's goes up by 10%, then the percentage by\nwhich Kamala's income would exceed Bimala's is nearest to",
+      "options": [
+        "29",
+        "31",
+        "28",
+        "32"
+      ],
+      "correctAnswer": "2",
+      "explanation": "2 Let income of Bimala = 100\nThen, Amala’s income = 100 x 1.2 = 120.\nKamala’s income = 120 100 150.\n80\n =\nKamala income down by 4% = 144.\nBimala’s income goes up by 10% = 110.\n Therefore Percentage by which Kamala’s income would\nexceed Bimala’s income\n= 144 110 100 30.91%\n110\n -  =  31%",
+      "difficulty": "Medium",
+      "year": null,
+      "slot": null,
+      "section": "QA",
+      "topic": "Basics of percentage",
+      "subtopic": "Basics of percentage",
+      "sourceQuestionPdf": "05 QA Arithmetic-1 Q.pdf",
+      "sourceSolutionPdf": "05 QA Arithmetic-1 Sol.pdf"
+    },
+    {
+      "id": "05_qa_arithmetic_1_q5",
+      "questionNumber": 5,
+      "type": "MCQ",
+      "question": "A vendor sells 30% of his fruits and throws away 40% of the rest of the fruits. Next day he\nsells 50% of the remainder fruits and throws away the rest. What percent of the fruits does\nthe vendor throw?",
+      "options": [
+        "51%",
+        "49%",
+        "63%",
+        "72%"
+      ],
+      "correctAnswer": "2",
+      "explanation": "2 Suppose, he has 100 fruits. He sells 30 fruits and\nthrows away 40% of 70 i.e. 28 fruits. Now he was\nleft with 42 fruits. Next day, he sells 50% of 42 = 21\nfruits. So, he throws 21 + 28 = 49 fruits.\nHence, the required percentage = 49.",
+      "difficulty": "Medium",
+      "year": null,
+      "slot": null,
+      "section": "QA",
+      "topic": "Basics of percentage",
+      "subtopic": "Basics of percentage",
+      "sourceQuestionPdf": "05 QA Arithmetic-1 Q.pdf",
+      "sourceSolutionPdf": "05 QA Arithmetic-1 Sol.pdf"
+    },
+    {
+      "id": "05_qa_arithmetic_1_q6",
+      "questionNumber": 6,
+      "type": "MCQ",
+      "question": "In a tournament, a team has played 40 matches so far and won 30% of them. If they win\n60% of the remaining matches, their overall win percentage will be 50%. Suppose they win\n90% of the remaining matches, then the total number of matches won by the team in the\ntournament will be",
+      "options": [
+        "86",
+        "84",
+        "80",
+        "78"
+      ],
+      "correctAnswer": "2",
+      "explanation": "2 Let the remaining number of matches be x\nUsing alligation:\nOver Upcoming\n30% 60%\n50%\n10 20\nGiven 40 : x = 10 : 20 => x = 80.\nOut of 80 they win 90% => 0.9 x 80 = 72\nOut of 40 they won 30% => 0.3 x 40 = 12\nHence, total number of matches won = 84.",
+      "difficulty": "Medium",
+      "year": null,
+      "slot": null,
+      "section": "QA",
+      "topic": "Basics of percentage",
+      "subtopic": "Basics of percentage",
+      "sourceQuestionPdf": "05 QA Arithmetic-1 Q.pdf",
+      "sourceSolutionPdf": "05 QA Arithmetic-1 Sol.pdf"
+    },
+    {
+      "id": "05_qa_arithmetic_1_q7",
+      "questionNumber": 7,
+      "type": "TITA",
+      "question": "Gun powder contains 75% nitre, 10% of sulphur and the rest is charcoal by weight. If",
+      "options": [],
+      "correctAnswer": "1",
+      "explanation": "1 The percentage of charcoal\n= [100 - (75 + 10)] % = 15 %\nQuantity of charcoal = 15 % of 24 kg\n= \n15 24\n100 = 3.6 kg.",
+      "difficulty": "Medium",
+      "year": null,
+      "slot": null,
+      "section": "QA",
+      "topic": "Basics of percentage",
+      "subtopic": "Basics of percentage",
+      "sourceQuestionPdf": "05 QA Arithmetic-1 Q.pdf",
+      "sourceSolutionPdf": "05 QA Arithmetic-1 Sol.pdf"
+    },
+    {
+      "id": "05_qa_arithmetic_1_q8",
+      "questionNumber": 8,
+      "type": "TITA",
+      "question": "A and B are two friends, each having at least a rupee. If A gives B a sum of Rs. 20, then A\nhas 40% of the amount with B. If B gives A, a sum of Rs. 40, then B will have 40% of the\namount with A. What is the amount (in Rs.) with A initially?",
+      "options": [],
+      "correctAnswer": null,
+      "explanation": "We have (A - 20 ) = 0.4(B + 20), i.e. A - 0.4B = 28\nAnd (B - 40) = 0.4(A + 40), i.e. B - 0.4A = 56\nSolving, we get A = Rs. 60",
+      "difficulty": "Medium",
+      "year": null,
+      "slot": null,
+      "section": "QA",
+      "topic": "Basics of percentage",
+      "subtopic": "Basics of percentage",
+      "sourceQuestionPdf": "05 QA Arithmetic-1 Q.pdf",
+      "sourceSolutionPdf": "05 QA Arithmetic-1 Sol.pdf"
+    },
+    {
+      "id": "05_qa_arithmetic_1_q9",
+      "questionNumber": 9,
+      "type": "MCQ",
+      "question": "In a certain town, people are either married or unmarried. Similarly, either they work or they\ndon't work. 37% of the total population was married and 76% of the married people were\nworking. Similarly, 54% of the unmarried people were working. If the total number of people\nwho work was 1,24,280, then the total population of the town was:",
+      "options": [
+        "90,000",
+        "2,00,000",
+        "1,80,000",
+        "2,16,000"
+      ],
+      "correctAnswer": "2",
+      "explanation": "2 Assume x be population of the town.\nNumber of people who work\n= 0.37x x 0.76 + 0.63x x 0.54 = 0.6214x\n => 0.6214x = 124280\n => x = 2,00,000",
+      "difficulty": "Medium",
+      "year": null,
+      "slot": null,
+      "section": "QA",
+      "topic": "Basics of percentage",
+      "subtopic": "Basics of percentage",
+      "sourceQuestionPdf": "05 QA Arithmetic-1 Q.pdf",
+      "sourceSolutionPdf": "05 QA Arithmetic-1 Sol.pdf"
+    },
+    {
+      "id": "05_qa_arithmetic_1_q10",
+      "questionNumber": 10,
+      "type": "TITA",
+      "question": "A watermelon is kept under sun for 3 days. Due to which its water content reduces from\n85% to 80%. If 3 kg of water got evaporated, then what was the initial weight (in kg) of the\nwatermelon?",
+      "options": [],
+      "correctAnswer": "12",
+      "explanation": "12 Let the initial weight of watermelon be 100x.\nWeight of solid part = 15% of 100x = 15x\nFinally, 15x 100 20%\n100x 3\n   =  \t  -\n3\nx 25\n =\n Therefore Weight of watermelon = 100x 3\n100 12\n25\n =  =",
+      "difficulty": "Medium",
+      "year": null,
+      "slot": null,
+      "section": "QA",
+      "topic": "Basics of percentage",
+      "subtopic": "Basics of percentage",
+      "sourceQuestionPdf": "05 QA Arithmetic-1 Q.pdf",
+      "sourceSolutionPdf": "05 QA Arithmetic-1 Sol.pdf"
+    },
+    {
+      "id": "05_qa_arithmetic_1_q11",
+      "questionNumber": 11,
+      "type": "MCQ",
+      "question": "Fresh grapes contain 80% water by weight while dried grapes contain 20% water by weight.\nWhat is the weight of dry grapes available from 40 kg of fresh grapes?",
+      "options": [
+        "4 kg",
+        "5.5 kg",
+        "10 kg",
+        "None of these"
+      ],
+      "correctAnswer": "3",
+      "explanation": "3 Fresh grapes contain 20% pulp.\n Therefore 40 kg fresh grapes contain 8 kg pulp. Dry grapes\ncontain 80% pulp.\n Therefore 8 kg pulp will contain 8\n0.8 = 10 kg dry grapes.\n1 3 2 2 3 - 4 2 5 2 6 2 7 1 8 - 9 2 10 12\n11 3 12 4 13 3 14 4 15 4 16 4 17 3 18 1 19 2 20 2",
+      "difficulty": "Medium",
+      "year": null,
+      "slot": null,
+      "section": "QA",
+      "topic": "Basics of percentage",
+      "subtopic": "Basics of percentage",
+      "sourceQuestionPdf": "05 QA Arithmetic-1 Q.pdf",
+      "sourceSolutionPdf": "05 QA Arithmetic-1 Sol.pdf"
+    },
+    {
+      "id": "05_qa_arithmetic_1_q12",
+      "questionNumber": 12,
+      "type": "MCQ",
+      "question": "Two lumps having mixture of gold and silver together weighs 20 kg. One lump contains\n75% gold and 31.25 gm silver per kg. Another lump contains 85% gold and 30 gm silver per\nkg. Total quantity of silver in two lumps is 617.5 gm. If two lumps are melted to form one,\nthen percentage of gold in it will be",
+      "options": [
+        "75%",
+        "87%",
+        "15.6%",
+        "78%"
+      ],
+      "correctAnswer": "4",
+      "explanation": "4 Weight of first lump = x kg\nWeight of second lump = (20 - x) kg\n31.25x + 30(20 - x) = 617.5 => x = 14 kg\nTotal gold = 75% of 14 + 85% of 6 kg = 15.6 kg\nNow percentage of gold = \n15.6 100\n20 = 78%.",
+      "difficulty": "Medium",
+      "year": null,
+      "slot": null,
+      "section": "QA",
+      "topic": "Basics of percentage",
+      "subtopic": "Basics of percentage",
+      "sourceQuestionPdf": "05 QA Arithmetic-1 Q.pdf",
+      "sourceSolutionPdf": "05 QA Arithmetic-1 Sol.pdf"
+    },
+    {
+      "id": "05_qa_arithmetic_1_q13",
+      "questionNumber": 13,
+      "type": "MCQ",
+      "question": "A candidate scores 39% of the maximum marks and fails by 58 marks, while another\ncandidate who scores 55% of the maximum marks, gets 22 marks more than minimum\nrequired marks to pass the examination. Find maximum marks of examination.",
+      "options": [
+        "450",
+        "650",
+        "500",
+        "550"
+      ],
+      "correctAnswer": "3",
+      "explanation": "3 Let total score = x\nPassing marks = 0.39x + 58 = 0.55x - 22\n => 80 = 0.16x\n => x = \n80 100\n16\nHence, maximum marks = 500",
+      "difficulty": "Medium",
+      "year": null,
+      "slot": null,
+      "section": "QA",
+      "topic": "Basics of percentage",
+      "subtopic": "Basics of percentage",
+      "sourceQuestionPdf": "05 QA Arithmetic-1 Q.pdf",
+      "sourceSolutionPdf": "05 QA Arithmetic-1 Sol.pdf"
+    },
+    {
+      "id": "05_qa_arithmetic_1_q14",
+      "questionNumber": 14,
+      "type": "MCQ",
+      "question": "In an examination, the maximum possible score is N while the pass mark is 45% of N. A\ncandidate obtains 36 marks, but falls short of the pass mark by 68%. Which one of the\nfollowing is then correct?",
+      "options": [
+        "201 <= N <= 242.",
+        "N >= 253.",
+        "N <= 200.",
+        "243 <= N <= 252."
+      ],
+      "correctAnswer": "4",
+      "explanation": "4 According to the question,\n68 45\n36 1 N\n100 100\n  \n = -   \n  \n32 45\n36 N\n100 100\n =  \n => N = 250\nHence, 243 N 252 <= <=",
+      "difficulty": "Medium",
+      "year": null,
+      "slot": null,
+      "section": "QA",
+      "topic": "Basics of percentage",
+      "subtopic": "Basics of percentage",
+      "sourceQuestionPdf": "05 QA Arithmetic-1 Q.pdf",
+      "sourceSolutionPdf": "05 QA Arithmetic-1 Sol.pdf"
+    },
+    {
+      "id": "05_qa_arithmetic_1_q15",
+      "questionNumber": 15,
+      "type": "MCQ",
+      "question": "A factory has 900 employees, 25% of whom are men. The factory has to hire 200 additional\nemployees to increases production. What percentage of the additional employees hired\nmust be men in order to raise the percentage of men employees in the factory to 35%?\n(Assume transgender for this situation.)",
+      "options": [
+        "70%",
+        "90%",
+        "75%",
+        "80%"
+      ],
+      "correctAnswer": "4",
+      "explanation": "4 Total number of men employee in company before\nhiring\n =  =\n25\n900 225\n100\nLet x men are hired to raise the percentage of men to\n35%.\n +  \n Therefore  =  \t  +\n225 x 100 35\n900 200\n  +\n =>  =\n225 x 100 35\n1100\n => x = 385 - 225\n => x = 160\nThus, percentage of additional hired men employees\n =  =\n160 100% 80%\n200",
+      "difficulty": "Medium",
+      "year": null,
+      "slot": null,
+      "section": "QA",
+      "topic": "Basics of percentage",
+      "subtopic": "Basics of percentage",
+      "sourceQuestionPdf": "05 QA Arithmetic-1 Q.pdf",
+      "sourceSolutionPdf": "05 QA Arithmetic-1 Sol.pdf"
+    },
+    {
+      "id": "05_qa_arithmetic_1_q16",
+      "questionNumber": 16,
+      "type": "MCQ",
+      "question": "If sides of a square is increased by 30%, then what is the percentage increase in its area?",
+      "options": [
+        "9%",
+        "30%",
+        "60%",
+        "69%"
+      ],
+      "correctAnswer": "4",
+      "explanation": "4 Net percentage change\n= a + b + ab\n100 = 30 + 30 + \t30 30\n100 = 69%",
+      "difficulty": "Medium",
+      "year": null,
+      "slot": null,
+      "section": "QA",
+      "topic": "Basics of percentage",
+      "subtopic": "Basics of percentage",
+      "sourceQuestionPdf": "05 QA Arithmetic-1 Q.pdf",
+      "sourceSolutionPdf": "05 QA Arithmetic-1 Sol.pdf"
+    },
+    {
+      "id": "05_qa_arithmetic_1_q17",
+      "questionNumber": 17,
+      "type": "MCQ",
+      "question": "The price per unit of an article decreases by 4%, and the consumption (in units) decreases\nby 8%. The expenditure would decrease by",
+      "options": [
+        "12%",
+        "12.32%",
+        "11.68%",
+        "4.32%"
+      ],
+      "correctAnswer": "3",
+      "explanation": "3 Expenditure in this case will be 0.96 x 0.92 times the\nearlier expenditure. Using the base of 100, the product\nwill be (96 - 8) x 100 + (-4) x (-8) = 0.8832\nThus, the expenditure will decrease by\n(1 - 0.8832) x 100 = 11.68%.",
+      "difficulty": "Medium",
+      "year": null,
+      "slot": null,
+      "section": "QA",
+      "topic": "Basics of percentage",
+      "subtopic": "Basics of percentage",
+      "sourceQuestionPdf": "05 QA Arithmetic-1 Q.pdf",
+      "sourceSolutionPdf": "05 QA Arithmetic-1 Sol.pdf"
+    },
+    {
+      "id": "05_qa_arithmetic_1_q18",
+      "questionNumber": 18,
+      "type": "MCQ",
+      "question": "During a landscaping operation, the length of a rectangular garden is decreased by 10%\nand its breadth is increased by 10%. The area of the new rectangular garden is:",
+      "options": [
+        "Decreased by 1%",
+        "Decreased by 10%",
+        "Increased by 1%",
+        "Neither increased nor decreased"
+      ],
+      "correctAnswer": "1",
+      "explanation": "1 % change = x + y + xy\n100\n-10x 10\n-10 10 1%\n100\n +\n = + + = -",
+      "difficulty": "Medium",
+      "year": null,
+      "slot": null,
+      "section": "QA",
+      "topic": "Basics of percentage",
+      "subtopic": "Basics of percentage",
+      "sourceQuestionPdf": "05 QA Arithmetic-1 Q.pdf",
+      "sourceSolutionPdf": "05 QA Arithmetic-1 Sol.pdf"
+    },
+    {
+      "id": "05_qa_arithmetic_1_q19",
+      "questionNumber": 19,
+      "type": "MCQ",
+      "question": "If the price of a bicycle is increased by 9.09%, then by 8.33% and then by 7.7%, the price\nbecomes Rs. 1,274. What is the original price of the bicycle?",
+      "options": [
+        "Rs. 999",
+        "Rs. 1,001",
+        "Rs. 1,100",
+        "Rs. 1,150"
+      ],
+      "correctAnswer": "2",
+      "explanation": "2 Let the original price of the bicycle be Rs. x. Then,\n9.09 8.33 7.7\nx 1 1 1 1274\n100 100 100\n     \n\t +  +  + =      \n     \n1 1 1\nx 1 1 1 1274\n11 12 13\n     \n =>  +  +  + =      \n     \n12 13 14\nx 1274\n11 12 13\n =>    =\n => x = 91 x 11 = Rs. 1,001.",
+      "difficulty": "Medium",
+      "year": null,
+      "slot": null,
+      "section": "QA",
+      "topic": "Basics of percentage",
+      "subtopic": "Basics of percentage",
+      "sourceQuestionPdf": "05 QA Arithmetic-1 Q.pdf",
+      "sourceSolutionPdf": "05 QA Arithmetic-1 Sol.pdf"
+    },
+    {
+      "id": "05_qa_arithmetic_1_q20",
+      "questionNumber": 20,
+      "type": "MCQ",
+      "question": "If the price of Sugar increases by 20%, and Salman intends to spend only an additional 5%\non Sugar, then find out the percentage decrease in his sugar consumption.",
+      "options": [
+        "5.25",
+        "12.5",
+        "11.75",
+        "10.25"
+      ],
+      "correctAnswer": "2",
+      "explanation": "2 As Expenditure (E) = Price (P) x Consumption (C)\nAs price increases by 20%, therefore New price\n =  6P\nP 5\nExpenditure also increases by 5%\n Therefore New expenditure =  21\nE E\n20\n Therefore E = P x C\n =  \n21 6\nE P f C\n20 5\n(where f is the factor by which the consumption has\nreduced)\n  = \n21 6\nP C P fC\n20 5\n => = 7\nf 8\n Therefore % Reduction in sugar consumption\n \n = - \t \t \n7\n1 100\n8\n =  =\n1 100 12.5%\n8",
+      "difficulty": "Medium",
+      "year": null,
+      "slot": null,
+      "section": "QA",
+      "topic": "Basics of percentage",
+      "subtopic": "Basics of percentage",
+      "sourceQuestionPdf": "05 QA Arithmetic-1 Q.pdf",
+      "sourceSolutionPdf": "05 QA Arithmetic-1 Sol.pdf"
+    }
+  ]
+}
+Generated 24 tests into D:\acetheclock\data\generated\tests.json

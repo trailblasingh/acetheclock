@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useState } from "react";
 
@@ -17,14 +17,14 @@ export default function MockSection() {
     fetch("/api/tests", { cache: "no-store" })
       .then((res) => res.json())
       .then((data) => {
-        console.log("FRONTEND TESTS:", data);
+        console.log("ALL TESTS:", data?.tests);
         setTests((data?.tests as Test[]) || []);
       })
       .catch((error) => console.error(error));
   }, []);
 
-  const fullMocks = (tests || []).filter((t) =>
-    t.sections?.length === 3 || t.title?.toLowerCase().includes("cat")
+  const fullMocks = (tests || []).filter((t: any) =>
+    t.sections?.length >= 3
   );
 
   console.log("ALL TESTS:", tests);

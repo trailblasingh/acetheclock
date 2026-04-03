@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 export const dynamic = "force-dynamic";
 
 export async function GET() {
-  console.log("API TESTS:", (tests as any)?.length);
+  console.log("TEST COUNT:", (tests as any)?.length);
 
   if (!tests || (Array.isArray(tests) && tests.length === 0)) {
     return NextResponse.json({ tests: [] });
@@ -14,3 +14,4 @@ export async function GET() {
 
   return NextResponse.json({ tests: list });
 }
+

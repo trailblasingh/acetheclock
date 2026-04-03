@@ -1,4 +1,4 @@
-﻿import fs from "node:fs";
+import fs from "node:fs";
 import path from "node:path";
 
 import { PDFParse } from "pdf-parse";
@@ -237,7 +237,7 @@ function parseSolutions(solutionText, questions) {
     const question = questionMap.get(questionNumber);
     const rawBlock = cleanupBlock(chunks[index + 1] ?? "");
 
-    let answer = findExplicitAnswer(rawBlock);
+        let answer = findExplicitAnswer(rawBlock);
 
     if (!answer && question && question.type === "MCQ") {
       const mcqLead = rawBlock.match(/^([A-D]|\d+)\b/i);
@@ -254,8 +254,12 @@ function parseSolutions(solutionText, questions) {
       }
     }
 
-    if (!answer) {
-      answer = extractAnswer(rawBlock);
+    if (answer && !isValidAnswer(String(answer), rawBlock)) {
+      answer = null;
+    }
+
+    if (answer && !isValidAnswer(String(answer), rawBlock)) {
+      answer = null;
     }
 
     const explanation = rawBlock.trim() || "Explanation not parsed.";
@@ -301,20 +305,15 @@ function findExplicitAnswer(text) {
   return null;
 }
 
-function isValidAnswer(val) {
-  return /^[0-9]+(\.[0-9]+)?$/.test(val);
-}
+function isValidAnswer(val, originalText) {
+  if (!/^[0-9]+(\.[0-9]+)?$/.test(val)) return false;
 
-function extractAnswer(text) {
-  const numbers = [];
-  const regex = /(?<![A-Za-z%])(-?\d+(?:\.\d+)?)(?![A-Za-z%])/g;
-  let match;
-  while ((match = regex.exec(text)) !== null) {
-    numbers.push(match[1]);
-  }
+  const index = originalText.indexOf(val);
+  const nextChar = originalText[index + val.length];
 
-  const valid = numbers.filter(isValidAnswer);
-  return valid.length ? valid[valid.length - 1] : null;
+  if (nextChar && /[a-zA-Z]/.test(nextChar)) return false;
+
+  return true;
 }
 
 function inferMeta(baseName, topic, questionText, sectionBlocks) {
@@ -409,3 +408,12 @@ function slugify(value) {
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
 }
+
+
+
+
+
+
+
+
+
