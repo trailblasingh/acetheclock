@@ -4,14 +4,15 @@ import { NextResponse } from "next/server";
 export const dynamic = "force-dynamic";
 
 export async function GET() {
-  console.log("TEST COUNT:", (tests as any)?.length);
+  const testList = Array.isArray(tests) ? tests : [];
+  
+  console.log("TEST COUNT:", testList.length);
+  console.log("FIRST TEST:", JSON.stringify(testList[0], null, 2));
 
-  if (!tests || (Array.isArray(tests) && tests.length === 0)) {
-    return NextResponse.json({ tests: [] });
+  if (testList.length === 0) {
+    console.error("Ingestion failed: no tests. Fix ingestion pipeline first.");
+    return NextResponse.json({ error: "Ingestion failed" }, { status: 500 });
   }
 
-  const list = Array.isArray(tests) ? (tests as any[]) : [];
-
-  return NextResponse.json({ tests: list });
+  return NextResponse.json({ tests: testList });
 }
-

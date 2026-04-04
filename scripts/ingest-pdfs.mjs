@@ -236,36 +236,48 @@ function parseSolutions(solutionText, questions) {
     const questionNumber = Number(chunks[index]);
     const question = questionMap.get(questionNumber);
     const rawBlock = cleanupBlock(chunks[index + 1] ?? "");
-
-        let answer = findExplicitAnswer(rawBlock);
-
-    if (!answer && question && question.type === "MCQ") {
-      const mcqLead = rawBlock.match(/^([A-D]|\d+)\b/i);
-      if (mcqLead) {
-        const token = mcqLead[1].replace(/\.$/, "");
-        answer = /^[a-d]$/i.test(token) ? String(token.toUpperCase().charCodeAt(0) - 64) : token;
-      }
-    }
-
-    if (!answer) {
-      const keyAnswer = answerKey.get(questionNumber);
-      if (keyAnswer) {
-        answer = keyAnswer;
-      }
-    }
-
-    if (answer && !isValidAnswer(String(answer), rawBlock)) {
-      answer = null;
-    }
-
-    if (answer && !isValidAnswer(String(answer), rawBlock)) {
-      answer = null;
-    }
-
     const explanation = rawBlock.trim() || "Explanation not parsed.";
 
+    let finalAnswer = null;
+
+    if (question && question.type === "MCQ") {
+      let indexStr = answerKey.get(questionNumber) || findExplicitAnswer(rawBlock);
+      if (!indexStr) {
+        const mcqLead = rawBlock.match(/^([A-D]|\d+)\b/i);
+        if (mcqLead) {
+          indexStr = mcqLead[1].replace(/\.$/, "");
+        }
+      }
+
+      if (indexStr) {
+        let idx = parseInt(indexStr);
+        if (isNaN(idx) && /^[a-d]$/i.test(indexStr)) {
+          idx = indexStr.toUpperCase().charCodeAt(0) - 64;
+        }
+        if (!isNaN(idx) && idx >= 1 && idx <= question.options.length) {
+          finalAnswer = question.options[idx - 1];
+        }
+      }
+    } else if (question && question.type === "TITA") {
+      let answerStr = answerKey.get(questionNumber) || findExplicitAnswer(rawBlock);
+      
+      if (answerStr && isValidAnswer(String(answerStr), rawBlock)) {
+        finalAnswer = String(answerStr);
+      } else {
+        const numbers = rawBlock.match(/\b\d+(\.\d+)?\b/g);
+        if (numbers) {
+          for (let i = numbers.length - 1; i >= 0; i--) {
+            if (isValidAnswer(numbers[i], rawBlock)) {
+              finalAnswer = numbers[i];
+              break;
+            }
+          }
+        }
+      }
+    }
+
     solutionMap.set(questionNumber, {
-      correctAnswer: answer ?? null,
+      correctAnswer: finalAnswer ?? null,
       explanation
     });
   }
@@ -305,11 +317,11 @@ function findExplicitAnswer(text) {
   return null;
 }
 
-function isValidAnswer(val, originalText) {
+function isValidAnswer(val, text) {
   if (!/^[0-9]+(\.[0-9]+)?$/.test(val)) return false;
 
-  const index = originalText.indexOf(val);
-  const nextChar = originalText[index + val.length];
+  const index = text.indexOf(val);
+  const nextChar = text[index + val.length];
 
   if (nextChar && /[a-zA-Z]/.test(nextChar)) return false;
 

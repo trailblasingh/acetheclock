@@ -23,9 +23,7 @@ export default function MockSection() {
       .catch((error) => console.error(error));
   }, []);
 
-  const fullMocks = (tests || []).filter((t: any) =>
-    t.sections?.length >= 3
-  );
+  const fullMocks = (tests || []).filter((t: any) => t.type === "FULL_MOCK");
 
   console.log("ALL TESTS:", tests);
   console.log("VISIBLE MOCKS:", fullMocks);
