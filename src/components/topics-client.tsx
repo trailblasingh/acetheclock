@@ -25,6 +25,10 @@ function getPremiumState() {
 export function TopicsClient({ topics, tests }: { topics: TopicCard[]; tests: TestRecord[] }) {
   const [isPremium] = useState(getPremiumState);
 
+  if (!tests || tests.length === 0 || !topics || topics.length === 0) {
+    return <div>No topics available</div>;
+  }
+
   return (
     <div className="space-y-8">
       <section className="rounded-[32px] border border-white/10 bg-slate-900/80 p-8 shadow-2xl shadow-indigo-950/30 backdrop-blur not-dark:border-slate-200 not-dark:bg-white">
@@ -36,8 +40,8 @@ export function TopicsClient({ topics, tests }: { topics: TopicCard[]; tests: Te
       </section>
 
       <div className="grid gap-5 xl:grid-cols-2">
-        {topics.map((topic: any) => {
-          const topicTests = tests.filter((test) => test.topicSlug === topic.slug);
+        {(topics || []).map((topic: any) => {
+          const topicTests = (tests || []).filter((test) => test.topicSlug === topic.slug);
           const isLocked = !topic.isFree && !isPremium;
 
           return (
@@ -67,25 +71,33 @@ export function TopicsClient({ topics, tests }: { topics: TopicCard[]; tests: Te
               </div>
 
               <div className="mt-6 space-y-3">
-                {topicTests.map((test: any) => (
-                  <div
-                    key={test.id}
-                    className="flex flex-col gap-4 rounded-[28px] border border-white/10 bg-slate-950/50 p-4 not-dark:border-slate-200 not-dark:bg-slate-50 md:flex-row md:items-center md:justify-between"
-                  >
-                    <div>
-                      <h3 className="font-semibold text-white not-dark:text-slate-950">{test.name}</h3>
-                      <p className="text-sm text-slate-400">
-                        {test.questions.length} questions and {test.durationMinutes} minutes
-                      </p>
-                    </div>
-                    <Link
-                      href={isLocked ? "/payment" : `/test/${test.id}`}
-                      className="rounded-full bg-indigo-500 px-5 py-3 text-center font-medium text-white transition hover:bg-indigo-400"
+                {(topicTests || []).map((test: any) => {
+                  const sections = test?.sections || [];
+                  const testQuestionsCount = sections.reduce((acc: number, section: any) => {
+                    const questions = section?.questions || [];
+                    return acc + (questions || []).length;
+                  }, 0);
+
+                  return (
+                    <div
+                      key={test.id}
+                      className="flex flex-col gap-4 rounded-[28px] border border-white/10 bg-slate-950/50 p-4 not-dark:border-slate-200 not-dark:bg-slate-50 md:flex-row md:items-center md:justify-between"
                     >
-                      {isLocked ? "Go to payment" : "Start test"}
-                    </Link>
-                  </div>
-                ))}
+                      <div>
+                        <h3 className="font-semibold text-white not-dark:text-slate-950">{test.name}</h3>
+                        <p className="text-sm text-slate-400">
+                          {testQuestionsCount} questions and {test.durationMinutes} minutes
+                        </p>
+                      </div>
+                      <Link
+                        href={isLocked ? "/payment" : `/test/${test.id}`}
+                        className="rounded-full bg-indigo-500 px-5 py-3 text-center font-medium text-white transition hover:bg-indigo-400"
+                      >
+                        {isLocked ? "Go to payment" : "Start test"}
+                      </Link>
+                    </div>
+                  );
+                })}
               </div>
             </section>
           );

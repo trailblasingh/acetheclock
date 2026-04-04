@@ -15,9 +15,11 @@ function enrichTest(record: TestRecord): TestRecord {
   const title = record.title ?? record.name ?? record.id;
   const isFree = record.isFree ?? record.id === "cat_2025_slot_1";
   const type = record.type;
-  const enrichedSections = (record.sections?.length ? record.sections : defaultSections).map(sec => ({
+  
+  const sections = record?.sections || defaultSections;
+  const enrichedSections = (sections || []).map(sec => ({
     ...sec,
-    questions: (sec.questions || []).map((q: any) => ({
+    questions: (sec?.questions || []).map((q: any) => ({
       section: q.section ?? sec.name,
       difficulty: q.difficulty ?? "Medium",
       topic: q.topic ?? record.topic,
@@ -90,9 +92,14 @@ export function getTestCatalog(): TestRecord[] {
     return getFallbackCatalog();
   }
 
-  const parsed = JSON.parse(raw) as TestRecord[];
-  const catalog = (parsed.length > 0 ? parsed : getFallbackCatalog()).map(enrichTest);
-  return catalog;
+  try {
+    const parsed = JSON.parse(raw) as TestRecord[];
+    const catalog = (parsed.length > 0 ? parsed : getFallbackCatalog()).map(enrichTest);
+    return catalog;
+  } catch (error) {
+    console.error("Failed to parse tests.json:", error);
+    return getFallbackCatalog();
+  }
 }
 
 export function getTestById(testId: string) {
@@ -100,7 +107,7 @@ export function getTestById(testId: string) {
 }
 
 export function getTopics() {
-  const tests = getTestCatalog();
+  const tests = getTestCatalog() || [];
   const map = new Map<
     string,
     { slug: string; name: string; isFree: boolean; testCount: number; totalQuestions: number }
@@ -120,7 +127,8 @@ export function getTopics() {
         totalQuestions: 0
       };
 
-    const testQuestionsCount = test.sections?.reduce((sum, sec) => sum + (sec.questions?.length || 0), 0) || 0;
+    const sections = test?.sections || [];
+    const testQuestionsCount = sections.reduce((sum, sec) => sum + (sec?.questions?.length || 0), 0) || 0;
     current.isFree = current.isFree || test.isFree;
     current.testCount += 1;
     current.totalQuestions += testQuestionsCount;
@@ -129,3 +137,4 @@ export function getTopics() {
 
   return [...map.values()];
 }
+

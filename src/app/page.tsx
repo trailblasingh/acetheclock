@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, BrainCircuit, ChartColumnIncreasing, ShieldCheck } from "lucide-react";
 
@@ -70,14 +70,14 @@ export default function HomePage() {
             </Link>
           </div>
           <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {topics.map((topic: any) => (
+            {(topics || []).map((topic: any) => (
               <div
-                key={topic.slug}
+                key={topic?.slug || Math.random()}
                 className="rounded-[28px] border border-white/10 bg-slate-950/60 p-5 not-dark:border-slate-200 not-dark:bg-slate-50"
               >
-                <p className="text-sm uppercase tracking-[0.25em] text-slate-400">{topic.isFree ? "Free" : "Premium"}</p>
-                <h3 className="mt-3 text-xl font-semibold text-white not-dark:text-slate-950">{topic.name}</h3>
-                <p className="mt-2 text-sm text-slate-400">{topic.testCount} tests and {topic.totalQuestions} questions</p>
+                <p className="text-sm uppercase tracking-[0.25em] text-slate-400">{topic?.isFree ? "Free" : "Premium"}</p>
+                <h3 className="mt-3 text-xl font-semibold text-white not-dark:text-slate-950">{topic?.name || "Untitled Topic"}</h3>
+                <p className="mt-2 text-sm text-slate-400">{topic?.testCount || 0} tests and {topic?.totalQuestions || 0} questions</p>
               </div>
             ))}
           </div>

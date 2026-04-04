@@ -29,7 +29,7 @@ export default function MockSection() {
   console.log("ALL TESTS:", tests);
   console.log("VISIBLE MOCKS:", fullMocks);
 
-  if (!fullMocks.length) {
+  if (!(fullMocks || []).length) {
     return <div className="p-4 text-sm">No full mocks available yet</div>;
   }
 
@@ -38,7 +38,7 @@ export default function MockSection() {
       <h2 className="text-2xl font-bold mb-6">Full Length CAT Mocks</h2>
 
       <div className="grid md:grid-cols-3 gap-6">
-        {fullMocks.map((t) => (
+        {(fullMocks || []).map((t) => (
           <div
             key={t.id}
             className="p-5 rounded-xl border bg-white shadow-sm hover:shadow-md transition"

@@ -46,8 +46,8 @@ export function scoreAttempt(
 
     if (question.type === "MCQ") {
       userIndex = getMCQIndex(answer);
-      correctIndex = parseInt(String(finalAnswer), 10);
-      isCorrect = userIndex === correctIndex;
+      correctIndex = parseInt(String(finalAnswer || ""), 10);
+      isCorrect = userIndex !== null && correctIndex !== null && userIndex === correctIndex;
     } else {
       isCorrect = normalize(answer) === normalize(finalAnswer);
     }

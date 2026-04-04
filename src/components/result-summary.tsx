@@ -259,8 +259,8 @@ function QuestionReviewSection({
         const isUnattempted = !userAnswer;
 
         const finalAnswer =
-          fullQuestion.correctAnswer ??
-          (fullQuestion as any).answer ??
+          fullQuestion?.correctAnswer ??
+          (fullQuestion as any)?.answer ??
           null;
 
         if (finalAnswer === null) {
@@ -280,8 +280,8 @@ function QuestionReviewSection({
 
         if (fullQuestion.type === "MCQ") {
           userIndex = getMCQIndex(userAnswer);
-          correctIndex = parseInt(String(finalAnswer), 10);
-          isCorrect = !isUnattempted && userIndex === correctIndex;
+          correctIndex = parseInt(String(finalAnswer || ""), 10);
+          isCorrect = !isUnattempted && userIndex !== null && correctIndex !== null && userIndex === correctIndex;
         } else {
           isCorrect = !isUnattempted && normalize(userAnswer) === normalize(finalAnswer);
         }
