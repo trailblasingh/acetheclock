@@ -28,10 +28,12 @@ export type TestRecord = {
   type?: "FULL_MOCK" | "TOPIC_TEST";
   testType?: "FULL_MOCK" | "QA_PRACTICE";
   testSource?: "CAT_PYQ" | "CREATED" | "PRACTICE";
-  isFree: boolean;
   name: string;
   slug: string;
   durationMinutes: number;
+  totalQuestions?: number;
+  isFree?: boolean;
+  price?: number;
   sections?: { name: "VARC" | "DILR" | "QA"; time: number; questions: QuestionRecord[] }[];
 };
 

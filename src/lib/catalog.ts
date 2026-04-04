@@ -122,14 +122,14 @@ export function getTopics() {
       {
         slug: test.topicSlug,
         name: test.topic,
-        isFree: test.isFree,
+        isFree: !!test.isFree,
         testCount: 0,
         totalQuestions: 0
       };
 
     const sections = test?.sections || [];
     const testQuestionsCount = sections.reduce((sum, sec) => sum + (sec?.questions?.length || 0), 0) || 0;
-    current.isFree = current.isFree || test.isFree;
+    current.isFree = current.isFree || !!test.isFree;
     current.testCount += 1;
     current.totalQuestions += testQuestionsCount;
     map.set(test.topicSlug, current);

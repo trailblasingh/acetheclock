@@ -31,6 +31,16 @@ function discoverPdfPairs(directory) {
   const grouped = new Map();
 
   for (const file of files) {
+    if (file.toLowerCase().includes("final-with-answer-keys")) {
+      const normalized = file.replace(/\.pdf$/i, "").replace(/-with-Answer-Keys/i, "").trim();
+      grouped.set(normalized, {
+        baseName: normalized,
+        questionFile: path.join(directory, file),
+        solutionFile: path.join(directory, file)
+      });
+      continue;
+    }
+
     const normalized = file
       .replace(/\s+Sol\.pdf$/i, "")
       .replace(/\s+S\.pdf$/i, "")
@@ -66,6 +76,7 @@ function buildTestRecord(pair, questionText, solutionText) {
   const topicSlug = slugify(topic);
 
   const sectionBlocks = detectSectionBlocks(questionText);
+  console.log(`Processing: ${pair.baseName}, Sections detected: ${sectionBlocks.map(b => b.name).join(", ")}`);
   const meta = inferMeta(pair.baseName, topic, questionText, sectionBlocks);
 
   const questions = sectionBlocks.length
@@ -98,7 +109,14 @@ function buildTestRecord(pair, questionText, solutionText) {
     };
   });
 
-  const initialSectionNames = hasAllThreeSections(sectionBlocks)
+  const sectionNamesDetected = new Set(sectionBlocks.map(b => b.name));
+
+  const isFullMock =
+    sectionNamesDetected.has("VARC") &&
+    sectionNamesDetected.has("DILR") &&
+    sectionNamesDetected.has("QA");
+
+  const initialSectionNames = isFullMock
     ? ["VARC", "DILR", "QA"]
     : [sectionBlocks[0]?.name || "QA"];
 
@@ -108,24 +126,19 @@ function buildTestRecord(pair, questionText, solutionText) {
     questions: mergedQuestions.filter((q) => q.section === name)
   }));
 
-  const sectionNames = sections.map(s => s.name);
-  const isFullMock =
-    sectionNames.includes("VARC") &&
-    sectionNames.includes("DILR") &&
-    sectionNames.includes("QA") && 
-    sections.length >= 3;
-
   const testType = isFullMock ? "FULL_MOCK" : "QA_PRACTICE";
   const testSource = isFullMock && meta.year ? "CAT_PYQ" : "PRACTICE";
-
+  const totalQuestions = mergedQuestions.length;
+  const price = isFullMock ? 129 : 49;
   const title = testType === "FULL_MOCK" ? buildFullMockTitle(pair.baseName, meta) : buildTopicTitle(pair.baseName, topic);
 
-  const isFree = title === "CAT 2025 Slot 1" || title.toLowerCase().includes("percentage");
+  const isFree = title.includes("Slot 1") || title.toLowerCase().includes("percentage");
 
   console.log({
     test: title,
     testType,
-    sections: sections.map((s) => s.name)
+    sections: sections.map((s) => s.name),
+    totalQuestions
   });
 
   const durationMinutes = testType === "FULL_MOCK" ? 120 : mergedQuestions.length >= 20 ? 60 : 30;
@@ -140,47 +153,63 @@ function buildTestRecord(pair, questionText, solutionText) {
     testType,
     testSource,
     isFree,
+    price,
+    totalQuestions,
     name: title,
     slug: testSlug,
     durationMinutes,
-    sections
+    sections: sections.map(s => ({
+       ...s,
+       totalQuestions: s.questions.length
+    }))
   };
 }
 
 function detectSectionBlocks(questionText) {
-  const lines = questionText.split(/\n+/);
-  const blocks = [];
-  let currentName = null;
-  let buffer = [];
+  const markers = [
+    { type: "VARC", regex: /Section:?\s*VARC|SECTION\s+I/i },
+    { type: "DILR", regex: /Section:?\s*DILR|SECTION\s+II/i },
+    { type: "QA", regex: /Section:?\s*QA|Section:?\s*Quant|Section\s*\n\s*Q|SECTION\s+III/i }
+  ];
 
-  const pushBlock = () => {
-    if (currentName && buffer.length) {
-      blocks.push({ name: normalizeSectionName(currentName), text: buffer.join("\n") });
+  const found = [];
+  for (const m of markers) {
+    const regex = new RegExp(m.regex, 'gi');
+    let match;
+    while ((match = regex.exec(questionText)) !== null) {
+      found.push({ type: m.type, index: match.index, text: match[0] });
     }
-    buffer = [];
-  };
-
-  for (const raw of lines) {
-    const line = raw.trim();
-    const match = line.match(/^(VARC|VERBAL ABILITY|DILR|LRDI|LOGICAL|DATA INTERPRETATION|QA|QUANT)/i);
-    if (match) {
-      pushBlock();
-      currentName = normalizeSectionName(match[1]);
-      continue;
-    }
-    buffer.push(line);
   }
-  if (buffer.length) {
-    pushBlock();
+  
+  // Sort and remove duplicates from Answer Keys (which are usually very late)
+  const filtered = found
+    .sort((a, b) => a.index - b.index)
+    .filter((m, i, arr) => {
+      // If we find same section twice, the first one is the questions, 
+      // the second is likely the answer key.
+      return i === 0 || arr[i - 1].type !== m.type;
+    });
+
+  if (filtered.length === 0) return [];
+
+  const blocks = [];
+  for (let i = 0; i < filtered.length; i++) {
+    const start = filtered[i].index;
+    const end = filtered[i + 1] ? filtered[i + 1].index : questionText.length;
+    blocks.push({
+      name: filtered[i].type,
+      text: questionText.slice(start, end).replace(/Section:?\s*[A-Z\s]+/i, "").trim()
+    });
   }
 
   return blocks;
 }
 
 function normalizeSectionName(name) {
-  const lower = name.toLowerCase();
+  const lower = name.toLowerCase().trim();
   if (lower.startsWith("varc") || lower.includes("verbal")) return "VARC";
   if (lower.includes("dilr") || lower.includes("lrdi") || lower.includes("logical") || lower.includes("data")) return "DILR";
+  if (lower === "q" || lower.startsWith("qa") || lower.includes("quant")) return "QA";
   return "QA";
 }
 
@@ -190,14 +219,28 @@ function hasAllThreeSections(blocks) {
 }
 
 function parseQuestions(questionText, pair, meta) {
+  // Strategy 1: Standard "Question 1" format
   const standardChunks = questionText.split(/(?:^|\n)Question\s+(\d+)\s*\n/g);
-  if (standardChunks.length > 1) {
+  if (standardChunks.length > 2) {
     return buildQuestionRecords(standardChunks, pair, "after", meta);
   }
 
+  // Strategy 2: "Question -- 1" format
   const alternateChunks = questionText.split(/(?:^|\n)Question\s*[--]\s*(\d+)\s*\n/g);
-  if (alternateChunks.length > 1) {
+  if (alternateChunks.length > 2) {
     return buildQuestionRecords(alternateChunks, pair, "before", meta);
+  }
+
+  // Strategy 3: CAT 2024 style: "1. ", "2. " with any leading whitespace/newlines
+  const numericChunks = questionText.split(/(?:\n|^|\s{2,})(\d+)\.\s+/g);
+  if (numericChunks.length > 2) {
+    return buildQuestionRecords(numericChunks, pair, "after", meta);
+  }
+
+  // Strategy 4: CAT 2024 style: "Q.1", "Q.2"
+  const qDotChunks = questionText.split(/(?:\n|^|\s+)Q\.\s*(\d+)\s+/g);
+  if (qDotChunks.length > 2) {
+    return buildQuestionRecords(qDotChunks, pair, "after", meta);
   }
 
   return [];
@@ -205,9 +248,11 @@ function parseQuestions(questionText, pair, meta) {
 
 function buildQuestionRecords(chunks, pair, mode, meta) {
   const questions = [];
+  const sectionPart = meta.section ? `${meta.section.toLowerCase()}_` : "";
 
   for (let index = 1; index < chunks.length; index += 2) {
     const questionNumber = Number(chunks[index]);
+    const globalIdx = (index - 1) / 2; // Unique index for this chunk
     const rawBody = cleanupBlock(mode === "after" ? chunks[index + 1] ?? "" : chunks[index - 1] ?? "");
     const body = mode === "before" ? stripHeader(rawBody) : rawBody;
     const options = [...body.matchAll(/^\((\d)\)\s+([\s\S]*?)(?=^\(\d\)\s+|\s*$)/gm)].map((match) =>
@@ -216,7 +261,7 @@ function buildQuestionRecords(chunks, pair, mode, meta) {
     const question = options.length > 0 ? cleanupBlock(body.replace(/^\((\d)\)\s+[\s\S]*$/gm, "")) : body;
 
     questions.push({
-      id: `${slugify(pair.baseName).replace(/-/g, "_")}_q${questionNumber}`,
+      id: `${slugify(pair.baseName).replace(/-/g, "_")}_${sectionPart}idx${globalIdx}_q${questionNumber}`,
       questionNumber,
       type: options.length > 0 ? "MCQ" : "TITA",
       question,
