@@ -98,19 +98,25 @@ function buildTestRecord(pair, questionText, solutionText) {
     };
   });
 
-  const hasAllSections = hasAllThreeSections(sectionBlocks);
-
-  const type = hasAllSections ? "FULL_MOCK" : "TOPIC_TEST";
-
-  const sectionNames = hasAllSections
+  const initialSectionNames = hasAllThreeSections(sectionBlocks)
     ? ["VARC", "DILR", "QA"]
     : [sectionBlocks[0]?.name || "QA"];
 
-  const sections = sectionNames.map((name) => ({
+  const sections = initialSectionNames.map((name) => ({
     name,
     time: name === "QA" ? 60 : 40,
     questions: mergedQuestions.filter((q) => q.section === name)
   }));
+
+  const sectionNames = sections.map(s => s.name);
+  const isFullMock =
+    sectionNames.includes("VARC") &&
+    sectionNames.includes("DILR") &&
+    sectionNames.includes("QA") && 
+    sections.length >= 3;
+
+  const type = sections.length === 1 ? "TOPIC_TEST" : (isFullMock ? "FULL_MOCK" : "TOPIC_TEST");
+  const category = type === "FULL_MOCK" ? "FULL_MOCK" : "TOPIC";
 
   const title = type === "FULL_MOCK" ? buildFullMockTitle(pair.baseName, meta) : buildTopicTitle(pair.baseName, topic);
 
@@ -128,6 +134,7 @@ function buildTestRecord(pair, questionText, solutionText) {
     topic,
     topicSlug,
     type,
+    category,
     isFree,
     name: title,
     slug: testSlug,
@@ -255,7 +262,7 @@ function parseSolutions(solutionText, questions) {
           idx = indexStr.toUpperCase().charCodeAt(0) - 64;
         }
         if (!isNaN(idx) && idx >= 1 && idx <= question.options.length) {
-          finalAnswer = question.options[idx - 1];
+          finalAnswer = String(idx);
         }
       }
     } else if (question && question.type === "TITA") {

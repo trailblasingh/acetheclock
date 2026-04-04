@@ -1,4 +1,4 @@
-﻿import fs from "node:fs";
+import fs from "node:fs";
 import path from "node:path";
 
 import type { TestRecord } from "@/lib/types";
@@ -97,7 +97,7 @@ export function getTopics() {
   >();
 
   for (const test of tests) {
-    const isTopic = !test.type || test.type === "TOPIC_TEST";
+    const isTopic = test.type === "TOPIC_TEST";
     if (!isTopic) continue;
 
     const current =

@@ -263,7 +263,33 @@ function QuestionReviewSection({
           console.error("❌ Missing answer:", fullQuestion);
         }
 
-        const isCorrect = !isUnattempted && normalize(userAnswer) === normalize(finalAnswer);
+        let isCorrect = false;
+
+        const getMCQIndex = (val: any) => {
+          if (!val) return null;
+          const match = val.toString().match(/(\d+)/);
+          return match ? parseInt(match[1], 10) : null;
+        };
+
+        let userIndex: number | null = null;
+        let correctIndex: number | null = null;
+
+        if (fullQuestion.type === "MCQ") {
+          userIndex = getMCQIndex(userAnswer);
+          correctIndex = parseInt(String(finalAnswer), 10);
+          isCorrect = !isUnattempted && userIndex === correctIndex;
+        } else {
+          isCorrect = !isUnattempted && normalize(userAnswer) === normalize(finalAnswer);
+        }
+
+        console.log({
+          type: fullQuestion.type,
+          userAnswer,
+          correctAnswer: finalAnswer,
+          userIndex,
+          correctIndex,
+          isCorrect
+        });
         
         const statusLabel = isUnattempted ? "Unattempted" : isCorrect ? "Correct" : "Incorrect";
         const statusClass = isUnattempted

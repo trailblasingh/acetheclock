@@ -31,7 +31,33 @@ export function scoreAttempt(
 
     const finalAnswer = question.correctAnswerOverride ?? question.correctAnswer ?? null;
 
-    const isCorrect = normalize(answer) === normalize(finalAnswer);
+    let isCorrect = false;
+
+    const getMCQIndex = (val: any) => {
+      if (!val) return null;
+      const match = val.toString().match(/(\d+)/);
+      return match ? parseInt(match[1], 10) : null;
+    };
+
+    let userIndex: number | null = null;
+    let correctIndex: number | null = null;
+
+    if (question.type === "MCQ") {
+      userIndex = getMCQIndex(answer);
+      correctIndex = parseInt(String(finalAnswer), 10);
+      isCorrect = userIndex === correctIndex;
+    } else {
+      isCorrect = normalize(answer) === normalize(finalAnswer);
+    }
+
+    console.log({
+      type: question.type,
+      userAnswer: answer,
+      correctAnswer: finalAnswer,
+      userIndex,
+      correctIndex,
+      isCorrect
+    });
 
     if (isCorrect) {
       score += 3;

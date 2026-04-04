@@ -23,13 +23,13 @@ export default function MockSection() {
       .catch((error) => console.error(error));
   }, []);
 
-  const fullMocks = tests;
+  const fullMocks = (tests || []).filter((t: any) => t.type === "FULL_MOCK");
 
   console.log("ALL TESTS:", tests);
   console.log("VISIBLE MOCKS:", fullMocks);
 
   if (!fullMocks.length) {
-    return <div className="p-4 text-sm">No mocks available</div>;
+    return <div className="p-4 text-sm">No full mocks available yet</div>;
   }
 
   return (
