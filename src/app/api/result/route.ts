@@ -29,7 +29,8 @@ export async function POST(request: Request) {
 
     const sectionBreakdown = Object.values(
       payload.responses.reduce((acc, response) => {
-        const question = test.questions.find((q) => q.id === response.questionId);
+        const questions = test?.sections?.flatMap((s: any) => s.questions || []) || [];
+        const question = questions.find((q) => q.id === response.questionId);
         const key = (question?.section as string) ?? "QA";
         acc[key] = acc[key] ?? { section: key, attempted: 0 };
         if (response.userAnswer?.trim()) {

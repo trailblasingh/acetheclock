@@ -28,7 +28,7 @@ function getDefaultState(test: TestRecord): StoredState {
     currentIndex: 0,
     answers: {},
     marked: [],
-    visited: [test.questions[0]?.id ?? ""].filter(Boolean),
+    visited: [(test.sections?.flatMap((s: any) => s.questions || []) || [])[0]?.id ?? ""].filter(Boolean),
     timeSpent: {},
     remainingSeconds: test.durationMinutes * 60
   };
@@ -44,6 +44,7 @@ function getStoredState(test: TestRecord): StoredState {
 }
 
 export function ExamRunner({ test }: { test: TestRecord }) {
+  const questions = useMemo(() => test.sections?.flatMap((s: any) => s.questions || []) || [], [test]);
   const router = useRouter();
   const [isSubmitting, startTransition] = useTransition();
   const [hydratedTest, setHydratedTest] = useState<TestRecord | null>(test);
@@ -69,11 +70,11 @@ export function ExamRunner({ test }: { test: TestRecord }) {
       .catch((error) => console.error(error));
   }, [test.id]);
 
-  const currentQuestion = test.questions[currentIndex] ?? test.questions[0] ?? { id: "placeholder", questionNumber: 0, type: "MCQ", question: "", options: [] as any[] } as any;
+  const currentQuestion = questions[currentIndex] ?? questions[0] ?? { id: "placeholder", questionNumber: 0, type: "MCQ", question: "", options: [] as any[] } as any;
 
 
   function buildResponses(): AttemptResponse[] {
-    return test.questions.map((question: any) => ({
+    return questions.map((question: any) => ({
       questionId: question.id,
       userAnswer: answers[question.id] ?? "",
       timeTaken: timeSpent[question.id] ?? 0
@@ -165,7 +166,7 @@ export function ExamRunner({ test }: { test: TestRecord }) {
 
   const statuses = useMemo(() => {
     return Object.fromEntries(
-      test.questions.map((question: any) => {
+      questions.map((question: any) => {
         const wasVisited = visited[question.id];
         const hasAnswer = Boolean(answers[question.id]?.trim());
         const isMarked = Boolean(marked[question.id]);
@@ -182,23 +183,23 @@ export function ExamRunner({ test }: { test: TestRecord }) {
         return [question.id, state];
       })
     ) as Record<string, ReviewState>;
-  }, [answers, marked, test.questions, visited]);
+  }, [answers, marked, questions, visited]);
 
   function selectQuestion(index: number) {
     setCurrentIndex(index);
-    setVisited((current) => ({ ...current, [test.questions[index].id]: true }));
+    setVisited((current) => ({ ...current, [questions[index].id]: true }));
   }
 
   function saveAndNext() {
     setMarked((current) => ({ ...current, [currentQuestion.id]: false }));
-    if (currentIndex < test.questions.length - 1) {
+    if (currentIndex < questions.length - 1) {
       selectQuestion(currentIndex + 1);
     }
   }
 
   function markForReviewAndNext() {
     setMarked((current) => ({ ...current, [currentQuestion.id]: true }));
-    if (currentIndex < test.questions.length - 1) {
+    if (currentIndex < questions.length - 1) {
       selectQuestion(currentIndex + 1);
     }
   }
@@ -221,7 +222,7 @@ export function ExamRunner({ test }: { test: TestRecord }) {
     }
   }
 
-  if (!test || !test.questions || test.questions.length === 0) {
+  if (!test || !questions || questions.length === 0) {
     return <div>Loading...</div>;
   }
 
@@ -362,7 +363,7 @@ export function ExamRunner({ test }: { test: TestRecord }) {
         <div>
           <p className="text-sm uppercase tracking-[0.3em] text-slate-400">Question Palette</p>
           <div className="mt-4 grid grid-cols-5 gap-3">
-            {test.questions.map((question: any, index: number) => (
+            {questions.map((question: any, index: number) => (
               <button
                 key={question.id}
                 type="button"

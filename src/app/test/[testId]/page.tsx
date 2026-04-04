@@ -19,11 +19,11 @@ export default async function TestPage({ params }: { params: Promise<{ testId: s
     // ignore
   }
 
-  if (!test || !test.questions) {
+  if (!test || !test.sections) {
     test = getTestById(testId);
   }
 
-  if (!test || !test.questions) {
+  if (!test || !test.sections) {
     notFound();
   }
 

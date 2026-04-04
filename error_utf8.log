@@ -1,0 +1,52 @@
+﻿{ question: '05_qa_arithmetic_1_q1', extractedAnswer: '3' }
+{ question: '05_qa_arithmetic_1_q2', extractedAnswer: '2' }
+{ question: '05_qa_arithmetic_1_q3', extractedAnswer: '300' }
+{ question: '05_qa_arithmetic_1_q4', extractedAnswer: '2' }
+{ question: '05_qa_arithmetic_1_q5', extractedAnswer: '2' }
+{ question: '05_qa_arithmetic_1_q6', extractedAnswer: '2' }
+{ question: '05_qa_arithmetic_1_q7', extractedAnswer: '1' }
+{ question: '05_qa_arithmetic_1_q8', extractedAnswer: '60' }
+{ question: '05_qa_arithmetic_1_q9', extractedAnswer: '2' }
+{ question: '05_qa_arithmetic_1_q10', extractedAnswer: '12' }
+{ question: '05_qa_arithmetic_1_q11', extractedAnswer: '3' }
+{ question: '05_qa_arithmetic_1_q12', extractedAnswer: '4' }
+{ question: '05_qa_arithmetic_1_q13', extractedAnswer: '3' }
+{ question: '05_qa_arithmetic_1_q14', extractedAnswer: '4' }
+{ question: '05_qa_arithmetic_1_q15', extractedAnswer: '4' }
+{ question: '05_qa_arithmetic_1_q16', extractedAnswer: '4' }
+{ question: '05_qa_arithmetic_1_q17', extractedAnswer: '3' }
+{ question: '05_qa_arithmetic_1_q18', extractedAnswer: '1' }
+{ question: '05_qa_arithmetic_1_q19', extractedAnswer: '2' }
+{ question: '05_qa_arithmetic_1_q20', extractedAnswer: '2' }
+node : file:///D:/acethecl
+ock/scripts/ingest-pdfs.mj
+s:127
+At line:1 char:1
++ node 
+scripts/ingest-pdfs.mjs > 
+error.log 2>&1; cat 
+error.log
++ ~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo        
+      : NotSpecified: (f  
+  ile:///D:/acet...st-p   
+ dfs.mjs:127:String) [    
+], RemoteException
+    + FullyQualifiedError 
+   Id : NativeCommandErr  
+  or
+ 
+    testType,
+    ^
+
+ReferenceError: testType 
+is not defined
+    at buildTestRecord (fi
+le:///D:/acetheclock/scrip
+ts/ingest-pdfs.mjs:127:5)
+    at file:///D:/acethecl
+ock/scripts/ingest-pdfs.mj
+s:15:16
+
+Node.js v24.14.0

@@ -115,16 +115,20 @@ function buildTestRecord(pair, questionText, solutionText) {
     sectionNames.includes("QA") && 
     sections.length >= 3;
 
-  const type = sections.length === 1 ? "TOPIC_TEST" : (isFullMock ? "FULL_MOCK" : "TOPIC_TEST");
-  const category = type === "FULL_MOCK" ? "FULL_MOCK" : "TOPIC";
+  const testType = isFullMock ? "FULL_MOCK" : "QA_PRACTICE";
+  const testSource = isFullMock && meta.year ? "CAT_PYQ" : "PRACTICE";
 
-  const title = type === "FULL_MOCK" ? buildFullMockTitle(pair.baseName, meta) : buildTopicTitle(pair.baseName, topic);
+  const title = testType === "FULL_MOCK" ? buildFullMockTitle(pair.baseName, meta) : buildTopicTitle(pair.baseName, topic);
 
   const isFree = title === "CAT 2025 Slot 1" || title.toLowerCase().includes("percentage");
 
-  console.log("TEST TYPE:", title, type, isFree);
+  console.log({
+    test: title,
+    testType,
+    sections: sections.map((s) => s.name)
+  });
 
-  const durationMinutes = type === "FULL_MOCK" ? 120 : mergedQuestions.length >= 20 ? 60 : 30;
+  const durationMinutes = testType === "FULL_MOCK" ? 120 : mergedQuestions.length >= 20 ? 60 : 30;
 
   const testSlug = meta.testId ?? slugify(pair.baseName).replace(/-/g, "_");
 
@@ -133,14 +137,13 @@ function buildTestRecord(pair, questionText, solutionText) {
     title,
     topic,
     topicSlug,
-    type,
-    category,
+    testType,
+    testSource,
     isFree,
     name: title,
     slug: testSlug,
     durationMinutes,
-    sections,
-    questions: mergedQuestions
+    sections
   };
 }
 
@@ -271,9 +274,29 @@ function parseSolutions(solutionText, questions) {
       if (answerStr && isValidAnswer(String(answerStr), rawBlock)) {
         finalAnswer = String(answerStr);
       } else {
-        finalAnswer = null;
+        const extractTITA = (explanation) => {
+          const matches = explanation.match(/(\d+(\.\d+)?)/g);
+          if (!matches) return null;
+
+          for (let i = matches.length - 1; i >= 0; i--) {
+            const val = matches[i];
+            const idx = explanation.lastIndexOf(val);
+            const nextChar = explanation[idx + val.length];
+
+            if (!nextChar || !/[a-zA-Z]/.test(nextChar)) {
+              return val;
+            }
+          }
+          return null;
+        };
+        finalAnswer = extractTITA(rawBlock);
       }
     }
+
+    console.log({
+      question: question?.id,
+      extractedAnswer: finalAnswer
+    });
 
     solutionMap.set(questionNumber, {
       correctAnswer: finalAnswer ?? null,

@@ -32,8 +32,7 @@ export type TestRecord = {
   name: string;
   slug: string;
   durationMinutes: number;
-  sections?: { name: "VARC" | "DILR" | "QA"; time: number }[];
-  questions: QuestionRecord[];
+  sections?: { name: "VARC" | "DILR" | "QA"; time: number; questions: QuestionRecord[] }[];
 };
 
 export type AttemptResponse = {

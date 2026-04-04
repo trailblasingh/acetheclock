@@ -19,7 +19,9 @@ export function scoreAttempt(
   let incorrectCount = 0;
   let attemptedCount = 0;
 
-  for (const question of test.questions) {
+  const questions = test?.sections?.flatMap((s: any) => s.questions || []) || [];
+
+  for (const question of questions) {
     const response = responseMap.get(question.id);
     const answer = response?.userAnswer?.trim();
 
@@ -72,7 +74,7 @@ export function scoreAttempt(
     }
   }
 
-  const totalQuestions = test.questions.length;
+  const totalQuestions = questions.length;
   const unattemptedCount = totalQuestions - attemptedCount;
   const accuracy = attemptedCount === 0 ? 0 : Number(((correctCount / attemptedCount) * 100).toFixed(2));
 

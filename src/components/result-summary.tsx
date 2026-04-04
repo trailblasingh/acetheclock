@@ -13,7 +13,8 @@ const metricClass =
 type ReviewPayload = {
   id: string;
   name: string;
-  questions: QuestionRecord[];
+  questions?: QuestionRecord[];
+  sections?: { name: string; questions: QuestionRecord[] }[];
 };
 
 type InsightCard = {
@@ -65,7 +66,8 @@ export function ResultSummary({ attemptId }: { attemptId: string }) {
       return [] as InsightCard[];
     }
 
-    const attemptedRate = review.questions.length === 0 ? 0 : (attempt.attemptedCount / review.questions.length) * 100;
+    const questions = review.sections?.flatMap((s: any) => s.questions || []) || review.questions || [];
+    const attemptedRate = questions.length === 0 ? 0 : (attempt.attemptedCount / questions.length) * 100;
     const strategyInsight: InsightCard = {
       title: "Attempt Strategy",
       description:
@@ -95,7 +97,8 @@ export function ResultSummary({ attemptId }: { attemptId: string }) {
     const timeInsightDescription = topTimeResponses.length > 0
       ? topTimeResponses
           .map((response: AttemptResponse) => {
-            const question = review.questions.find((item: QuestionRecord) => item.id === response.questionId);
+            const questions = review.sections?.flatMap((s: any) => s.questions || []) || review.questions || [];
+            const question = questions.find((item: QuestionRecord) => item.id === response.questionId);
             const questionLabel = question ? `Q${question.questionNumber}` : `Q?`;
             return `${questionLabel} \u2192 ${Math.ceil(response.timeTaken / 60)} min`;
           })
@@ -234,7 +237,8 @@ function QuestionReviewSection({
 }) {
   const questionMap = useMemo(() => {
     if (!review) return new Map();
-    return new Map(review.questions.map((q: QuestionRecord) => [q.id, q]));
+    const questions = review.sections?.flatMap((s: any) => s.questions || []) || review.questions || [];
+    return new Map(questions.map((q: QuestionRecord) => [q.id, q]));
   }, [review]);
 
   if (!review) {
