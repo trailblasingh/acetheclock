@@ -264,15 +264,7 @@ function parseSolutions(solutionText, questions) {
       if (answerStr && isValidAnswer(String(answerStr), rawBlock)) {
         finalAnswer = String(answerStr);
       } else {
-        const numbers = rawBlock.match(/\b\d+(\.\d+)?\b/g);
-        if (numbers) {
-          for (let i = numbers.length - 1; i >= 0; i--) {
-            if (isValidAnswer(numbers[i], rawBlock)) {
-              finalAnswer = numbers[i];
-              break;
-            }
-          }
-        }
+        finalAnswer = null;
       }
     }
 

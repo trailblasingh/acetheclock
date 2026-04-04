@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
@@ -255,19 +255,15 @@ function QuestionReviewSection({
         const isUnattempted = !userAnswer;
 
         const finalAnswer =
-          fullQuestion.correctAnswer ||
-          (fullQuestion as any).answer ||
+          fullQuestion.correctAnswer ??
+          (fullQuestion as any).answer ??
           null;
 
         if (finalAnswer === null) {
           console.error("❌ Missing answer:", fullQuestion);
         }
 
-        const isCorrect =
-          !isUnattempted &&
-          (fullQuestion.type === "MCQ"
-            ? userAnswer === String(finalAnswer)
-            : String(userAnswer).trim() === String(finalAnswer).trim());
+        const isCorrect = !isUnattempted && normalize(userAnswer) === normalize(finalAnswer);
         
         const statusLabel = isUnattempted ? "Unattempted" : isCorrect ? "Correct" : "Incorrect";
         const statusClass = isUnattempted
@@ -329,7 +325,7 @@ function QuestionReviewSection({
                 <div className="p-4 border rounded-xl bg-white">
                   <div className="text-sm text-gray-500">Correct Answer</div>
                   <div className="text-lg font-semibold text-black">
-                    {finalAnswer === null ? "Answer not found" : String(finalAnswer)}
+                    {finalAnswer === null ? "Not Available" : String(finalAnswer)}
                   </div>
                 </div>
                 <AnswerBox label="Status" value={statusLabel} />
@@ -406,8 +402,13 @@ function formatMcqAnswer(question: QuestionRecord, answer: string, allowEmpty: b
   return option ? `Option ${answer}: ${option}` : answer;
 }
 
-function normalize(value: string) {
-  return value.replace(/\s+/g, "").toLowerCase();
+function normalize(val: any) {
+  if (!val) return "";
+  return val
+    .toString()
+    .replace(/,/g, "")
+    .replace(/Option\s*\d*:\s*/i, "")
+    .trim();
 }
 
 function FormattedExplanation({

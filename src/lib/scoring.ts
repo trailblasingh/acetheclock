@@ -29,12 +29,9 @@ export function scoreAttempt(
 
     attemptedCount += 1;
 
-    const finalAnswer = question.correctAnswerOverride ?? question.correctAnswer ?? "NA";
+    const finalAnswer = question.correctAnswerOverride ?? question.correctAnswer ?? null;
 
-    const isCorrect =
-      question.type === "MCQ"
-        ? normalize(answer) === normalize(String(finalAnswer)) || normalize(answer) === normalize(getOptionLabel(String(finalAnswer)))
-        : normalize(answer) === normalize(String(finalAnswer));
+    const isCorrect = normalize(answer) === normalize(finalAnswer);
 
     if (isCorrect) {
       score += 3;
@@ -69,8 +66,13 @@ export function scoreAttempt(
   };
 }
 
-function normalize(value: string) {
-  return value.replace(/\s+/g, "").toLowerCase();
+function normalize(val: any) {
+  if (!val) return "";
+  return val
+    .toString()
+    .replace(/,/g, "")
+    .replace(/Option\s*\d*:\s*/i, "")
+    .trim();
 }
 
 function getOptionLabel(answer: string) {
