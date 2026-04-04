@@ -1,4 +1,4 @@
-﻿export type QuestionType = "MCQ" | "TITA";
+export type QuestionType = "MCQ" | "TITA";
 
 export type QuestionRecord = {
   id: string;
@@ -26,6 +26,8 @@ export type TestRecord = {
   topic: string;
   topicSlug: string;
   type?: "FULL_MOCK" | "TOPIC_TEST";
+  testType?: "FULL_MOCK" | "QA_PRACTICE";
+  testSource?: "CAT_PYQ" | "CREATED" | "PRACTICE";
   isFree: boolean;
   name: string;
   slug: string;

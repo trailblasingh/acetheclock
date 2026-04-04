@@ -97,7 +97,7 @@ export function getTopics() {
   >();
 
   for (const test of tests) {
-    const isTopic = test.type === "TOPIC_TEST";
+    const isTopic = test.testType === "QA_PRACTICE";
     if (!isTopic) continue;
 
     const current =

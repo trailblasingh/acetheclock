@@ -14,5 +14,8 @@ export async function GET() {
     return NextResponse.json({ error: "Ingestion failed" }, { status: 500 });
   }
 
-  return NextResponse.json({ tests: testList });
+  const fullMocks = testList.filter((t: any) => t.testType === "FULL_MOCK");
+  const qaTests = testList.filter((t: any) => t.testType === "QA_PRACTICE");
+
+  return NextResponse.json({ tests: testList, fullMocks, qaTests });
 }

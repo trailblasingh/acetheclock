@@ -8,6 +8,7 @@ type Test = {
   name?: string;
   isFree?: boolean;
   type?: string;
+  testType?: string;
 };
 
 export default function MockSection() {
@@ -23,7 +24,7 @@ export default function MockSection() {
       .catch((error) => console.error(error));
   }, []);
 
-  const fullMocks = (tests || []).filter((t: any) => t.type === "FULL_MOCK");
+  const fullMocks = (tests || []).filter((t: any) => t.testType === "FULL_MOCK");
 
   console.log("ALL TESTS:", tests);
   console.log("VISIBLE MOCKS:", fullMocks);
@@ -43,11 +44,11 @@ export default function MockSection() {
             className="p-5 rounded-xl border bg-white shadow-sm hover:shadow-md transition"
           >
             <div className="font-semibold">
-              {t.type === "FULL_MOCK" ? t.title || t.name || t.id : `QA: ${t.title || t.name || t.id}`}
+              {t.testType === "FULL_MOCK" ? t.title || t.name || t.id : `QA: ${t.title || t.name || t.id}`}
             </div>
 
             <div className="text-xs text-gray-500 mt-1">
-              {t.type === "FULL_MOCK" ? "120 mins • VARC + DILR + QA" : "QA Practice Test"}
+              {t.testType === "FULL_MOCK" ? "120 mins • VARC + DILR + QA" : "QA Practice Test"}
             </div>
 
             <div className="mt-3">
